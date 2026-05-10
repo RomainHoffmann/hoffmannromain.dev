@@ -121,7 +121,7 @@ export function HeroSection() {
 
       <div className="relative z-[var(--z-raised)] mx-auto flex w-full max-w-[42rem] flex-col items-center text-center">
         <div className="overflow-hidden">
-          <h1 className="font-display text-[length:var(--text-display)] font-normal leading-[var(--leading-display)] tracking-[var(--tracking-display)] text-[var(--fg)]">
+          <h1 className="type-hero text-[var(--fg)]">
             <span className="block overflow-hidden">
               <span data-hero-line className="block">
                 {first}
@@ -140,14 +140,14 @@ export function HeroSection() {
 
         <p
           data-hero-fade
-          className="ds-body-relaxed mt-[var(--space-xl)] max-w-[34rem] text-pretty text-[0.95rem] leading-relaxed md:text-[1.05rem]"
+          className="type-lead mt-[var(--space-xl)] max-w-[34rem] text-pretty text-[var(--muted-strong)]"
         >
           {SITE.heroSubtitle}
         </p>
 
         <p
           data-hero-fade
-          className="mt-[var(--space-lg)] font-mono text-[10px] uppercase tracking-[0.26em] text-[var(--muted)]"
+          className="type-meta mt-[var(--space-lg)] text-[var(--muted)]"
         >
           {SITE.role}
           <span className="text-[var(--border-strong)]"> · </span>
@@ -156,7 +156,7 @@ export function HeroSection() {
 
         <div
           data-hero-fade
-          className="mt-[var(--space-3xl)] flex items-center justify-center gap-[var(--space-md)] font-mono text-[10px] uppercase tracking-[var(--tracking-label-wide)] text-[var(--muted)]"
+          className="type-meta mt-[var(--space-3xl)] flex items-center justify-center gap-[var(--space-md)] tracking-[var(--tracking-label-wide)] text-[var(--muted)]"
         >
           <span className="h-px w-10 bg-[var(--accent-line)] opacity-80" aria-hidden />
           <span>Scroll</span>

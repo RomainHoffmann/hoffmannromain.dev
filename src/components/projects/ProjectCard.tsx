@@ -125,13 +125,13 @@ export function ProjectCard({
           <div
             className="translate-y-3 opacity-[0.82] transition-[transform,opacity] duration-[620ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0 group-hover:opacity-100"
           >
-            <h3 className="font-display text-[clamp(1.65rem,3.6vw,2.25rem)] leading-[1.08] tracking-[var(--tracking-tight)] text-[var(--fg)]">
+            <h3 className="type-project-title text-[var(--fg)]">
               {project.title}
             </h3>
-            <p className="mt-3 font-mono text-[10px] uppercase leading-relaxed tracking-[0.24em] text-[var(--muted-strong)]">
+            <p className="type-meta mt-3 text-[var(--muted-strong)]">
               {project.type}
             </p>
-            <p className="mt-2 font-mono text-[11px] tabular-nums tracking-[0.18em] text-[var(--muted)]">
+            <p className="type-caption mt-2 tabular-nums tracking-[0.14em] text-[var(--muted)]">
               {project.year}
             </p>
           </div>

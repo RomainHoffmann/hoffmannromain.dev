@@ -42,13 +42,13 @@ export function ProjectGridSection({ projects }: ProjectGridSectionProps) {
             <p className="ds-label">Index</p>
             <h2
               id="work-heading"
-              className="mt-[var(--space-sm)] font-display text-4xl tracking-[var(--tracking-tight)] text-[var(--fg)] md:text-5xl"
+              className="type-section-title mt-[var(--space-sm)] text-[var(--fg)]"
             >
               Selected{" "}
               <span className="text-[color:var(--accent-soft)]">work</span>
             </h2>
           </div>
-          <p className="ds-body-relaxed max-w-md text-sm md:text-right">
+          <p className="ds-body-relaxed max-w-md md:text-right">
             Large-format studies — image, type, and metadata in one frame.
           </p>
         </div>

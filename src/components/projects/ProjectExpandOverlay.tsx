@@ -324,11 +324,11 @@ export function ProjectExpandOverlay({
           <button
             type="button"
             onClick={runExit}
-            className="font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--muted)] transition-colors hover:text-[var(--fg)]"
+            className="type-nav text-[var(--muted)] transition-colors hover:text-[var(--fg)]"
           >
             Close — Esc
           </button>
-          <div className="flex items-center gap-6 font-mono text-[10px] uppercase tracking-[0.22em]">
+          <div className="type-nav flex items-center gap-6">
             {project.githubUrl ? (
               <a
                 href={project.githubUrl}
@@ -350,14 +350,14 @@ export function ProjectExpandOverlay({
               <h2
                 id="expand-project-title"
                 ref={titleRef}
-                className="font-display text-[clamp(2.15rem,7vw,4.25rem)] leading-[0.98] tracking-[var(--tracking-display)] text-[var(--fg)]"
+                className="type-expand-title text-[var(--fg)]"
               >
                 {project.title}
               </h2>
 
               <p
                 ref={leadRef}
-                className="mt-[var(--space-xl)] max-w-[38rem] text-[1.05rem] leading-[var(--leading-body)] text-[var(--muted-strong)] md:text-[1.12rem]"
+                className="type-lead mt-[var(--space-xl)] max-w-[38rem] text-[var(--muted-strong)]"
               >
                 {project.tagline}
               </p>
@@ -366,7 +366,7 @@ export function ProjectExpandOverlay({
                 ref={heroDetailsRef}
                 className="mt-[var(--space-2xl)] space-y-[var(--space-xl)] border-t border-[var(--border)] pt-[var(--space-2xl)]"
               >
-                <div className="flex flex-wrap items-baseline gap-x-[var(--space-lg)] gap-y-2 font-mono text-[10px] uppercase tracking-[0.26em] text-[var(--muted)]">
+                <div className="type-meta flex flex-wrap items-baseline gap-x-[var(--space-lg)] gap-y-2 text-[var(--muted)]">
                   <span>{project.type}</span>
                   <span className="text-[var(--border-strong)]">·</span>
                   <span className="tabular-nums">{project.year}</span>
@@ -376,7 +376,7 @@ export function ProjectExpandOverlay({
                   {project.stack.map((tech) => (
                     <li
                       key={tech}
-                      className="border border-[var(--border)] bg-[var(--surface)]/60 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--muted-strong)]"
+                      className="type-tag border border-[var(--border)] bg-[var(--surface)]/60 px-3 py-1.5 text-[var(--muted-strong)]"
                     >
                       {tech}
                     </li>
@@ -386,7 +386,7 @@ export function ProjectExpandOverlay({
                 {project.liveUrl ? (
                   <a
                     href={project.liveUrl}
-                    className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.28em] text-[var(--muted)] transition-colors hover:text-[var(--project-accent)]"
+                    className="type-nav inline-flex items-center gap-2 text-[var(--muted)] transition-colors hover:text-[var(--project-accent)]"
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -394,7 +394,7 @@ export function ProjectExpandOverlay({
                     View live
                   </a>
                 ) : (
-                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--muted)]">
+                  <p className="type-meta text-[var(--muted)]">
                     Live link coming soon
                   </p>
                 )}
@@ -439,7 +439,7 @@ export function ProjectExpandOverlay({
               </div>
             </div>
 
-            <p className="mt-[var(--space-3xl)] max-w-[38rem] text-sm leading-relaxed text-[var(--muted-strong)] md:text-[0.95rem]">
+            <p className="type-body mt-[var(--space-3xl)] max-w-[38rem] text-[var(--muted-strong)]">
               {project.description}
             </p>
           </div>

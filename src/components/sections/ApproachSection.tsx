@@ -40,18 +40,18 @@ export function ApproachSection() {
           <h2
             id="approach-heading"
             data-approach
-            className="font-display text-[length:var(--text-h2)] leading-[var(--leading-snug)] tracking-[var(--tracking-tight)] text-[var(--fg)]"
+            className="type-section-title text-[var(--fg)]"
           >
             Code as choreography — every transition earns its place in the
             frame.
           </h2>
           <div data-approach className="space-y-6">
-            <p className="ds-body-relaxed text-base md:text-[1.05rem]">
+            <p className="ds-body-relaxed">
               I build interfaces that read like scenes: depth from type scale,
               tempo from motion curves, and silence from negative space. No
               decorative noise — only signal.
             </p>
-            <ul className="flex flex-col gap-[var(--space-xs)] border-l border-[var(--border)] pl-[var(--space-lg)] font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--muted)]">
+            <ul className="type-caption flex flex-col gap-[var(--space-xs)] border-l border-[var(--border)] pl-[var(--space-lg)] text-[var(--muted)]">
               {pillars.map((item) => (
                 <li key={item}>{item}</li>
               ))}

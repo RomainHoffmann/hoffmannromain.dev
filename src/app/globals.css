@@ -31,16 +31,39 @@
   --accent-line: rgba(255, 83, 33, 0.88);
   --ring-focus: rgba(255, 83, 33, 0.42);
 
-  /* Typography scale */
-  --text-display: clamp(2.65rem, 9vw, 7.25rem);
-  --text-h2: clamp(1.85rem, 4vw, 2.75rem);
-  --leading-display: 0.92;
-  --leading-snug: 1.15;
-  --leading-body: 1.62;
-  --tracking-display: -0.045em;
-  --tracking-tight: -0.03em;
-  --tracking-label: 0.28em;
-  --tracking-label-wide: 0.35em;
+  /* Typography — Geist Sans (UI + reading) + Instrument Serif (display only) */
+  --text-hero: clamp(2.85rem, 9.2vw, 7.35rem);
+  --text-section: clamp(2rem, 4.6vw, 3.45rem);
+  --text-project: clamp(1.6875rem, 3.65vw, 2.5rem);
+  --text-expand: clamp(2.125rem, 6.9vw, 4.35rem);
+  --text-lead: clamp(1.02rem, 2.15vw, 1.14rem);
+  --text-body: 1.0625rem;
+  --text-body-lg: 1.125rem;
+  --text-caption: 0.8125rem;
+  --text-nav: 0.75rem;
+  --text-meta: 0.75rem;
+  --text-label: 0.75rem;
+
+  --leading-hero: 0.93;
+  --leading-section: 1.14;
+  --leading-project: 1.07;
+  --leading-expand: 0.98;
+  --leading-body: 1.68;
+  --leading-caption: 1.55;
+
+  --tracking-display: -0.042em;
+  --tracking-tight: -0.028em;
+  --tracking-body: 0.006em;
+  --tracking-nav: 0.2em;
+  --tracking-meta: 0.22em;
+  --tracking-label: 0.32em;
+  --tracking-label-wide: 0.38em;
+
+  /* Legacy aliases — prefer tokens above */
+  --text-display: var(--text-hero);
+  --text-h2: var(--text-section);
+  --leading-display: var(--leading-hero);
+  --leading-snug: var(--leading-section);
 
   /* Spacing — modular rhythm (4px base, premium jumps) */
   --space-3xs: 0.25rem;
@@ -102,7 +125,6 @@
 
 @theme inline {
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
   --font-display: var(--font-instrument), ui-serif, Georgia, "Times New Roman",
     serif;
   --color-background: var(--bg);
@@ -372,18 +394,120 @@ a {
    Typography helpers (rhythm)
    -------------------------------------------------------------------------- */
 
-.ds-label {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  line-height: 1.4;
+.ds-label,
+.type-label {
+  font-family: var(--font-sans);
+  font-size: var(--text-label);
+  font-weight: 400;
+  line-height: 1.45;
   letter-spacing: var(--tracking-label-wide);
   text-transform: uppercase;
   color: var(--muted);
 }
 
 .ds-body-relaxed {
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
   line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
+  font-weight: 400;
   color: var(--muted-strong);
+}
+
+@media (min-width: 768px) {
+  .ds-body-relaxed {
+    font-size: var(--text-body-lg);
+  }
+}
+
+/* Semantic type roles — two families only, two weights (400 default) */
+.type-hero {
+  font-family: var(--font-display);
+  font-size: var(--text-hero);
+  font-weight: 400;
+  line-height: var(--leading-hero);
+  letter-spacing: var(--tracking-display);
+}
+
+.type-section-title {
+  font-family: var(--font-display);
+  font-size: var(--text-section);
+  font-weight: 400;
+  line-height: var(--leading-section);
+  letter-spacing: var(--tracking-tight);
+}
+
+.type-project-title {
+  font-family: var(--font-display);
+  font-size: var(--text-project);
+  font-weight: 400;
+  line-height: var(--leading-project);
+  letter-spacing: var(--tracking-tight);
+}
+
+.type-expand-title {
+  font-family: var(--font-display);
+  font-size: var(--text-expand);
+  font-weight: 400;
+  line-height: var(--leading-expand);
+  letter-spacing: var(--tracking-display);
+}
+
+.type-lead {
+  font-family: var(--font-sans);
+  font-size: var(--text-lead);
+  font-weight: 400;
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
+}
+
+.type-body {
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
+}
+
+@media (min-width: 768px) {
+  .type-body {
+    font-size: var(--text-body-lg);
+  }
+}
+
+.type-caption {
+  font-family: var(--font-sans);
+  font-size: var(--text-caption);
+  font-weight: 400;
+  line-height: var(--leading-caption);
+  letter-spacing: 0.01em;
+}
+
+.type-meta {
+  font-family: var(--font-sans);
+  font-size: var(--text-meta);
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+}
+
+.type-nav {
+  font-family: var(--font-sans);
+  font-size: var(--text-nav);
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: var(--tracking-nav);
+  text-transform: uppercase;
+}
+
+.type-tag {
+  font-family: var(--font-sans);
+  font-size: var(--text-caption);
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 /* --------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import { Geist, Instrument_Serif } from "next/font/google";
 import { Atmosphere } from "@/components/layout/Atmosphere";
 import { ProjectExpandProvider } from "@/components/projects/ProjectExpandContext";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
@@ -8,12 +8,6 @@ import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
   subsets: ["latin"],
   display: "swap",
 });
@@ -67,7 +61,7 @@ export default function RootLayout({
   return (
     <html
       lang={SITE.locale}
-      className={`dark ${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full scroll-auto antialiased`}
+      className={`dark ${geistSans.variable} ${instrumentSerif.variable} h-full scroll-auto antialiased`}
       suppressHydrationWarning
     >
       <body className="relative min-h-full bg-[var(--bg-deep)]">

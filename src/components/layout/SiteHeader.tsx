@@ -15,13 +15,13 @@ export function SiteHeader() {
       <div className="pointer-events-auto flex w-full max-w-[120rem] items-center justify-between gap-[var(--space-lg)] border border-[var(--border)] bg-[var(--surface)]/80 px-gutter py-[var(--space-header-pad-y)] backdrop-blur-md md:px-gutter-lg">
         <Link
           href="/"
-          className="ds-interactive font-mono text-[11px] uppercase tracking-[var(--tracking-label)]"
+          className="ds-interactive type-nav tracking-[var(--tracking-label)]"
         >
           {SITE.name.split(" ")[0]}
           <span className="text-[var(--accent)]">.</span>
         </Link>
         <nav
-          className="flex items-center gap-[var(--space-xl)] font-mono text-[11px] uppercase tracking-[0.22em]"
+          className="type-nav flex items-center gap-[var(--space-xl)]"
           aria-label="Primary"
         >
           {nav.map((item) => (
