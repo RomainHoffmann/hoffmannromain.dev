@@ -8,7 +8,10 @@ const nav = [
 
 export function SiteHeader() {
   return (
-    <header className="pointer-events-none fixed inset-x-0 top-0 z-[var(--z-header)] flex justify-center px-gutter pt-[var(--space-lg)] md:px-gutter-lg md:pt-[var(--space-xl)]">
+    <header
+      data-expand-chrome
+      className="pointer-events-none fixed inset-x-0 top-0 z-[var(--z-header)] flex justify-center px-gutter pt-[var(--space-lg)] md:px-gutter-lg md:pt-[var(--space-xl)] transition-opacity duration-[420ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+    >
       <div className="pointer-events-auto flex w-full max-w-[120rem] items-center justify-between gap-[var(--space-lg)] border border-[var(--border)] bg-[var(--surface)]/80 px-gutter py-[var(--space-header-pad-y)] backdrop-blur-md md:px-gutter-lg">
         <Link
           href="/"

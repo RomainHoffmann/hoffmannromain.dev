@@ -4,7 +4,10 @@ const year = new Date().getFullYear();
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-[var(--border)] px-gutter py-[var(--space-3xl)] md:px-gutter-lg">
+    <footer
+      data-expand-chrome
+      className="border-t border-[var(--border)] px-gutter py-[var(--space-3xl)] transition-opacity duration-[420ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:px-gutter-lg"
+    >
       <div className="mx-auto flex max-w-[120rem] flex-col gap-[var(--space-2xl)] md:flex-row md:items-end md:justify-between">
         <p className="max-w-sm font-mono text-[11px] uppercase leading-relaxed tracking-[0.2em] text-[var(--muted)]">
           Motion-first interfaces · DOM &amp; CSS craft · Built for filmic rhythm

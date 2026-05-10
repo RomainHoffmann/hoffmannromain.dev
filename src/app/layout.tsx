@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import { Atmosphere } from "@/components/layout/Atmosphere";
+import { ProjectExpandProvider } from "@/components/projects/ProjectExpandContext";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 import { SITE } from "@/constants/site";
 import "./globals.css";
@@ -72,7 +73,9 @@ export default function RootLayout({
       <body className="relative min-h-full bg-[var(--bg-deep)]">
         <Atmosphere />
         <div className="relative z-[var(--z-content)] min-h-full">
-          <SmoothScrollProvider>{children}</SmoothScrollProvider>
+          <SmoothScrollProvider>
+            <ProjectExpandProvider>{children}</ProjectExpandProvider>
+          </SmoothScrollProvider>
         </div>
       </body>
     </html>

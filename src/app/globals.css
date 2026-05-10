@@ -142,6 +142,16 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+body[data-project-expand="open"] [data-expand-chrome] {
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+body[data-project-expand="open"] [data-expand-dim] {
+  opacity: 0;
+  pointer-events: none;
+}
+
 img,
 picture,
 video,

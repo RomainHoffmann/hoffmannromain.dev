@@ -7,7 +7,10 @@ import { projects } from "@/data/projects";
 
 export default function Home() {
   return (
-    <div className="relative flex min-h-full flex-col">
+    <div
+      data-expand-dim
+      className="relative flex min-h-full flex-col transition-opacity duration-[380ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+    >
       <SiteHeader />
       <main className="flex-1">
         <HeroSection />
