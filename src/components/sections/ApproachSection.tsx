@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef } from "react";
-import { gsap, useGSAP } from "@/lib/gsap";
+import { useGSAP } from "@/lib/gsap";
+import { createApproachTimeline } from "@/lib/motion/timelines";
 
 const pillars = [
   "Motion as hierarchy",
@@ -14,19 +15,10 @@ export function ApproachSection() {
 
   useGSAP(
     () => {
-      const q = gsap.utils.selector(root);
-      gsap.from(q("[data-approach]"), {
-        y: 36,
-        opacity: 0,
-        duration: 0.95,
-        stagger: 0.1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: root.current,
-          start: "top 80%",
-          once: true,
-        },
-      });
+      const section = root.current;
+      if (!section) return;
+
+      createApproachTimeline(section);
     },
     { scope: root },
   );

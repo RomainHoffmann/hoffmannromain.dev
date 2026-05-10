@@ -1,7 +1,11 @@
 "use client";
 
 import { useRef } from "react";
-import { gsap, useGSAP } from "@/lib/gsap";
+import { useGSAP } from "@/lib/gsap";
+import {
+  createHeroIntroTimeline,
+  createHeroParallax,
+} from "@/lib/motion/timelines";
 import { SITE } from "@/constants/site";
 
 function splitName(full: string) {
@@ -17,21 +21,11 @@ export function HeroSection() {
 
   useGSAP(
     () => {
-      const q = gsap.utils.selector(root);
-      gsap.from(q("[data-hero-line]"), {
-        yPercent: 108,
-        opacity: 0,
-        duration: 1.25,
-        stagger: 0.095,
-        ease: "power4.out",
-      });
-      gsap.from(q("[data-hero-rest]"), {
-        opacity: 0,
-        y: 22,
-        duration: 1,
-        delay: 0.35,
-        ease: "power3.out",
-      });
+      const section = root.current;
+      if (!section) return;
+
+      createHeroIntroTimeline(section);
+      createHeroParallax(section);
     },
     { scope: root },
   );
@@ -45,7 +39,8 @@ export function HeroSection() {
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="hero-grid absolute inset-0 opacity-[0.35]" aria-hidden />
         <div
-          className="absolute -left-1/4 top-1/3 h-[42rem] w-[42rem] rounded-full bg-[radial-gradient(circle_at_center,var(--accent-subtle)_0%,transparent_62%)] blur-3xl"
+          data-parallax-glow
+          className="absolute -left-1/4 top-1/3 h-[42rem] w-[42rem] rounded-full bg-[radial-gradient(circle_at_center,var(--accent-subtle)_0%,transparent_62%)] blur-3xl will-change-transform"
           aria-hidden
         />
       </div>

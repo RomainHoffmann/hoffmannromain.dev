@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef } from "react";
-import { gsap, useGSAP } from "@/lib/gsap";
+import { useGSAP } from "@/lib/gsap";
+import { registerWorkSectionMotion } from "@/lib/motion/timelines";
 import type { Project } from "@/data/projects";
 
 type WorkSectionProps = {
@@ -13,36 +14,10 @@ export function WorkSection({ projects }: WorkSectionProps) {
 
   useGSAP(
     () => {
-      const q = gsap.utils.selector(root);
-      gsap.from(q("[data-project]"), {
-        y: 56,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.12,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: root.current,
-          start: "top 82%",
-          once: true,
-        },
-      });
+      const section = root.current;
+      if (!section) return;
 
-      q("[data-project-line]").forEach((line) => {
-        gsap.fromTo(
-          line,
-          { scaleX: 0, transformOrigin: "left center" },
-          {
-            scaleX: 1,
-            duration: 1.15,
-            ease: "power2.inOut",
-            scrollTrigger: {
-              trigger: line,
-              start: "top 88%",
-              once: true,
-            },
-          },
-        );
-      });
+      registerWorkSectionMotion(section);
     },
     { scope: root, dependencies: [projects] },
   );

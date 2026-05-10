@@ -1,39 +1,83 @@
 "use client";
 
-import { useEffect } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  type MutableRefObject,
+  type ReactNode,
+} from "react";
 import Lenis from "lenis";
+import { configureMotion } from "@/lib/motion/init-motion";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 import "lenis/dist/lenis.css";
 
+const LenisContext = createContext<MutableRefObject<Lenis | null> | null>(null);
+
+/**
+ * Ref to the Lenis instance — read `ref.current` only in effects or handlers,
+ * not during render (strict ESLint / React 19 rules).
+ */
+export function useLenisRef(): MutableRefObject<Lenis | null> | null {
+  return useContext(LenisContext);
+}
+
 type SmoothScrollProviderProps = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
+/**
+ * Global Lenis + GSAP ticker: single RAF clock, ScrollTrigger updates each frame.
+ * `lagSmoothing(0)` keeps scroll-linked motion tight on desktop.
+ */
 export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
+  const lenisRef = useRef<Lenis | null>(null);
+
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.15,
+    configureMotion();
+
+    const instance = new Lenis({
+      duration: 1.05,
       easing: (t) => Math.min(1, 1.001 - 2 ** (-10 * t)),
+      lerp: 0.11,
+      wheelMultiplier: 1,
       smoothWheel: true,
       touchMultiplier: 1.35,
+      syncTouch: false,
+      autoResize: true,
     });
 
-    lenis.on("scroll", ScrollTrigger.update);
+    lenisRef.current = instance;
 
-    const ticker = (time: number) => {
-      lenis.raf(time * 1000);
+    instance.on("scroll", ScrollTrigger.update);
+
+    /** GSAP ticker supplies ms clock — matches Lenis rAF contract */
+    const onTick = (time: number) => {
+      instance.raf(time * 1000);
     };
 
-    gsap.ticker.add(ticker);
+    gsap.ticker.add(onTick);
     gsap.ticker.lagSmoothing(0);
 
+    const onResize = () => {
+      instance.resize();
+      ScrollTrigger.refresh();
+    };
+
+    window.addEventListener("resize", onResize, { passive: true });
+
     return () => {
-      gsap.ticker.remove(ticker);
-      lenis.destroy();
+      window.removeEventListener("resize", onResize);
+      gsap.ticker.remove(onTick);
+      instance.destroy();
+      lenisRef.current = null;
       ScrollTrigger.refresh();
     };
   }, []);
 
-  return children;
+  return (
+    <LenisContext.Provider value={lenisRef}>{children}</LenisContext.Provider>
+  );
 }
