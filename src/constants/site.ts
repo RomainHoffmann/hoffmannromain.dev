@@ -1,6 +1,9 @@
 export const SITE = {
   name: "Romain Hoffmann",
   role: "Creative Developer",
+  /** Hero — one restrained line under the name */
+  heroSubtitle:
+    "Interfaces, motion systems, and front-end craft — precision over noise.",
   /** Primary viewport title */
   title: "Romain Hoffmann — Creative Developer",
   description:

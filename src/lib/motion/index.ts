@@ -15,7 +15,7 @@ export {
 export {
   createApproachTimeline,
   createHeroIntroTimeline,
-  createHeroParallax,
+  createHeroScrollParallax,
   createSceneTimeline,
   createWorkLineReveals,
   createWorkProjectsReveal,

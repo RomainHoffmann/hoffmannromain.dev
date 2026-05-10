@@ -19,7 +19,7 @@ export function createSceneTimeline(id: string): gsap.core.Timeline {
 }
 
 /**
- * Hero load sequence — single timeline (page paint / intro).
+ * Hero load sequence — name lines, then staggered opacity / lift on supporting copy.
  */
 export function createHeroIntroTimeline(section: Element): gsap.core.Timeline {
   const q = gsap.utils.selector(section);
@@ -31,7 +31,7 @@ export function createHeroIntroTimeline(section: Element): gsap.core.Timeline {
     .from(
       q("[data-hero-line]"),
       {
-        yPercent: 108,
+        yPercent: 100,
         opacity: 0,
         duration: motionDurations.slow,
         stagger: motionStagger.default,
@@ -40,29 +40,33 @@ export function createHeroIntroTimeline(section: Element): gsap.core.Timeline {
       0,
     )
     .from(
-      q("[data-hero-rest]"),
+      q("[data-hero-fade]"),
       {
         opacity: 0,
-        y: 22,
+        y: 18,
         duration: motionDurations.moderate,
+        stagger: motionStagger.tight,
         ease: motionEase.out,
       },
-      0.35,
+      0.42,
     );
 }
 
-/** Subtle depth on decorative layers — scrubbed, Lenis-synced. */
-export function createHeroParallax(section: Element): gsap.core.Tween | null {
-  const glow = section.querySelector("[data-parallax-glow]");
-  if (!(glow instanceof Element)) return null;
-
-  return smoothParallax(glow, {
-    y: -40,
-    scrub: 0.55,
-    trigger: section,
-    start: "top bottom",
-    end: "bottom top",
-  });
+/** Scroll-scrubbed drift on layered backgrounds — Lenis-synced. */
+export function createHeroScrollParallax(section: Element): gsap.core.Tween[] {
+  const layers = gsap.utils.toArray(
+    section.querySelectorAll("[data-parallax-scroll]"),
+  ) as Element[];
+  const depths = [-30, -18];
+  return layers.map((el, i) =>
+    smoothParallax(el, {
+      y: depths[i % depths.length] ?? -22,
+      scrub: 0.58,
+      trigger: section,
+      start: "top bottom",
+      end: "bottom top",
+    }),
+  );
 }
 
 /** Project rows enter — scroll-triggered stagger. */
