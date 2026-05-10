@@ -16,8 +16,7 @@ export {
   createApproachTimeline,
   createHeroIntroTimeline,
   createHeroScrollParallax,
+  createProjectGridReveal,
   createSceneTimeline,
-  createWorkLineReveals,
-  createWorkProjectsReveal,
-  registerWorkSectionMotion,
+  registerProjectGridMotion,
 } from "./timelines";

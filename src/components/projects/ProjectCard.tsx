@@ -1,0 +1,130 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { useRef } from "react";
+import { gsap, useGSAP } from "@/lib/gsap";
+import type { Project } from "@/data/projects";
+
+type ProjectCardProps = {
+  project: Project;
+  className?: string;
+  priority?: boolean;
+};
+
+const parallaxMax = 5;
+
+export function ProjectCard({
+  project,
+  className = "",
+  priority = false,
+}: ProjectCardProps) {
+  const root = useRef<HTMLElement>(null);
+  const shiftRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const card = root.current;
+      const shift = shiftRef.current;
+      if (!card || !shift) return;
+
+      const xTo = gsap.quickTo(shift, "x", {
+        duration: 1.15,
+        ease: "power3.out",
+      });
+      const yTo = gsap.quickTo(shift, "y", {
+        duration: 1.15,
+        ease: "power3.out",
+      });
+
+      const onMove = (event: PointerEvent) => {
+        const r = card.getBoundingClientRect();
+        const nx = (event.clientX - r.left) / r.width - 0.5;
+        const ny = (event.clientY - r.top) / r.height - 0.5;
+        xTo(nx * 2 * parallaxMax);
+        yTo(ny * 2 * parallaxMax);
+      };
+
+      const onLeave = () => {
+        xTo(0);
+        yTo(0);
+      };
+
+      card.addEventListener("pointermove", onMove, { passive: true });
+      card.addEventListener("pointerleave", onLeave);
+
+      return () => {
+        card.removeEventListener("pointermove", onMove);
+        card.removeEventListener("pointerleave", onLeave);
+      };
+    },
+    { scope: root, dependencies: [project.id] },
+  );
+
+  const inner = (
+    <article
+      ref={root}
+      data-project-card
+      className={`relative flex h-full min-h-[min(76vw,23rem)] flex-col overflow-hidden border border-[var(--border)] bg-[var(--bg-elevated)] ${className}`}
+    >
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 overflow-hidden">
+          <div
+            ref={shiftRef}
+            className="absolute -inset-[4%] will-change-transform"
+          >
+            <div className="relative h-full w-full transition-transform duration-[620ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02]">
+              <Image
+                src={project.coverSrc}
+                alt=""
+                role="presentation"
+                fill
+                priority={priority}
+                sizes="(max-width: 1024px) 100vw, (max-width: 1536px) 52vw, 42vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div
+          className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_78%_72%_at_50%_88%,transparent_22%,rgba(0,0,0,0.78)_100%)] opacity-[0.4] transition-opacity duration-[620ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-[0.58]"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0 z-[2] bg-black/17 transition-colors duration-[620ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:bg-black/38"
+          aria-hidden
+        />
+      </div>
+
+      <div className="relative z-[3] mt-auto w-full p-6 pt-[38%] md:p-8 md:pt-[36%] lg:pt-[32%]">
+        <div
+          className="translate-y-3 opacity-[0.82] transition-[transform,opacity] duration-[620ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0 group-hover:opacity-100"
+        >
+          <h3 className="font-display text-[clamp(1.65rem,3.6vw,2.25rem)] leading-[1.08] tracking-[var(--tracking-tight)] text-[var(--fg)]">
+            {project.title}
+          </h3>
+          <p className="mt-3 font-mono text-[10px] uppercase leading-relaxed tracking-[0.24em] text-[var(--muted-strong)]">
+            {project.type}
+          </p>
+          <p className="mt-2 font-mono text-[11px] tabular-nums tracking-[0.18em] text-[var(--muted)]">
+            {project.year}
+          </p>
+        </div>
+      </div>
+    </article>
+  );
+
+  if (project.href) {
+    return (
+      <Link
+        href={project.href}
+        className="group block h-full min-h-0 outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]"
+      >
+        {inner}
+      </Link>
+    );
+  }
+
+  return <div className="group block h-full min-h-0">{inner}</div>;
+}

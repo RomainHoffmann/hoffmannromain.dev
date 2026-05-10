@@ -69,40 +69,24 @@ export function createHeroScrollParallax(section: Element): gsap.core.Tween[] {
   );
 }
 
-/** Project rows enter — scroll-triggered stagger. */
-export function createWorkProjectsReveal(section: Element): gsap.core.Animation {
+/** Project grid cards — editorial stagger on enter. */
+export function createProjectGridReveal(section: Element): gsap.core.Animation {
   const q = gsap.utils.selector(section);
-  return staggerReveal(q("[data-project]"), motionStagger.relaxed, {
-    y: 56,
+  return staggerReveal(q("[data-project-card]"), motionStagger.relaxed, {
+    y: 48,
+    opacity: 0,
     duration: motionDurations.moderate,
     ease: motionEase.out,
     scrollTrigger: {
       trigger: section,
-      ...scrollDefaults.enterFromBelow,
+      start: "top 86%",
+      once: true,
     },
   });
 }
 
-/** Rule lines — per-line trigger (independent of row timeline). */
-export function createWorkLineReveals(section: Element): gsap.core.Tween[] {
-  const lines = gsap.utils.toArray(
-    section.querySelectorAll("[data-project-line]"),
-  ) as Element[];
-  return lines.map((line) =>
-    gsap.fromTo(
-      line,
-      { scaleX: 0, transformOrigin: "left center" },
-      {
-        scaleX: 1,
-        duration: motionDurations.cinematic * 0.8,
-        ease: motionEase.inOut,
-        scrollTrigger: {
-          trigger: line,
-          ...scrollDefaults.enterLine,
-        },
-      },
-    ),
-  );
+export function registerProjectGridMotion(section: Element): void {
+  createProjectGridReveal(section);
 }
 
 /** Approach block — single staggered pass. */
@@ -117,13 +101,4 @@ export function createApproachTimeline(section: Element): gsap.core.Animation {
       ...scrollDefaults.approachBlock,
     },
   });
-}
-
-/**
- * Register all work-section motion; returns array for optional debugging.
- * useGSAP reverts context — do not store globally.
- */
-export function registerWorkSectionMotion(section: Element): void {
-  createWorkProjectsReveal(section);
-  createWorkLineReveals(section);
 }
