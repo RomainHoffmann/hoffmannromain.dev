@@ -58,120 +58,129 @@ export function ProjectExpandOverlay({
     const gallerySection = gallerySectionRef.current;
     if (!stage || !backdrop) return;
 
-    const vw = window.innerWidth;
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
+    const ctx = gsap.context(() => {
+      const vw = window.innerWidth;
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
 
-    const rx = originRect.left;
-    const ry = originRect.top;
-    const sx = originRect.width / vw;
-    const sy = originRect.height / window.innerHeight;
+      const rx = originRect.left;
+      const ry = originRect.top;
+      const sx = originRect.width / vw;
+      const sy = originRect.height / window.innerHeight;
 
-    const flipDur = reduceMotion ? 0.01 : overlayMotion.flipIn;
-    const bdDur = reduceMotion ? 0.01 : overlayMotion.backdropIn;
+      const flipDur = reduceMotion ? 0.01 : overlayMotion.flipIn;
+      const bdDur = reduceMotion ? 0.01 : overlayMotion.backdropIn;
 
-    gsap.set(stage, {
-      x: rx,
-      y: ry,
-      scaleX: sx,
-      scaleY: sy,
-      transformOrigin: "0 0",
-    });
-    gsap.set(backdrop, { opacity: 0 });
-    gsap.set([title, lead, heroDetails].filter(Boolean), {
-      opacity: 0,
-      y: 22,
-    });
-    const galleryItems =
-      gallerySection?.querySelectorAll("[data-expand-gallery-item]");
-    if (galleryItems?.length) {
-      gsap.set(galleryItems, { opacity: 0, y: 18 });
-    }
+      gsap.set(stage, {
+        x: rx,
+        y: ry,
+        scaleX: sx,
+        scaleY: sy,
+        transformOrigin: "0 0",
+        force3D: true,
+      });
+      gsap.set(backdrop, { opacity: 0 });
+      gsap.set([title, lead, heroDetails].filter(Boolean), {
+        opacity: 0,
+        y: 22,
+        force3D: true,
+      });
+      const galleryItems =
+        gallerySection?.querySelectorAll("[data-expand-gallery-item]");
+      if (galleryItems?.length) {
+        gsap.set(galleryItems, { opacity: 0, y: 18, force3D: true });
+      }
 
-    const tl = gsap.timeline({
-      defaults: { ease: overlayMotion.easeFlip },
-    });
+      const tl = gsap.timeline({
+        defaults: { ease: overlayMotion.easeFlip },
+      });
 
-    tl.to(
-      stage,
-      {
-        x: 0,
-        y: 0,
-        scaleX: 1,
-        scaleY: 1,
-        duration: flipDur,
-        ease: overlayMotion.easeFlip,
-      },
-      0,
-    );
-
-    tl.to(
-      backdrop,
-      {
-        opacity: reduceMotion ? 0.82 : 0.94,
-        duration: bdDur,
-        ease: overlayMotion.easeContent,
-      },
-      0,
-    );
-
-    const tOff = reduceMotion ? 0 : overlayMotion.contentEnterAt;
-    tl.to(
-      title,
-      {
-        opacity: 1,
-        y: 0,
-        duration: reduceMotion ? 0.01 : overlayMotion.titleIn,
-        ease: overlayMotion.easeContent,
-      },
-      tOff,
-    );
-
-    tl.to(
-      lead,
-      {
-        opacity: 1,
-        y: 0,
-        duration: reduceMotion ? 0.01 : overlayMotion.leadIn,
-        ease: overlayMotion.easeContent,
-      },
-      tOff + 0.06,
-    );
-
-    tl.to(
-      heroDetails,
-      {
-        opacity: 1,
-        y: 0,
-        duration: reduceMotion ? 0.01 : overlayMotion.detailsIn,
-        ease: overlayMotion.easeContent,
-      },
-      tOff + 0.14,
-    );
-
-    const galleryStart = reduceMotion
-      ? 0.01
-      : tOff + overlayMotion.galleryWaveDelay;
-
-    if (galleryItems?.length && !reduceMotion) {
       tl.to(
-        galleryItems,
+        stage,
+        {
+          x: 0,
+          y: 0,
+          scaleX: 1,
+          scaleY: 1,
+          duration: flipDur,
+          ease: overlayMotion.easeFlip,
+          force3D: true,
+        },
+        0,
+      );
+
+      tl.to(
+        backdrop,
+        {
+          opacity: reduceMotion ? 0.82 : 0.94,
+          duration: bdDur,
+          ease: overlayMotion.easeContent,
+        },
+        0,
+      );
+
+      const tOff = reduceMotion ? 0 : overlayMotion.contentEnterAt;
+      tl.to(
+        title,
         {
           opacity: 1,
           y: 0,
-          duration: overlayMotion.galleryItemIn,
-          stagger: overlayMotion.galleryStaggerIn,
+          duration: reduceMotion ? 0.01 : overlayMotion.titleIn,
           ease: overlayMotion.easeContent,
+          force3D: true,
         },
-        galleryStart,
+        tOff,
       );
-    } else if (galleryItems?.length && reduceMotion) {
-      gsap.set(galleryItems, { opacity: 1, y: 0 });
-    }
+
+      tl.to(
+        lead,
+        {
+          opacity: 1,
+          y: 0,
+          duration: reduceMotion ? 0.01 : overlayMotion.leadIn,
+          ease: overlayMotion.easeContent,
+          force3D: true,
+        },
+        tOff + 0.06,
+      );
+
+      tl.to(
+        heroDetails,
+        {
+          opacity: 1,
+          y: 0,
+          duration: reduceMotion ? 0.01 : overlayMotion.detailsIn,
+          ease: overlayMotion.easeContent,
+          force3D: true,
+        },
+        tOff + 0.14,
+      );
+
+      const galleryStart = reduceMotion
+        ? 0.01
+        : tOff + overlayMotion.galleryWaveDelay;
+
+      if (galleryItems?.length && !reduceMotion) {
+        tl.to(
+          galleryItems,
+          {
+            opacity: 1,
+            y: 0,
+            duration: overlayMotion.galleryItemIn,
+            stagger: overlayMotion.galleryStaggerIn,
+            ease: overlayMotion.easeContent,
+            force3D: true,
+          },
+          galleryStart,
+        );
+      } else if (galleryItems?.length && reduceMotion) {
+        gsap.set(galleryItems, { opacity: 1, y: 0 });
+      }
+    }, stage);
 
     return () => {
-      tl.kill();
+      ctx.revert();
     };
   }, [originRect, project.slug]);
 
@@ -249,6 +258,7 @@ export function ProjectExpandOverlay({
         scaleY: sy,
         duration: reduceMotion ? 0.01 : overlayMotion.exitFlipDur,
         ease: overlayMotion.easeFlip,
+        force3D: true,
       },
       overlayMotion.exitFlipAt,
     );
@@ -299,6 +309,8 @@ export function ProjectExpandOverlay({
               alt=""
               fill
               priority
+              fetchPriority="high"
+              decoding="async"
               className="object-cover"
               sizes="100vw"
             />
@@ -359,9 +371,11 @@ export function ProjectExpandOverlay({
                     src={previewSrc}
                     alt=""
                     fill
-                    className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 65vw"
-                    priority
+                    priority={previewSrc !== project.coverImage}
+                    fetchPriority="high"
+                    decoding="async"
+                    className="object-cover"
                   />
                 </div>
 
@@ -377,6 +391,9 @@ export function ProjectExpandOverlay({
                           src={src}
                           alt=""
                           fill
+                          loading="lazy"
+                          decoding="async"
+                          fetchPriority="low"
                           className="object-cover"
                           sizes="(max-width: 1023px) 120px, 88px"
                         />

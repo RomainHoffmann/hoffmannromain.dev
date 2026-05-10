@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import {
   createContext,
   useCallback,
@@ -9,7 +10,14 @@ import {
   type ReactNode,
 } from "react";
 import type { Project } from "@/types/project";
-import { ProjectExpandOverlay } from "@/components/projects/ProjectExpandOverlay";
+
+const ProjectExpandOverlay = dynamic(
+  () =>
+    import("@/components/projects/ProjectExpandOverlay").then(
+      (m) => m.ProjectExpandOverlay,
+    ),
+  { ssr: false },
+);
 
 type ExpandPayload = {
   project: Project;
@@ -19,7 +27,6 @@ type ExpandPayload = {
 type ProjectExpandContextValue = {
   expand: (project: Project, originEl: HTMLElement | null) => void;
   close: () => void;
-  isOpen: boolean;
 };
 
 const ProjectExpandContext = createContext<ProjectExpandContextValue | null>(
@@ -46,13 +53,13 @@ export function ProjectExpandProvider({ children }: { children: ReactNode }) {
     document.body.style.overflow = "";
   }, []);
 
+  /** Stable identity — cards must not rerender when overlay mounts (payload change). */
   const value = useMemo(
     () => ({
       expand,
       close,
-      isOpen: !!payload,
     }),
-    [expand, close, payload],
+    [expand, close],
   );
 
   return (

@@ -8,6 +8,7 @@ import {
   createHeroIntroTimeline,
   createHeroScrollParallax,
 } from "@/lib/motion/timelines";
+import { rafPointerHandler } from "@/lib/pointerFrame";
 
 function splitName(full: string) {
   const parts = full.trim().split(/\s+/);
@@ -45,6 +46,10 @@ export function HeroSection() {
         section.querySelectorAll("[data-parallax-mouse]"),
       ) as HTMLElement[];
 
+      mouseLayers.forEach((el) => {
+        gsap.set(el, { force3D: true });
+      });
+
       const drivers = mouseLayers.map((el, index) => {
         const depth = index === 0 ? 1 : 0.62;
         return {
@@ -52,24 +57,26 @@ export function HeroSection() {
           xTo: gsap.quickTo(el, "x", {
             duration: 1.55,
             ease: "power3.out",
+            force3D: true,
           }),
           yTo: gsap.quickTo(el, "y", {
             duration: 1.55,
             ease: "power3.out",
+            force3D: true,
           }),
         };
       });
 
       const maxPx = 9;
 
-      const onPointerMove = (event: PointerEvent) => {
+      const onPointerMove = rafPointerHandler((event: PointerEvent) => {
         const nx = (event.clientX / window.innerWidth - 0.5) * 2;
         const ny = (event.clientY / window.innerHeight - 0.5) * 2;
         drivers.forEach(({ xTo, yTo, depth }) => {
           xTo(nx * maxPx * depth);
           yTo(ny * maxPx * depth);
         });
-      };
+      });
 
       window.addEventListener("pointermove", onPointerMove, { passive: true });
 

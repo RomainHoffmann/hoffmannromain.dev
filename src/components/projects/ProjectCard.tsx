@@ -1,10 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, type CSSProperties, type KeyboardEvent } from "react";
+import {
+  memo,
+  useCallback,
+  useRef,
+  type CSSProperties,
+  type KeyboardEvent,
+} from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { useProjectExpand } from "@/components/projects/ProjectExpandContext";
 import type { Project } from "@/data/projects";
+import { rafPointerHandler } from "@/lib/pointerFrame";
 
 type ProjectCardProps = {
   project: Project;
@@ -14,7 +21,7 @@ type ProjectCardProps = {
 
 const parallaxMax = 5;
 
-export function ProjectCard({
+function ProjectCardInner({
   project,
   className = "",
   priority = false,
@@ -22,6 +29,13 @@ export function ProjectCard({
   const { expand } = useProjectExpand();
   const root = useRef<HTMLElement>(null);
   const shiftRef = useRef<HTMLDivElement>(null);
+  const prefetchOnce = useRef(false);
+
+  const warmExpandChunk = useCallback(() => {
+    if (prefetchOnce.current) return;
+    prefetchOnce.current = true;
+    void import("@/components/projects/ProjectExpandOverlay");
+  }, []);
 
   useGSAP(
     () => {
@@ -29,22 +43,26 @@ export function ProjectCard({
       const shift = shiftRef.current;
       if (!card || !shift) return;
 
+      gsap.set(shift, { force3D: true });
+
       const xTo = gsap.quickTo(shift, "x", {
         duration: 1.45,
         ease: "power3.out",
+        force3D: true,
       });
       const yTo = gsap.quickTo(shift, "y", {
         duration: 1.45,
         ease: "power3.out",
+        force3D: true,
       });
 
-      const onMove = (event: PointerEvent) => {
+      const onMove = rafPointerHandler((event: PointerEvent) => {
         const r = card.getBoundingClientRect();
         const nx = (event.clientX - r.left) / r.width - 0.5;
         const ny = (event.clientY - r.top) / r.height - 0.5;
         xTo(nx * 2 * parallaxMax);
         yTo(ny * 2 * parallaxMax);
-      };
+      });
 
       const onLeave = () => {
         xTo(0);
@@ -77,6 +95,7 @@ export function ProjectCard({
   return (
     <div
       className="group block h-full min-h-0 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]"
+      onPointerEnter={warmExpandChunk}
       onClick={open}
       onKeyDown={onKeyDown}
       role="button"
@@ -93,10 +112,7 @@ export function ProjectCard({
       >
         <div className="absolute inset-0">
           <div className="absolute inset-0 overflow-hidden">
-            <div
-              ref={shiftRef}
-              className="absolute -inset-[4%] will-change-transform"
-            >
+            <div ref={shiftRef} className="absolute -inset-[4%]">
               <div className="relative h-full w-full transition-transform duration-[var(--duration-emphasis)] ease-[var(--ease-out-expo)] group-hover:scale-[1.02]">
                 <Image
                   src={project.coverImage}
@@ -104,6 +120,7 @@ export function ProjectCard({
                   role="presentation"
                   fill
                   priority={priority}
+                  decoding="async"
                   sizes="(max-width: 1024px) 100vw, (max-width: 1536px) 52vw, 42vw"
                   className="object-cover"
                 />
@@ -140,3 +157,5 @@ export function ProjectCard({
     </div>
   );
 }
+
+export const ProjectCard = memo(ProjectCardInner);

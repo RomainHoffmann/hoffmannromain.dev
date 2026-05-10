@@ -61,14 +61,20 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     gsap.ticker.add(onTick);
     gsap.ticker.lagSmoothing(0);
 
+    let resizeTimeout: ReturnType<typeof setTimeout> | undefined;
+
     const onResize = () => {
-      instance.resize();
-      ScrollTrigger.refresh();
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        instance.resize();
+        ScrollTrigger.refresh();
+      }, 120);
     };
 
     window.addEventListener("resize", onResize, { passive: true });
 
     return () => {
+      clearTimeout(resizeTimeout);
       window.removeEventListener("resize", onResize);
       gsap.ticker.remove(onTick);
       instance.destroy();

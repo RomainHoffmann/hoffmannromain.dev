@@ -118,6 +118,7 @@ export function smoothParallax(
   return gsap.to(targets, {
     y,
     ease: motionEase.linear,
+    force3D: true,
     scrollTrigger: {
       trigger: stTrigger,
       start,

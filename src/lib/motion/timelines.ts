@@ -85,6 +85,7 @@ export function createProjectGridReveal(section: Element): gsap.core.Animation {
       trigger: section,
       start: "top 85%",
       once: true,
+      fastScrollEnd: true,
     },
   });
 }
@@ -104,6 +105,7 @@ export function createApproachTimeline(section: Element): gsap.core.Animation {
     scrollTrigger: {
       trigger: section,
       ...scrollDefaults.approachBlock,
+      fastScrollEnd: true,
     },
   });
 }

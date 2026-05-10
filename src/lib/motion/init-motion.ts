@@ -19,6 +19,7 @@ export function configureMotion(): void {
   gsap.defaults({
     duration: motionDurations.normal,
     ease: motionEase.out,
+    overwrite: "auto",
   });
 
   ScrollTrigger.defaults({
