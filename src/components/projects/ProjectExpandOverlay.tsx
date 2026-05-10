@@ -344,7 +344,7 @@ export function ProjectExpandOverlay({
             {project.githubUrl ? (
               <a
                 href={project.githubUrl}
-                className="text-[var(--muted)] transition-colors hover:text-[var(--fg)]"
+                className="ds-interactive ds-link-underline text-[var(--muted)]"
                 target="_blank"
                 rel="noreferrer"
               >

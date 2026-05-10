@@ -12,10 +12,10 @@ export function SiteHeader() {
       data-expand-chrome
       className="pointer-events-none fixed inset-x-0 top-0 z-[var(--z-header)] flex justify-center px-gutter pt-[calc(env(safe-area-inset-top,0px)+var(--space-md))] md:px-gutter-lg md:pt-[calc(env(safe-area-inset-top,0px)+var(--space-xl))] transition-opacity duration-[var(--duration-chrome)] ease-[var(--ease-out-expo)]"
     >
-      <div className="pointer-events-auto flex w-full max-w-[120rem] items-center justify-between gap-[var(--space-lg)] border border-[var(--border)] bg-[var(--surface)]/80 px-gutter py-[var(--space-header-pad-y)] backdrop-blur-md md:px-gutter-lg">
+      <div className="ds-chrome-depth pointer-events-auto flex w-full max-w-[120rem] items-center justify-between gap-[var(--space-lg)] border border-[var(--border)] bg-[var(--surface)]/80 px-gutter py-[var(--space-header-pad-y)] backdrop-blur-md md:px-gutter-lg">
         <Link
           href="/"
-          className="ds-interactive type-nav tracking-[var(--tracking-label)]"
+          className="ds-interactive ds-link-underline type-nav tracking-[var(--tracking-label)]"
         >
           {SITE.name.split(" ")[0]}
           <span className="text-[var(--accent)]">.</span>
@@ -25,7 +25,7 @@ export function SiteHeader() {
           aria-label="Primary"
         >
           {nav.map((item) => (
-            <a key={item.href} href={item.href} className="ds-interactive">
+            <a key={item.href} href={item.href} className="ds-interactive ds-link-underline">
               {item.label}
             </a>
           ))}

@@ -337,8 +337,25 @@ a {
 
 @media (prefers-reduced-motion: reduce) {
   .ds-atmosphere-drift,
-  .ds-noise--animated {
+  .ds-ambient-breathe,
+  .ds-noise--animated,
+  .ds-view-enter-shell,
+  .ds-media-reveal {
     animation: none !important;
+  }
+
+  .ds-ambient-breathe {
+    opacity: 0.34;
+    transform: none;
+  }
+
+  .ds-view-enter-shell {
+    opacity: 1;
+    transform: none;
+  }
+
+  .ds-media-reveal {
+    clip-path: inset(0 0 0 0);
   }
 
   .ds-noise--animated {
@@ -406,6 +423,108 @@ a {
 .group:hover .ds-title-accent,
 .group:focus-within .ds-title-accent {
   color: var(--accent-soft);
+}
+
+/* Premium polish — restrained; disable under `prefers-reduced-motion` below */
+
+/** Slow wash over warmth — reads as breathing space, not motion graphics */
+.ds-ambient-breathe {
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+  background: radial-gradient(
+    ellipse 74% 56% at 46% 44%,
+    rgba(255, 83, 33, 0.038) 0%,
+    transparent 58%
+  );
+  opacity: 0.36;
+  animation: ds-ambient-breathe 44s ease-in-out infinite alternate;
+}
+
+@keyframes ds-ambient-breathe {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: scale(1.012);
+  }
+}
+
+/** First paint — opacity + tiny lift only */
+.ds-view-enter-shell {
+  animation: ds-view-enter 920ms var(--ease-out-expo) forwards;
+}
+
+@keyframes ds-view-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 7px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/** Inline links — underline draws once on hover (editorial, not buttons) */
+.ds-link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  padding-bottom: 0.14em;
+  text-decoration: none;
+  transition:
+    background-size var(--duration-ui) var(--ease-out-expo),
+    color var(--duration-ui) var(--ease-out-expo);
+}
+
+.ds-link-underline:hover,
+.ds-link-underline:focus-visible {
+  background-size: 100% 1px;
+}
+
+/** Header chrome — depth on fine-pointer hover only */
+.ds-chrome-depth {
+  transition: box-shadow var(--duration-layer) var(--ease-out-expo);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ds-chrome-depth:hover {
+    box-shadow:
+      0 18px 46px -22px rgba(0, 0, 0, 0.58),
+      0 0 0 1px rgba(255, 255, 255, 0.035);
+  }
+}
+
+/** Project cards — lift shadow follows group hover */
+.ds-card-depth {
+  transition: box-shadow var(--duration-emphasis) var(--ease-out-expo);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .group:hover .ds-card-depth,
+  .group:focus-visible .ds-card-depth {
+    box-shadow:
+      0 26px 62px -30px rgba(0, 0, 0, 0.72),
+      0 0 0 1px rgba(255, 255, 255, 0.055);
+  }
+}
+
+/** One-shot editorial crop — images arrive, then settle */
+.ds-media-reveal {
+  clip-path: inset(8% 0 11% 0);
+  animation: ds-media-reveal 1.08s var(--ease-out-expo) forwards;
+}
+
+@keyframes ds-media-reveal {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
 }
 
 /* --------------------------------------------------------------------------

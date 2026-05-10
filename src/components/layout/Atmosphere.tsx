@@ -9,6 +9,7 @@ export function Atmosphere() {
       aria-hidden
     >
       <div className="ds-bg-atmosphere absolute inset-0" />
+      <div className="ds-ambient-breathe absolute inset-0" />
       <div className="ds-atmosphere-drift absolute inset-[-28%]" />
       <div className="ds-vignette absolute inset-0" />
       <div className="ds-edge-dim absolute inset-0" />

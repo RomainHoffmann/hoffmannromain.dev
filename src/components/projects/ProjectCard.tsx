@@ -108,12 +108,12 @@ function ProjectCardInner({
         style={
           { "--project-accent": project.accentColor } as CSSProperties
         }
-        className={`relative flex h-full min-h-[min(76vw,23rem)] flex-col overflow-hidden border border-[var(--border)] bg-[var(--bg-elevated)] ${className}`}
+        className={`ds-card-depth relative flex h-full min-h-[min(76vw,23rem)] flex-col overflow-hidden border border-[var(--border)] bg-[var(--bg-elevated)] ${className}`}
       >
         <div className="absolute inset-0">
           <div className="absolute inset-0 overflow-hidden">
             <div ref={shiftRef} className="absolute -inset-[4%]">
-              <div className="relative h-full w-full transition-transform duration-[var(--duration-emphasis)] ease-[var(--ease-out-expo)] group-hover:scale-[1.02]">
+              <div className="ds-media-reveal relative h-full w-full transition-transform duration-[var(--duration-emphasis)] ease-[var(--ease-out-expo)] group-hover:scale-[1.02]">
                 <Image
                   src={project.coverImage}
                   alt=""

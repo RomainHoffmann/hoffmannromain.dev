@@ -19,7 +19,7 @@ export function SiteFooter() {
           </span>
           <a
             href={SITE.social.github}
-            className="ds-interactive-accent"
+            className="ds-interactive-accent ds-link-underline"
             target="_blank"
             rel="noreferrer"
           >
@@ -27,7 +27,7 @@ export function SiteFooter() {
           </a>
           <a
             href={SITE.social.linkedin}
-            className="ds-interactive-accent"
+            className="ds-interactive-accent ds-link-underline"
             target="_blank"
             rel="noreferrer"
           >
