@@ -123,7 +123,7 @@ export function ProjectCard({
 
         <div className="relative z-[3] mt-auto w-full p-6 pt-[38%] md:p-8 md:pt-[36%] lg:pt-[32%]">
           <div
-            className="translate-y-3 opacity-[0.82] transition-[transform,opacity] duration-[620ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0 group-hover:opacity-100"
+            className="translate-y-0 opacity-100 transition-[transform,opacity] duration-[620ms] ease-[cubic-bezier(0.16,1,0.3,1)] lg:translate-y-3 lg:opacity-[0.82] lg:group-hover:translate-y-0 lg:group-hover:opacity-100"
           >
             <h3 className="type-project-title text-[var(--fg)]">
               {project.title}

@@ -123,6 +123,19 @@
   --transition-shadow: box-shadow var(--duration-moderate) var(--ease-out-expo);
 }
 
+/* Narrow viewports — intentional rhythm (not scaled-down desktop) */
+@media (max-width: 767px) {
+  :root {
+    --space-gutter: 1rem;
+    --space-section-y: 4.25rem;
+    --space-section-y-lg: 5.25rem;
+    --space-2xl: 2.75rem;
+    --space-3xl: 3.75rem;
+    --space-4xl: 4.25rem;
+    --space-5xl: 5.5rem;
+  }
+}
+
 @theme inline {
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-instrument), ui-serif, Georgia, "Times New Roman",
@@ -508,6 +521,31 @@ a {
   line-height: 1.35;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+/* Project expand — horizontal thumb rail (touch + snap) */
+.expand-thumb-strip {
+  touch-action: pan-x;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--space-gutter);
+  scrollbar-width: thin;
+}
+
+.expand-thumb-strip > * {
+  scroll-snap-align: start;
+}
+
+@media (min-width: 1024px) {
+  .expand-thumb-strip {
+    touch-action: auto;
+    scroll-snap-type: none;
+    scroll-padding-inline: 0;
+  }
+
+  .expand-thumb-strip > * {
+    scroll-snap-align: none;
+  }
 }
 
 /* --------------------------------------------------------------------------

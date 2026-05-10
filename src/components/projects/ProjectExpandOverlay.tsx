@@ -320,7 +320,7 @@ export function ProjectExpandOverlay({
         </div>
 
         {/* Chrome */}
-        <div className="relative z-[3] flex shrink-0 items-start justify-between gap-6 px-gutter pb-4 pt-[calc(env(safe-area-inset-top)+var(--space-lg))] md:px-gutter-lg md:pb-6">
+        <div className="relative z-[3] flex shrink-0 items-start justify-between gap-4 px-gutter pb-3 pt-[calc(env(safe-area-inset-top)+var(--space-md))] md:gap-6 md:pb-4 md:pt-[calc(env(safe-area-inset-top)+var(--space-lg))] lg:px-gutter-lg">
           <button
             type="button"
             onClick={runExit}
@@ -342,11 +342,53 @@ export function ProjectExpandOverlay({
           </div>
         </div>
 
-        {/* Scrollable editorial body */}
+        {/* Scrollable body — mobile: gallery first (cinematic); lg: editorial → gallery */}
         <div className="relative z-[2] flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain">
-          <div className="flex flex-1 flex-col px-gutter pb-[calc(env(safe-area-inset-bottom)+var(--space-4xl))] pt-[var(--space-md)] md:px-gutter-lg md:pb-[var(--space-5xl)]">
-            {/* Lower-left editorial block */}
-            <div className="flex max-w-[42rem] flex-col justify-end lg:max-w-[48rem]">
+          <div className="flex flex-1 flex-col px-gutter pb-[calc(env(safe-area-inset-bottom)+var(--space-3xl))] pt-0 md:px-gutter-lg md:pb-[calc(env(safe-area-inset-bottom)+var(--space-5xl))] md:pt-[var(--space-md)] lg:pt-[var(--space-md)]">
+            {/* Gallery — order 1 on mobile, order 3 on desktop */}
+            <div
+              ref={gallerySectionRef}
+              className="order-1 -mx-gutter mb-[var(--space-2xl)] lg:order-3 lg:mx-0 lg:mb-0 lg:mt-[var(--space-4xl)]"
+            >
+              <div className="grid grid-cols-1 items-start gap-0 lg:grid-cols-[1fr_minmax(4.5rem,5.5rem)] lg:gap-x-[var(--space-2xl)] lg:gap-y-[var(--space-xl)]">
+                <div
+                  data-expand-gallery-item
+                  className="relative aspect-[16/11] min-h-[min(58vw,17.5rem)] overflow-hidden border-y border-[var(--border)] bg-[var(--surface)]/40 md:min-h-[min(52vw,22rem)] lg:aspect-[16/10] lg:min-h-[min(42vh,28rem)] lg:border lg:border-[var(--border)]"
+                >
+                  <Image
+                    src={previewSrc}
+                    alt=""
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 65vw"
+                    priority
+                  />
+                </div>
+
+                <div className="-mx-gutter border-t border-[var(--border)] bg-[var(--bg-elevated)]/55 px-gutter py-[var(--space-md)] lg:mx-0 lg:h-full lg:border-0 lg:bg-transparent lg:px-0 lg:py-0">
+                  <div className="expand-thumb-strip flex flex-row gap-3 lg:max-h-[min(52vh,28rem)] lg:flex lg:w-full lg:flex-col lg:gap-3 lg:overflow-y-auto lg:overflow-x-visible lg:pb-0">
+                    {thumbFrames.map((src, i) => (
+                      <div
+                        key={`${src}-${i}`}
+                        data-expand-gallery-item
+                        className="relative aspect-[4/5] w-[5rem] shrink-0 overflow-hidden border border-[var(--border)] bg-[var(--bg-elevated)] sm:w-[5.25rem] lg:aspect-square lg:h-auto lg:w-full"
+                      >
+                        <Image
+                          src={src}
+                          alt=""
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 1023px) 120px, 88px"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Title + tagline */}
+            <div className="order-2 max-w-[42rem] lg:order-1 lg:max-w-[48rem]">
               <h2
                 id="expand-project-title"
                 ref={titleRef}
@@ -357,89 +399,52 @@ export function ProjectExpandOverlay({
 
               <p
                 ref={leadRef}
-                className="type-lead mt-[var(--space-xl)] max-w-[38rem] text-[var(--muted-strong)]"
+                className="type-lead mt-[var(--space-lg)] max-w-[38rem] text-[var(--muted-strong)] md:mt-[var(--space-xl)]"
               >
                 {project.tagline}
               </p>
-
-              <div
-                ref={heroDetailsRef}
-                className="mt-[var(--space-2xl)] space-y-[var(--space-xl)] border-t border-[var(--border)] pt-[var(--space-2xl)]"
-              >
-                <div className="type-meta flex flex-wrap items-baseline gap-x-[var(--space-lg)] gap-y-2 text-[var(--muted)]">
-                  <span>{project.type}</span>
-                  <span className="text-[var(--border-strong)]">·</span>
-                  <span className="tabular-nums">{project.year}</span>
-                </div>
-
-                <ul className="flex flex-wrap gap-x-3 gap-y-2">
-                  {project.stack.map((tech) => (
-                    <li
-                      key={tech}
-                      className="type-tag border border-[var(--border)] bg-[var(--surface)]/60 px-3 py-1.5 text-[var(--muted-strong)]"
-                    >
-                      {tech}
-                    </li>
-                  ))}
-                </ul>
-
-                {project.liveUrl ? (
-                  <a
-                    href={project.liveUrl}
-                    className="type-nav inline-flex items-center gap-2 text-[var(--muted)] transition-colors hover:text-[var(--project-accent)]"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <span className="h-px w-10 bg-[color:var(--project-accent,var(--accent))] opacity-90" />
-                    View live
-                  </a>
-                ) : (
-                  <p className="type-meta text-[var(--muted)]">
-                    Live link coming soon
-                  </p>
-                )}
-              </div>
             </div>
 
-            {/* Main preview + thumbnail rail */}
+            {/* Meta, stack, links */}
             <div
-              ref={gallerySectionRef}
-              className="mt-[var(--space-4xl)] grid grid-cols-1 gap-[var(--space-lg)] lg:grid-cols-[1fr_minmax(4.5rem,5.5rem)] lg:gap-[var(--space-xl)] lg:gap-x-[var(--space-2xl)]"
+              ref={heroDetailsRef}
+              className="order-3 mt-[var(--space-2xl)] max-w-[42rem] space-y-[var(--space-xl)] border-t border-[var(--border)] pt-[var(--space-2xl)] lg:order-2 lg:max-w-[48rem]"
             >
-              <div
-                data-expand-gallery-item
-                className="relative aspect-[16/10] min-h-[min(52vw,22rem)] overflow-hidden border border-[var(--border)] bg-[var(--surface)]/40 lg:min-h-[min(42vh,28rem)]"
-              >
-                <Image
-                  src={previewSrc}
-                  alt=""
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 65vw"
-                  priority
-                />
+              <div className="type-meta flex flex-wrap items-baseline gap-x-[var(--space-lg)] gap-y-2 text-[var(--muted)]">
+                <span>{project.type}</span>
+                <span className="text-[var(--border-strong)]">·</span>
+                <span className="tabular-nums">{project.year}</span>
               </div>
 
-              <div className="flex flex-row gap-3 overflow-x-auto pb-2 lg:flex lg:w-full lg:flex-col lg:gap-3 lg:overflow-x-visible lg:overflow-y-auto lg:pb-0">
-                {thumbFrames.map((src, i) => (
-                  <div
-                    key={`${src}-${i}`}
-                    data-expand-gallery-item
-                    className="relative aspect-[4/5] w-[4.5rem] shrink-0 overflow-hidden border border-[var(--border)] bg-[var(--bg-elevated)] sm:w-[5rem] lg:aspect-square lg:w-full"
+              <ul className="flex flex-wrap gap-x-3 gap-y-2">
+                {project.stack.map((tech) => (
+                  <li
+                    key={tech}
+                    className="type-tag border border-[var(--border)] bg-[var(--surface)]/60 px-3 py-1.5 text-[var(--muted-strong)]"
                   >
-                    <Image
-                      src={src}
-                      alt=""
-                      fill
-                      className="object-cover"
-                      sizes="88px"
-                    />
-                  </div>
+                    {tech}
+                  </li>
                 ))}
-              </div>
+              </ul>
+
+              {project.liveUrl ? (
+                <a
+                  href={project.liveUrl}
+                  className="type-nav inline-flex items-center gap-2 text-[var(--muted)] transition-colors hover:text-[var(--project-accent)]"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <span className="h-px w-10 bg-[color:var(--project-accent,var(--accent))] opacity-90" />
+                  View live
+                </a>
+              ) : (
+                <p className="type-meta text-[var(--muted)]">
+                  Live link coming soon
+                </p>
+              )}
             </div>
 
-            <p className="type-body mt-[var(--space-3xl)] max-w-[38rem] text-[var(--muted-strong)]">
+            <p className="type-body order-4 mt-[var(--space-3xl)] max-w-[38rem] text-[var(--muted-strong)] lg:max-w-[42rem]">
               {project.description}
             </p>
           </div>

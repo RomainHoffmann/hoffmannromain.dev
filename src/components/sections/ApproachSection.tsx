@@ -36,7 +36,7 @@ export function ApproachSection() {
         <p data-approach className="ds-label">
           Approach
         </p>
-        <div className="mt-[var(--space-2xl)] grid gap-[var(--space-2xl)] lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-[var(--space-5xl)]">
+        <div className="mt-[var(--space-2xl)] grid gap-[var(--space-xl)] lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-[var(--space-5xl)]">
           <h2
             id="approach-heading"
             data-approach
