@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
+import { useRef, type CSSProperties } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import type { Project } from "@/data/projects";
 
@@ -58,13 +58,16 @@ export function ProjectCard({
         card.removeEventListener("pointerleave", onLeave);
       };
     },
-    { scope: root, dependencies: [project.id] },
+    { scope: root, dependencies: [project.slug] },
   );
 
   const inner = (
     <article
       ref={root}
       data-project-card
+      style={
+        { "--project-accent": project.accentColor } as CSSProperties
+      }
       className={`relative flex h-full min-h-[min(76vw,23rem)] flex-col overflow-hidden border border-[var(--border)] bg-[var(--bg-elevated)] ${className}`}
     >
       <div className="absolute inset-0">
@@ -75,7 +78,7 @@ export function ProjectCard({
           >
             <div className="relative h-full w-full transition-transform duration-[620ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02]">
               <Image
-                src={project.coverSrc}
+                src={project.coverImage}
                 alt=""
                 role="presentation"
                 fill
@@ -115,10 +118,10 @@ export function ProjectCard({
     </article>
   );
 
-  if (project.href) {
+  if (project.liveUrl) {
     return (
       <Link
-        href={project.href}
+        href={project.liveUrl}
         className="group block h-full min-h-0 outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]"
       >
         {inner}

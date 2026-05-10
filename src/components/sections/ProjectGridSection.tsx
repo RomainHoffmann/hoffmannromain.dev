@@ -56,7 +56,7 @@ export function ProjectGridSection({ projects }: ProjectGridSectionProps) {
         <div className="grid grid-cols-1 gap-y-[var(--space-2xl)] lg:grid-cols-12 lg:gap-x-[var(--space-xl)] lg:gap-y-[var(--space-2xl)]">
           {projects.map((project, index) => (
             <ProjectCard
-              key={project.id}
+              key={project.slug}
               project={project}
               className={
                 editorialLayouts[index] ??
