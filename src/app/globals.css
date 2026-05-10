@@ -1,26 +1,310 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* --------------------------------------------------------------------------
+   Design system — cinematic monochrome base, accent #ff5321 used sparingly
+   -------------------------------------------------------------------------- */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
+
+  /* Surface & ink */
+  --bg: #050505;
+  --bg-elevated: #080808;
+  --bg-deep: #030303;
+  --fg: #ebe8e4;
+  --fg-subtle: #d4d0c8;
+  --muted: #6e6e6e;
+  --muted-strong: #9c9893;
+  --surface: #0a0a0a;
+  --border: rgba(255, 255, 255, 0.065);
+  --border-strong: rgba(255, 255, 255, 0.12);
+
+  /* Accent — use for active, key titles, hover highlights, selection */
+  --accent: #ff5321;
+  --accent-hover: #ff6a3d;
+  --accent-muted: rgba(255, 83, 33, 0.42);
+  --accent-soft: color-mix(in srgb, var(--accent) 78%, var(--fg) 22%);
+  --accent-subtle: rgba(255, 83, 33, 0.09);
+  --accent-glow: rgba(255, 83, 33, 0.055);
+  --accent-line: rgba(255, 83, 33, 0.88);
+  --ring-focus: rgba(255, 83, 33, 0.42);
+
+  /* Typography scale */
+  --text-display: clamp(2.65rem, 9vw, 7.25rem);
+  --text-h2: clamp(1.85rem, 4vw, 2.75rem);
+  --leading-display: 0.92;
+  --leading-snug: 1.15;
+  --leading-body: 1.62;
+  --tracking-display: -0.045em;
+  --tracking-tight: -0.03em;
+  --tracking-label: 0.28em;
+  --tracking-label-wide: 0.35em;
+
+  /* Spacing — modular rhythm (4px base, premium jumps) */
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 2.5rem;
+  --space-2xl: 3.5rem;
+  --space-3xl: 5rem;
+  --space-4xl: 6rem;
+  --space-5xl: 8rem;
+  --space-gutter: 1.25rem;
+  --space-gutter-lg: 2.5rem;
+  --space-section-y: 6rem;
+  --space-section-y-lg: 8rem;
+  --space-header-pad-y: 0.65rem;
+  --space-header-pad-x: 1.25rem;
+  --space-header-pad-x-lg: 1.75rem;
+
+  /* Z-index layers */
+  --z-below: -1;
+  --z-atmosphere: 0;
+  --z-content: 1;
+  --z-raised: 2;
+  --z-header: 50;
+  --z-overlay: 100;
+  --z-modal: 200;
+
+  /* Motion — duration */
+  --duration-instant: 0ms;
+  --duration-fast: 140ms;
+  --duration-normal: 280ms;
+  --duration-moderate: 420ms;
+  --duration-slow: 560ms;
+  --duration-slower: 780ms;
+
+  /* Motion — easing */
+  --ease-default: cubic-bezier(0.33, 1, 0.68, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-soft: cubic-bezier(0.45, 0, 0.15, 1);
+  --ease-linear-soft: cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  /* Opacity steps */
+  --opacity-muted: 0.55;
+  --opacity-dim: 0.72;
+  --opacity-strong: 0.88;
+  --opacity-subtle: 0.35;
+
+  /* Composite transitions */
+  --transition-color: color var(--duration-normal) var(--ease-out-expo);
+  --transition-opacity: opacity var(--duration-normal) var(--ease-out-expo);
+  --transition-transform: transform var(--duration-moderate) var(--ease-out-expo);
+  --transition-border: border-color var(--duration-normal) var(--ease-out-expo);
+  --transition-bg: background-color var(--duration-normal) var(--ease-out-expo);
+  --transition-shadow: box-shadow var(--duration-moderate) var(--ease-out-expo);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-display: var(--font-instrument), ui-serif, Georgia, "Times New Roman",
+    serif;
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
+
+  --spacing-gutter: var(--space-gutter);
+  --spacing-gutter-lg: var(--space-gutter-lg);
+  --spacing-section: var(--space-section-y);
+  --spacing-section-lg: var(--space-section-y-lg);
+  --spacing-block: var(--space-2xl);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  min-height: 100%;
+  background-color: var(--bg-deep);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-feature-settings:
+    "kern" 1,
+    "liga" 1;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 3px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ring-focus);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: rgba(255, 83, 33, 0.22);
+  color: var(--fg);
+}
+
+/* --------------------------------------------------------------------------
+   Atmospheric layers
+   -------------------------------------------------------------------------- */
+
+.ds-bg-atmosphere {
+  background:
+    radial-gradient(
+      ellipse 95% 70% at 14% 8%,
+      var(--accent-glow) 0%,
+      transparent 54%
+    ),
+    radial-gradient(
+      ellipse 65% 48% at 92% 78%,
+      rgba(255, 255, 255, 0.025) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse 130% 85% at 50% 102%,
+      rgba(6, 6, 8, 0.92) 0%,
+      transparent 58%
+    ),
+    linear-gradient(168deg, var(--bg-deep) 0%, var(--bg) 42%, #060606 100%);
+}
+
+.ds-vignette {
+  background: radial-gradient(
+    ellipse 72% 58% at 50% 48%,
+    transparent 28%,
+    rgba(0, 0, 0, 0.58) 100%
+  );
+  pointer-events: none;
+}
+
+.ds-noise {
+  opacity: var(--opacity-subtle);
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+}
+
+/* --------------------------------------------------------------------------
+   Interaction utilities — monochrome + sparse accent
+   -------------------------------------------------------------------------- */
+
+.ds-interactive {
+  color: var(--muted);
+  transition: var(--transition-color);
+}
+
+.ds-interactive:hover,
+.ds-interactive:focus-visible {
+  color: var(--fg);
+}
+
+.ds-interactive-accent {
+  color: var(--muted);
+  transition: var(--transition-color);
+}
+
+.ds-interactive-accent:hover,
+.ds-interactive-accent:focus-visible {
+  color: var(--accent);
+}
+
+.ds-hover-lift {
+  transition:
+    var(--transition-transform),
+    var(--transition-opacity);
+}
+
+.ds-hover-lift:hover {
+  transform: translateY(-2px);
+}
+
+.ds-opacity-dim {
+  opacity: var(--opacity-dim);
+  transition: var(--transition-opacity);
+}
+
+.ds-opacity-dim:hover,
+.ds-opacity-dim:focus-within {
+  opacity: 1;
+}
+
+.ds-transition-opacity {
+  transition: var(--transition-opacity);
+}
+
+.ds-transition-colors {
+  transition: var(--transition-color);
+}
+
+/* Title accent on hover — project rows */
+.ds-title-accent {
+  transition: var(--transition-color);
+}
+
+.group:hover .ds-title-accent,
+.group:focus-within .ds-title-accent {
+  color: var(--accent-soft);
+}
+
+/* --------------------------------------------------------------------------
+   Typography helpers (rhythm)
+   -------------------------------------------------------------------------- */
+
+.ds-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  letter-spacing: var(--tracking-label-wide);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.ds-body-relaxed {
+  line-height: var(--leading-body);
+  color: var(--muted-strong);
+}
+
+/* --------------------------------------------------------------------------
+   Hero grid (section-local)
+   -------------------------------------------------------------------------- */
+
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.024) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.024) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(
+    ellipse 85% 65% at 50% 42%,
+    #000 18%,
+    transparent 100%
+  );
 }
