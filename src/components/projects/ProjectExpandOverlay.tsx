@@ -312,13 +312,11 @@ export function ProjectExpandOverlay({
             aria-hidden
           />
           <div
-            className="absolute inset-0 bg-[radial-gradient(ellipse_75%_65%_at_50%_55%,transparent_22%,rgba(0,0,0,0.82)_100%)]"
+            className="absolute inset-0 bg-[radial-gradient(ellipse_78%_68%_at_50%_54%,transparent_26%,rgba(0,0,0,0.55)_100%)]"
             aria-hidden
           />
-          <div
-            className="ds-noise absolute inset-0 opacity-[0.05]"
-            aria-hidden
-          />
+          <div className="ds-edge-dim absolute inset-0" aria-hidden />
+          <div className="ds-noise ds-noise--animated absolute inset-0" aria-hidden />
         </div>
 
         {/* Chrome */}

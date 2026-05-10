@@ -115,9 +115,8 @@ export function HeroSection() {
           </div>
         </div>
 
-        {/* Local vignette + grain — stacks under global atmosphere for depth */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_72%_58%_at_50%_48%,transparent_30%,rgba(0,0,0,0.62)_100%)]" />
-        <div className="ds-noise absolute inset-0 opacity-[0.032]" />
+        {/* Light local falloff only — global atmosphere carries grain + vignette */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_72%_58%_at_50%_48%,transparent_34%,rgba(0,0,0,0.38)_100%)]" />
       </div>
 
       <div className="relative z-[var(--z-raised)] mx-auto flex w-full max-w-[42rem] flex-col items-center text-center">
