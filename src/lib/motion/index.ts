@@ -1,7 +1,9 @@
 export {
+  motionDelay,
   motionDurations,
   motionEase,
   motionStagger,
+  overlayMotion,
   scrollDefaults,
 } from "./config";
 export { configureMotion } from "./init-motion";

@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div
       data-expand-dim
-      className="relative flex min-h-full flex-col transition-opacity duration-[380ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+      className="relative flex min-h-full flex-col transition-opacity duration-[var(--duration-shell)] ease-[var(--ease-out-expo)]"
     >
       <SiteHeader />
       <main className="flex-1">

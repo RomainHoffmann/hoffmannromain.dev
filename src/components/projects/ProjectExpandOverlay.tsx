@@ -11,6 +11,7 @@ import {
 import { createPortal } from "react-dom";
 import { gsap } from "@/lib/gsap";
 import { useLenisRef } from "@/components/providers/SmoothScrollProvider";
+import { overlayMotion } from "@/lib/motion/config";
 import type { Project } from "@/types/project";
 
 type ProjectExpandOverlayProps = {
@@ -18,16 +19,6 @@ type ProjectExpandOverlayProps = {
   originRect: DOMRect;
   onDismiss: () => void;
 };
-
-const EASE_FLIP = "power4.inOut";
-const EASE_CONTENT = "power3.out";
-const DUR_FLIP = 0.82;
-const DUR_BACKDROP = 0.42;
-const DUR_TITLE = 0.34;
-const DUR_LEAD = 0.32;
-const DUR_DETAILS = 0.3;
-const DUR_GALLERY_ITEM = 0.26;
-const GALLERY_STAGGER = 0.055;
 
 export function ProjectExpandOverlay({
   project,
@@ -77,8 +68,8 @@ export function ProjectExpandOverlay({
     const sx = originRect.width / vw;
     const sy = originRect.height / window.innerHeight;
 
-    const flipDur = reduceMotion ? 0.01 : DUR_FLIP;
-    const bdDur = reduceMotion ? 0.01 : DUR_BACKDROP;
+    const flipDur = reduceMotion ? 0.01 : overlayMotion.flipIn;
+    const bdDur = reduceMotion ? 0.01 : overlayMotion.backdropIn;
 
     gsap.set(stage, {
       x: rx,
@@ -90,15 +81,17 @@ export function ProjectExpandOverlay({
     gsap.set(backdrop, { opacity: 0 });
     gsap.set([title, lead, heroDetails].filter(Boolean), {
       opacity: 0,
-      y: 28,
+      y: 22,
     });
     const galleryItems =
       gallerySection?.querySelectorAll("[data-expand-gallery-item]");
     if (galleryItems?.length) {
-      gsap.set(galleryItems, { opacity: 0, y: 22 });
+      gsap.set(galleryItems, { opacity: 0, y: 18 });
     }
 
-    const tl = gsap.timeline({ defaults: { ease: EASE_FLIP } });
+    const tl = gsap.timeline({
+      defaults: { ease: overlayMotion.easeFlip },
+    });
 
     tl.to(
       stage,
@@ -108,7 +101,7 @@ export function ProjectExpandOverlay({
         scaleX: 1,
         scaleY: 1,
         duration: flipDur,
-        ease: EASE_FLIP,
+        ease: overlayMotion.easeFlip,
       },
       0,
     );
@@ -118,19 +111,19 @@ export function ProjectExpandOverlay({
       {
         opacity: reduceMotion ? 0.82 : 0.94,
         duration: bdDur,
-        ease: EASE_CONTENT,
+        ease: overlayMotion.easeContent,
       },
       0,
     );
 
-    const tOff = reduceMotion ? 0 : 0.34;
+    const tOff = reduceMotion ? 0 : overlayMotion.contentEnterAt;
     tl.to(
       title,
       {
         opacity: 1,
         y: 0,
-        duration: reduceMotion ? 0.01 : DUR_TITLE,
-        ease: EASE_CONTENT,
+        duration: reduceMotion ? 0.01 : overlayMotion.titleIn,
+        ease: overlayMotion.easeContent,
       },
       tOff,
     );
@@ -140,8 +133,8 @@ export function ProjectExpandOverlay({
       {
         opacity: 1,
         y: 0,
-        duration: reduceMotion ? 0.01 : DUR_LEAD,
-        ease: EASE_CONTENT,
+        duration: reduceMotion ? 0.01 : overlayMotion.leadIn,
+        ease: overlayMotion.easeContent,
       },
       tOff + 0.06,
     );
@@ -151,11 +144,15 @@ export function ProjectExpandOverlay({
       {
         opacity: 1,
         y: 0,
-        duration: reduceMotion ? 0.01 : DUR_DETAILS,
-        ease: EASE_CONTENT,
+        duration: reduceMotion ? 0.01 : overlayMotion.detailsIn,
+        ease: overlayMotion.easeContent,
       },
       tOff + 0.14,
     );
+
+    const galleryStart = reduceMotion
+      ? 0.01
+      : tOff + overlayMotion.galleryWaveDelay;
 
     if (galleryItems?.length && !reduceMotion) {
       tl.to(
@@ -163,11 +160,11 @@ export function ProjectExpandOverlay({
         {
           opacity: 1,
           y: 0,
-          duration: DUR_GALLERY_ITEM,
-          stagger: GALLERY_STAGGER,
-          ease: EASE_CONTENT,
+          duration: overlayMotion.galleryItemIn,
+          stagger: overlayMotion.galleryStaggerIn,
+          ease: overlayMotion.easeContent,
         },
-        tOff + 0.24,
+        galleryStart,
       );
     } else if (galleryItems?.length && reduceMotion) {
       gsap.set(galleryItems, { opacity: 1, y: 0 });
@@ -214,10 +211,10 @@ export function ProjectExpandOverlay({
         galleryItems,
         {
           opacity: 0,
-          y: 16,
-          duration: reduceMotion ? 0.01 : 0.18,
-          stagger: 0.03,
-          ease: "power2.in",
+          y: 14,
+          duration: reduceMotion ? 0.01 : overlayMotion.exitGalleryDur,
+          stagger: overlayMotion.exitGalleryStagger,
+          ease: overlayMotion.easeExit,
         },
         0,
       );
@@ -227,17 +224,20 @@ export function ProjectExpandOverlay({
       [heroDetails, lead, title].filter(Boolean),
       {
         opacity: 0,
-        y: 16,
-        duration: reduceMotion ? 0.01 : 0.22,
-        ease: "power2.in",
+        y: 14,
+        duration: reduceMotion ? 0.01 : overlayMotion.exitContentDur,
+        ease: overlayMotion.easeExit,
       },
-      0.02,
+      overlayMotion.exitContentAt,
     );
 
     exit.to(
       backdrop,
-      { opacity: 0, duration: reduceMotion ? 0.01 : 0.28 },
-      0.06,
+      {
+        opacity: 0,
+        duration: reduceMotion ? 0.01 : overlayMotion.exitBackdropDur,
+      },
+      overlayMotion.exitBackdropAt,
     );
 
     exit.to(
@@ -247,10 +247,10 @@ export function ProjectExpandOverlay({
         y: ry,
         scaleX: sx,
         scaleY: sy,
-        duration: reduceMotion ? 0.01 : 0.52,
-        ease: EASE_FLIP,
+        duration: reduceMotion ? 0.01 : overlayMotion.exitFlipDur,
+        ease: overlayMotion.easeFlip,
       },
-      0.04,
+      overlayMotion.exitFlipAt,
     );
   }, [dismissAfterExit, originRect]);
 

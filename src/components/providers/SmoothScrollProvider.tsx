@@ -39,12 +39,12 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     configureMotion();
 
     const instance = new Lenis({
-      duration: 1.05,
+      duration: 1.12,
       easing: (t) => Math.min(1, 1.001 - 2 ** (-10 * t)),
-      lerp: 0.11,
+      lerp: 0.085,
       wheelMultiplier: 1,
       smoothWheel: true,
-      touchMultiplier: 1.35,
+      touchMultiplier: 1.28,
       syncTouch: false,
       autoResize: true,
     });

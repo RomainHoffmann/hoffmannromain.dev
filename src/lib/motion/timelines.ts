@@ -1,5 +1,6 @@
 import { gsap } from "@/lib/gsap";
 import {
+  motionDelay,
   motionDurations,
   motionEase,
   motionStagger,
@@ -36,6 +37,7 @@ export function createHeroIntroTimeline(section: Element): gsap.core.Timeline {
         duration: motionDurations.slow,
         stagger: motionStagger.default,
         ease: motionEase.outStrong,
+        force3D: true,
       },
       0,
     )
@@ -43,12 +45,13 @@ export function createHeroIntroTimeline(section: Element): gsap.core.Timeline {
       q("[data-hero-fade]"),
       {
         opacity: 0,
-        y: 18,
-        duration: motionDurations.moderate,
+        y: 14,
+        duration: motionDurations.fast,
         stagger: motionStagger.tight,
         ease: motionEase.out,
+        force3D: true,
       },
-      0.42,
+      motionDelay.heroSecondary,
     );
 }
 
@@ -61,7 +64,7 @@ export function createHeroScrollParallax(section: Element): gsap.core.Tween[] {
   return layers.map((el, i) =>
     smoothParallax(el, {
       y: depths[i % depths.length] ?? -22,
-      scrub: 0.58,
+      scrub: 0.72,
       trigger: section,
       start: "top bottom",
       end: "bottom top",
@@ -73,13 +76,14 @@ export function createHeroScrollParallax(section: Element): gsap.core.Tween[] {
 export function createProjectGridReveal(section: Element): gsap.core.Animation {
   const q = gsap.utils.selector(section);
   return staggerReveal(q("[data-project-card]"), motionStagger.relaxed, {
-    y: 48,
+    y: 40,
     opacity: 0,
     duration: motionDurations.moderate,
     ease: motionEase.out,
+    force3D: true,
     scrollTrigger: {
       trigger: section,
-      start: "top 86%",
+      start: "top 85%",
       once: true,
     },
   });
@@ -93,9 +97,10 @@ export function registerProjectGridMotion(section: Element): void {
 export function createApproachTimeline(section: Element): gsap.core.Animation {
   const q = gsap.utils.selector(section);
   return staggerReveal(q("[data-approach]"), motionStagger.tight, {
-    y: 36,
-    duration: 0.95,
+    y: 32,
+    duration: motionDurations.moderate,
     ease: motionEase.out,
+    force3D: true,
     scrollTrigger: {
       trigger: section,
       ...scrollDefaults.approachBlock,

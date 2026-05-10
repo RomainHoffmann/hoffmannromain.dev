@@ -50,11 +50,11 @@ export function HeroSection() {
         return {
           depth,
           xTo: gsap.quickTo(el, "x", {
-            duration: 1.35,
+            duration: 1.55,
             ease: "power3.out",
           }),
           yTo: gsap.quickTo(el, "y", {
-            duration: 1.35,
+            duration: 1.55,
             ease: "power3.out",
           }),
         };

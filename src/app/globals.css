@@ -94,15 +94,20 @@
   --z-overlay: 100;
   --z-modal: 200;
 
-  /* Motion — duration */
+  /* Motion — duration (CSS ↔ complements GSAP `src/lib/motion/config.ts`) */
   --duration-instant: 0ms;
-  --duration-fast: 140ms;
-  --duration-normal: 280ms;
-  --duration-moderate: 420ms;
-  --duration-slow: 560ms;
-  --duration-slower: 780ms;
+  --duration-fast: 160ms;
+  --duration-ui: 340ms;
+  --duration-normal: 340ms;
+  --duration-moderate: 440ms;
+  --duration-layer: 540ms;
+  --duration-emphasis: 620ms;
+  --duration-slow: 620ms;
+  --duration-slower: 800ms;
+  --duration-chrome: 420ms;
+  --duration-shell: 380ms;
 
-  /* Motion — easing */
+  /* Motion — easing — single premium curve for hover / UI */
   --ease-default: cubic-bezier(0.33, 1, 0.68, 1);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out-soft: cubic-bezier(0.45, 0, 0.15, 1);
@@ -115,11 +120,11 @@
   --opacity-subtle: 0.35;
 
   /* Composite transitions */
-  --transition-color: color var(--duration-normal) var(--ease-out-expo);
-  --transition-opacity: opacity var(--duration-normal) var(--ease-out-expo);
-  --transition-transform: transform var(--duration-moderate) var(--ease-out-expo);
-  --transition-border: border-color var(--duration-normal) var(--ease-out-expo);
-  --transition-bg: background-color var(--duration-normal) var(--ease-out-expo);
+  --transition-color: color var(--duration-ui) var(--ease-out-expo);
+  --transition-opacity: opacity var(--duration-layer) var(--ease-out-expo);
+  --transition-transform: transform var(--duration-emphasis) var(--ease-out-expo);
+  --transition-border: border-color var(--duration-ui) var(--ease-out-expo);
+  --transition-bg: background-color var(--duration-ui) var(--ease-out-expo);
   --transition-shadow: box-shadow var(--duration-moderate) var(--ease-out-expo);
 }
 

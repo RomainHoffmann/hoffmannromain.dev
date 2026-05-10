@@ -30,11 +30,11 @@ export function ProjectCard({
       if (!card || !shift) return;
 
       const xTo = gsap.quickTo(shift, "x", {
-        duration: 1.15,
+        duration: 1.45,
         ease: "power3.out",
       });
       const yTo = gsap.quickTo(shift, "y", {
-        duration: 1.15,
+        duration: 1.45,
         ease: "power3.out",
       });
 
@@ -97,7 +97,7 @@ export function ProjectCard({
               ref={shiftRef}
               className="absolute -inset-[4%] will-change-transform"
             >
-              <div className="relative h-full w-full transition-transform duration-[620ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02]">
+              <div className="relative h-full w-full transition-transform duration-[var(--duration-emphasis)] ease-[var(--ease-out-expo)] group-hover:scale-[1.02]">
                 <Image
                   src={project.coverImage}
                   alt=""
@@ -112,18 +112,18 @@ export function ProjectCard({
           </div>
 
           <div
-            className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_78%_72%_at_50%_88%,transparent_22%,rgba(0,0,0,0.78)_100%)] opacity-[0.4] transition-opacity duration-[620ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-[0.58]"
+            className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_78%_72%_at_50%_88%,transparent_22%,rgba(0,0,0,0.78)_100%)] opacity-[0.4] transition-opacity duration-[var(--duration-emphasis)] ease-[var(--ease-out-expo)] group-hover:opacity-[0.58]"
             aria-hidden
           />
           <div
-            className="pointer-events-none absolute inset-0 z-[2] bg-black/17 transition-colors duration-[620ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:bg-black/38"
+            className="pointer-events-none absolute inset-0 z-[2] bg-black/17 transition-colors duration-[var(--duration-emphasis)] ease-[var(--ease-out-expo)] group-hover:bg-black/38"
             aria-hidden
           />
         </div>
 
         <div className="relative z-[3] mt-auto w-full p-6 pt-[38%] md:p-8 md:pt-[36%] lg:pt-[32%]">
           <div
-            className="translate-y-0 opacity-100 transition-[transform,opacity] duration-[620ms] ease-[cubic-bezier(0.16,1,0.3,1)] lg:translate-y-3 lg:opacity-[0.82] lg:group-hover:translate-y-0 lg:group-hover:opacity-100"
+            className="translate-y-0 opacity-100 transition-[transform,opacity] duration-[var(--duration-emphasis)] ease-[var(--ease-out-expo)] lg:translate-y-3 lg:opacity-[0.82] lg:group-hover:translate-y-0 lg:group-hover:opacity-100"
           >
             <h3 className="type-project-title text-[var(--fg)]">
               {project.title}

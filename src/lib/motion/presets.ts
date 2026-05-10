@@ -14,10 +14,11 @@ export function fadeInUp(
   vars?: Partial<TweenVars>,
 ): gsap.core.Animation {
   return gsap.from(targets, {
-    y: 48,
+    y: 40,
     opacity: 0,
     duration: motionDurations.normal,
     ease: motionEase.out,
+    force3D: true,
     ...vars,
   });
 }
@@ -39,7 +40,7 @@ export function revealMask(
 
   return gsap.fromTo(
     targets,
-    { clipPath: from, opacity: 0.98 },
+    { clipPath: from, opacity: 0.94 },
     {
       clipPath: "inset(0 0 0% 0)",
       opacity: 1,
@@ -59,11 +60,12 @@ export function staggerReveal(
   vars?: Partial<TweenVars>,
 ): gsap.core.Animation {
   return gsap.from(targets, {
-    y: 44,
+    y: 40,
     opacity: 0,
     stagger,
     duration: motionDurations.normal,
     ease: motionEase.out,
+    force3D: true,
     ...vars,
   });
 }
@@ -104,7 +106,7 @@ export function smoothParallax(
 ): Tween {
   const {
     y = -48,
-    scrub = 0.65,
+    scrub = 0.72,
     start = "top bottom",
     end = "bottom top",
     trigger,

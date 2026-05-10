@@ -6,7 +6,7 @@ export function SiteFooter() {
   return (
     <footer
       data-expand-chrome
-      className="border-t border-[var(--border)] px-gutter py-[var(--space-3xl)] transition-opacity duration-[420ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:px-gutter-lg"
+      className="border-t border-[var(--border)] px-gutter py-[var(--space-3xl)] transition-opacity duration-[var(--duration-chrome)] ease-[var(--ease-out-expo)] md:px-gutter-lg"
     >
       <div className="mx-auto flex max-w-[120rem] flex-col gap-[var(--space-2xl)] md:flex-row md:items-end md:justify-between">
         <p className="type-caption max-w-sm text-[var(--muted)]">
