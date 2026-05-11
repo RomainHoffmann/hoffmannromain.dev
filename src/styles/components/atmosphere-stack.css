@@ -1,0 +1,18 @@
+/* Fixed full-viewport atmosphere behind content */
+
+.atmosphere {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-atmosphere);
+}
+
+.atmosphere__fill {
+  position: absolute;
+  inset: 0;
+}
+
+.atmosphere__drift {
+  position: absolute;
+  inset: -28%;
+}

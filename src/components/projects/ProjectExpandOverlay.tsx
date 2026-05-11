@@ -281,10 +281,10 @@ export function ProjectExpandOverlay({
     mediaFrames.length > 1 ? mediaFrames.slice(1) : [mediaFrames[0]];
 
   return createPortal(
-    <div className="fixed inset-0 z-[var(--z-modal)]">
+    <div className="expand-overlay">
       <div
         ref={backdropRef}
-        className="absolute inset-0 z-0 bg-[var(--bg-deep)]"
+        className="expand-overlay__backdrop"
         style={{ opacity: 0 }}
         aria-hidden
       />
@@ -294,16 +294,15 @@ export function ProjectExpandOverlay({
         role="dialog"
         aria-modal="true"
         aria-labelledby="expand-project-title"
-        className="absolute inset-0 z-[1] flex max-h-[100dvh] flex-col overflow-hidden bg-[var(--bg)] will-change-transform"
+        className="expand-overlay__stage"
         style={
           {
             "--project-accent": project.accentColor,
           } as CSSProperties
         }
       >
-        {/* Immersive atmosphere — low-opacity hero, gradients, grain, vignette */}
-        <div className="pointer-events-none absolute inset-0 z-0">
-          <div className="absolute inset-0 opacity-[0.42]">
+        <div className="expand-overlay__atmos">
+          <div className="expand-overlay__hero-img-wrap">
             <Image
               src={project.coverImage}
               alt=""
@@ -311,40 +310,26 @@ export function ProjectExpandOverlay({
               priority
               fetchPriority="high"
               decoding="async"
-              className="object-cover"
+              className="u-img-cover"
               sizes="100vw"
             />
           </div>
-          <div
-            className="absolute inset-0 bg-gradient-to-b from-[var(--bg-deep)]/95 via-black/55 to-[var(--bg-deep)]"
-            aria-hidden
-          />
-          <div
-            className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/25 to-black/65"
-            aria-hidden
-          />
-          <div
-            className="absolute inset-0 bg-[radial-gradient(ellipse_78%_68%_at_50%_54%,transparent_26%,rgba(0,0,0,0.55)_100%)]"
-            aria-hidden
-          />
-          <div className="ds-edge-dim absolute inset-0" aria-hidden />
-          <div className="ds-noise ds-noise--animated absolute inset-0" aria-hidden />
+          <div className="expand-overlay__grad-v" aria-hidden />
+          <div className="expand-overlay__grad-h" aria-hidden />
+          <div className="expand-overlay__grad-radial" aria-hidden />
+          <div className="ds-edge-dim" aria-hidden />
+          <div className="ds-noise ds-noise--animated" aria-hidden />
         </div>
 
-        {/* Chrome */}
-        <div className="relative z-[3] flex shrink-0 items-start justify-between gap-4 px-gutter pb-3 pt-[calc(env(safe-area-inset-top)+var(--space-md))] md:gap-6 md:pb-4 md:pt-[calc(env(safe-area-inset-top)+var(--space-lg))] lg:px-gutter-lg">
-          <button
-            type="button"
-            onClick={runExit}
-            className="type-nav text-[var(--muted)] transition-colors hover:text-[var(--fg)]"
-          >
+        <div className="expand-overlay__chrome">
+          <button type="button" onClick={runExit} className="expand-overlay__close type-nav">
             Close — Esc
           </button>
-          <div className="type-nav flex items-center gap-6">
+          <div className="expand-overlay__chrome-links type-nav">
             {project.githubUrl ? (
               <a
                 href={project.githubUrl}
-                className="ds-interactive ds-link-underline text-[var(--muted)]"
+                className="ds-interactive ds-link-underline expand-overlay__link-muted"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -354,19 +339,11 @@ export function ProjectExpandOverlay({
           </div>
         </div>
 
-        {/* Scrollable body — mobile: gallery first (cinematic); lg: editorial → gallery */}
-        <div className="relative z-[2] flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain">
-          <div className="flex flex-1 flex-col px-gutter pb-[calc(env(safe-area-inset-bottom)+var(--space-3xl))] pt-0 md:px-gutter-lg md:pb-[calc(env(safe-area-inset-bottom)+var(--space-5xl))] md:pt-[var(--space-md)] lg:pt-[var(--space-md)]">
-            {/* Gallery — order 1 on mobile, order 3 on desktop */}
-            <div
-              ref={gallerySectionRef}
-              className="order-1 -mx-gutter mb-[var(--space-2xl)] lg:order-3 lg:mx-0 lg:mb-0 lg:mt-[var(--space-4xl)]"
-            >
-              <div className="grid grid-cols-1 items-start gap-0 lg:grid-cols-[1fr_minmax(4.5rem,5.5rem)] lg:gap-x-[var(--space-2xl)] lg:gap-y-[var(--space-xl)]">
-                <div
-                  data-expand-gallery-item
-                  className="relative aspect-[16/11] min-h-[min(58vw,17.5rem)] overflow-hidden border-y border-[var(--border)] bg-[var(--surface)]/40 md:min-h-[min(52vw,22rem)] lg:aspect-[16/10] lg:min-h-[min(42vh,28rem)] lg:border lg:border-[var(--border)]"
-                >
+        <div className="expand-overlay__scroll">
+          <div className="expand-overlay__content">
+            <div ref={gallerySectionRef} className="expand-overlay__gallery-wrap">
+              <div className="expand-overlay__gallery-grid">
+                <div data-expand-gallery-item className="expand-overlay__preview">
                   <Image
                     src={previewSrc}
                     alt=""
@@ -375,17 +352,17 @@ export function ProjectExpandOverlay({
                     priority={previewSrc !== project.coverImage}
                     fetchPriority="high"
                     decoding="async"
-                    className="object-cover"
+                    className="u-img-cover"
                   />
                 </div>
 
-                <div className="-mx-gutter border-t border-[var(--border)] bg-[var(--bg-elevated)]/55 px-gutter py-[var(--space-md)] lg:mx-0 lg:h-full lg:border-0 lg:bg-transparent lg:px-0 lg:py-0">
-                  <div className="expand-thumb-strip flex flex-row gap-3 lg:max-h-[min(52vh,28rem)] lg:flex lg:w-full lg:flex-col lg:gap-3 lg:overflow-y-auto lg:overflow-x-visible lg:pb-0">
+                <div className="expand-overlay__thumbs-shell">
+                  <div className="expand-overlay__thumbs expand-thumb-strip">
                     {thumbFrames.map((src, i) => (
                       <div
                         key={`${src}-${i}`}
                         data-expand-gallery-item
-                        className="relative aspect-[4/5] w-[5rem] shrink-0 overflow-hidden border border-[var(--border)] bg-[var(--bg-elevated)] sm:w-[5.25rem] lg:aspect-square lg:h-auto lg:w-full"
+                        className="expand-overlay__thumb"
                       >
                         <Image
                           src={src}
@@ -394,7 +371,7 @@ export function ProjectExpandOverlay({
                           loading="lazy"
                           decoding="async"
                           fetchPriority="low"
-                          className="object-cover"
+                          className="u-img-cover"
                           sizes="(max-width: 1023px) 120px, 88px"
                         />
                       </div>
@@ -404,41 +381,26 @@ export function ProjectExpandOverlay({
               </div>
             </div>
 
-            {/* Title + tagline */}
-            <div className="order-2 max-w-[42rem] lg:order-1 lg:max-w-[48rem]">
-              <h2
-                id="expand-project-title"
-                ref={titleRef}
-                className="type-expand-title text-[var(--fg)]"
-              >
+            <div className="expand-overlay__intro">
+              <h2 id="expand-project-title" ref={titleRef} className="expand-overlay__title type-expand-title">
                 {project.title}
               </h2>
 
-              <p
-                ref={leadRef}
-                className="type-lead mt-[var(--space-lg)] max-w-[38rem] text-[var(--muted-strong)] md:mt-[var(--space-xl)]"
-              >
+              <p ref={leadRef} className="expand-overlay__lead type-lead">
                 {project.tagline}
               </p>
             </div>
 
-            {/* Meta, stack, links */}
-            <div
-              ref={heroDetailsRef}
-              className="order-3 mt-[var(--space-2xl)] max-w-[42rem] space-y-[var(--space-xl)] border-t border-[var(--border)] pt-[var(--space-2xl)] lg:order-2 lg:max-w-[48rem]"
-            >
-              <div className="type-meta flex flex-wrap items-baseline gap-x-[var(--space-lg)] gap-y-2 text-[var(--muted)]">
+            <div ref={heroDetailsRef} className="expand-overlay__details">
+              <div className="expand-overlay__meta-row type-meta">
                 <span>{project.type}</span>
-                <span className="text-[var(--border-strong)]">·</span>
-                <span className="tabular-nums">{project.year}</span>
+                <span className="expand-overlay__meta-sep">·</span>
+                <span className="u-tabular-nums">{project.year}</span>
               </div>
 
-              <ul className="flex flex-wrap gap-x-3 gap-y-2">
+              <ul className="expand-overlay__stack-list">
                 {project.stack.map((tech) => (
-                  <li
-                    key={tech}
-                    className="type-tag border border-[var(--border)] bg-[var(--surface)]/60 px-3 py-1.5 text-[var(--muted-strong)]"
-                  >
+                  <li key={tech} className="expand-overlay__stack-tag type-tag">
                     {tech}
                   </li>
                 ))}
@@ -447,23 +409,19 @@ export function ProjectExpandOverlay({
               {project.liveUrl ? (
                 <a
                   href={project.liveUrl}
-                  className="type-nav inline-flex items-center gap-2 text-[var(--muted)] transition-colors hover:text-[var(--project-accent)]"
+                  className="expand-overlay__live-link type-nav"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <span className="h-px w-10 bg-[color:var(--project-accent,var(--accent))] opacity-90" />
+                  <span className="expand-overlay__live-line" aria-hidden />
                   View live
                 </a>
               ) : (
-                <p className="type-meta text-[var(--muted)]">
-                  Live link coming soon
-                </p>
+                <p className="type-meta expand-overlay__link-muted">Live link coming soon</p>
               )}
             </div>
 
-            <p className="type-body order-4 mt-[var(--space-3xl)] max-w-[38rem] text-[var(--muted-strong)] lg:max-w-[42rem]">
-              {project.description}
-            </p>
+            <p className="expand-overlay__description type-body">{project.description}</p>
           </div>
         </div>
       </div>

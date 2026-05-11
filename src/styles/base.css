@@ -1,0 +1,66 @@
+/* Reset, document defaults, expand overlay chrome */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html.app-html {
+  height: 100%;
+  scroll-behavior: auto;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  background-color: var(--bg-deep);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-feature-settings:
+    "kern" 1,
+    "liga" 1;
+  text-rendering: optimizeLegibility;
+}
+
+body[data-project-expand="open"] [data-expand-chrome] {
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+body[data-project-expand="open"] [data-expand-dim] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 3px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ring-focus);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: rgba(255, 83, 33, 0.22);
+  color: var(--fg);
+}

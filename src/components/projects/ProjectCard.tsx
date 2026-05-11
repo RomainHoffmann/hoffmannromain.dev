@@ -94,7 +94,7 @@ function ProjectCardInner({
 
   return (
     <div
-      className="group block h-full min-h-0 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]"
+      className="project-card__hitbox"
       onPointerEnter={warmExpandChunk}
       onClick={open}
       onKeyDown={onKeyDown}
@@ -108,12 +108,12 @@ function ProjectCardInner({
         style={
           { "--project-accent": project.accentColor } as CSSProperties
         }
-        className={`ds-card-depth relative flex h-full min-h-[min(76vw,23rem)] flex-col overflow-hidden border border-[var(--border)] bg-[var(--bg-elevated)] ${className}`}
+        className={`project-card__article ds-card-depth ${className}`}
       >
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 overflow-hidden">
-            <div ref={shiftRef} className="absolute -inset-[4%]">
-              <div className="ds-media-reveal relative h-full w-full transition-transform duration-[var(--duration-emphasis)] ease-[var(--ease-out-expo)] group-hover:scale-[1.02]">
+        <div className="project-card__media-stack">
+          <div className="project-card__media-clip">
+            <div ref={shiftRef} className="project-card__media-shift">
+              <div className="project-card__media-inner ds-media-reveal">
                 <Image
                   src={project.coverImage}
                   alt=""
@@ -122,33 +122,23 @@ function ProjectCardInner({
                   priority={priority}
                   decoding="async"
                   sizes="(max-width: 1024px) 100vw, (max-width: 1536px) 52vw, 42vw"
-                  className="object-cover"
+                  className="u-img-cover"
                 />
               </div>
             </div>
           </div>
 
-          <div
-            className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_78%_72%_at_50%_88%,transparent_22%,rgba(0,0,0,0.78)_100%)] opacity-[0.4] transition-opacity duration-[var(--duration-emphasis)] ease-[var(--ease-out-expo)] group-hover:opacity-[0.58]"
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute inset-0 z-[2] bg-black/17 transition-colors duration-[var(--duration-emphasis)] ease-[var(--ease-out-expo)] group-hover:bg-black/38"
-            aria-hidden
-          />
+          <div className="project-card__vignette-radial" aria-hidden />
+          <div className="project-card__vignette-flat" aria-hidden />
         </div>
 
-        <div className="relative z-[3] mt-auto w-full p-6 pt-[38%] md:p-8 md:pt-[36%] lg:pt-[32%]">
-          <div
-            className="translate-y-0 opacity-100 transition-[transform,opacity] duration-[var(--duration-emphasis)] ease-[var(--ease-out-expo)] lg:translate-y-3 lg:opacity-[0.82] lg:group-hover:translate-y-0 lg:group-hover:opacity-100"
-          >
-            <h3 className="type-project-title text-[var(--fg)]">
+        <div className="project-card__body">
+          <div className="project-card__body-inner">
+            <h3 className="project-card__title type-project-title">
               {project.title}
             </h3>
-            <p className="type-meta mt-3 text-[var(--muted-strong)]">
-              {project.type}
-            </p>
-            <p className="type-caption mt-2 tabular-nums tracking-[0.14em] text-[var(--muted)]">
+            <p className="project-card__type type-meta">{project.type}</p>
+            <p className="project-card__year type-caption u-tabular-nums">
               {project.year}
             </p>
           </div>

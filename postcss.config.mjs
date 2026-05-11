@@ -1,7 +1,6 @@
+/** PostCSS — Tailwind removed; keep file so tooling can extend later. */
 const config = {
-  plugins: {
-    "@tailwindcss/postcss": {},
-  },
+  plugins: {},
 };
 
 export default config;

@@ -61,12 +61,12 @@ export default function RootLayout({
   return (
     <html
       lang={SITE.locale}
-      className={`dark ${geistSans.variable} ${instrumentSerif.variable} h-full scroll-auto antialiased`}
+      className={`app-html ${geistSans.variable} ${instrumentSerif.variable}`}
       suppressHydrationWarning
     >
-      <body className="relative min-h-full bg-[var(--bg-deep)]">
+      <body className="app-body">
         <Atmosphere />
-        <div className="relative z-[var(--z-content)] min-h-full">
+        <div className="app-shell">
           <SmoothScrollProvider>
             <ProjectExpandProvider>{children}</ProjectExpandProvider>
           </SmoothScrollProvider>

@@ -1,0 +1,60 @@
+/* Home — project grid as primary section */
+
+.project-grid {
+  display: flex;
+  min-height: 100dvh;
+  flex-direction: column;
+  padding-inline: var(--space-gutter);
+  padding-block: var(--space-section-y);
+}
+
+@media (min-width: 768px) {
+  .project-grid {
+    padding-inline: var(--space-gutter-lg);
+    padding-block: var(--space-section-y-lg);
+  }
+}
+
+.project-grid__inner {
+  margin-inline: auto;
+  display: flex;
+  width: 100%;
+  max-width: 120rem;
+  flex: 1;
+  flex-direction: column;
+}
+
+.project-grid__layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: var(--space-2xl);
+}
+
+@media (min-width: 1024px) {
+  .project-grid__layout {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--space-xl);
+    row-gap: var(--space-2xl);
+  }
+
+  .project-grid__cell--layout-a {
+    grid-column: span 7;
+    min-height: min(85vh, 38rem);
+  }
+
+  .project-grid__cell--layout-b {
+    grid-column: span 5;
+    min-height: min(92vh, 42rem);
+  }
+
+  .project-grid__cell--layout-c {
+    grid-column: 2 / span 10;
+    min-height: min(72vh, 34rem);
+  }
+
+  .project-grid__cell--layout-default {
+    grid-column: span 12;
+    min-height: min(70vh, 32rem);
+  }
+}
