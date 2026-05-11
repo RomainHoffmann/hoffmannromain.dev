@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { useGSAP } from "@/lib/gsap";
 import { ProjectCard } from "@/components/projects/ProjectCard";
+import { SITE } from "@/constants/site";
 import type { Project } from "@/data/projects";
 import { registerProjectGridMotion } from "@/lib/motion/timelines";
 
@@ -33,27 +34,14 @@ export function ProjectGridSection({ projects }: ProjectGridSectionProps) {
     <section
       ref={root}
       id="work"
-      className="border-t border-[var(--border)] px-gutter py-section md:px-gutter-lg md:py-section-lg"
+      className="flex min-h-[100dvh] flex-col px-gutter py-section md:px-gutter-lg md:py-section-lg"
       aria-labelledby="work-heading"
     >
-      <div className="mx-auto max-w-[120rem]">
-        <div className="mb-[var(--space-4xl)] flex flex-col gap-[var(--space-md)] md:mb-[var(--space-5xl)] md:flex-row md:items-end md:justify-between">
-          <div>
-            <p className="ds-label">Index</p>
-            <h2
-              id="work-heading"
-              className="type-section-title mt-[var(--space-sm)] text-[var(--fg)]"
-            >
-              Selected{" "}
-              <span className="text-[color:var(--accent-soft)]">work</span>
-            </h2>
-          </div>
-          <p className="ds-body-relaxed max-w-md md:text-right">
-            Large-format studies — image, type, and metadata in one frame.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 gap-y-[var(--space-2xl)] lg:grid-cols-12 lg:gap-x-[var(--space-xl)] lg:gap-y-[var(--space-2xl)]">
+      <div className="mx-auto flex w-full max-w-[120rem] flex-1 flex-col">
+        <h1 id="work-heading" className="sr-only">
+          {SITE.title}
+        </h1>
+        <div className="grid flex-1 grid-cols-1 gap-y-[var(--space-2xl)] lg:grid-cols-12 lg:gap-x-[var(--space-xl)] lg:gap-y-[var(--space-2xl)]">
           {projects.map((project, index) => (
             <ProjectCard
               key={project.slug}

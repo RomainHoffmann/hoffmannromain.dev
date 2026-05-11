@@ -1,5 +1,4 @@
 export {
-  motionDelay,
   motionDurations,
   motionEase,
   motionStagger,
@@ -15,9 +14,6 @@ export {
   staggerReveal,
 } from "./presets";
 export {
-  createApproachTimeline,
-  createHeroIntroTimeline,
-  createHeroScrollParallax,
   createProjectGridReveal,
   createSceneTimeline,
   registerProjectGridMotion,

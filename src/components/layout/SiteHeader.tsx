@@ -1,10 +1,7 @@
 import Link from "next/link";
 import { SITE } from "@/constants/site";
 
-const nav = [
-  { label: "Work", href: "#work" },
-  { label: "Approach", href: "#approach" },
-] as const;
+const nav = [{ label: "Work", href: "#work" }] as const;
 
 export function SiteHeader() {
   return (

@@ -14,15 +14,6 @@ export const motionDurations = {
   cinematic: 1.52,
 } as const;
 
-/** Timeline offsets — tiny gaps so layers read as intentional, not simultaneous */
-export const motionDelay = {
-  none: 0,
-  xs: 0.04,
-  sm: 0.1,
-  /** Hero lines → secondary copy */
-  heroSecondary: 0.46,
-} as const;
-
 export const motionEase = {
   /** Primary UI moves */
   out: "power3.out",
@@ -54,10 +45,6 @@ export const scrollDefaults = {
   },
   enterLine: {
     start: "top 88%",
-    once: true as const,
-  },
-  approachBlock: {
-    start: "top 80%",
     once: true as const,
   },
 } as const;
