@@ -21,7 +21,7 @@
   max-height: 100dvh;
   flex-direction: column;
   overflow: hidden;
-  background-color: var(--bg);
+  background-color: var(--project-scene, var(--bg));
   will-change: transform;
 }
 
@@ -340,15 +340,12 @@
   gap: 0.5rem 0.75rem;
   list-style: none;
   margin: 0;
-  padding: 0;
+  color: var(--muted-strong);
 }
 
-.expand-overlay__stack-tag {
-  border: 1px solid var(--border);
-  background-color: color-mix(in srgb, var(--surface) 60%, transparent);
-  padding-inline: 0.75rem;
-  padding-block: 0.375rem;
-  color: var(--muted-strong);
+.expand-overlay__role {
+  margin: 0;
+  color: var(--muted);
 }
 
 .expand-overlay__live-link {

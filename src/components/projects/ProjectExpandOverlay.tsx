@@ -12,13 +12,23 @@ import { createPortal } from "react-dom";
 import { gsap } from "@/lib/gsap";
 import { useLenisRef } from "@/components/providers/SmoothScrollProvider";
 import { overlayMotion } from "@/lib/motion/config";
-import type { Project } from "@/types/project";
+import type { Project, ProjectStatus } from "@/types/project";
 
 type ProjectExpandOverlayProps = {
   project: Project;
   originRect: DOMRect;
   onDismiss: () => void;
 };
+
+function excerptDescription(text: string, max = 200): string {
+  const t = text.trim();
+  if (t.length <= max) return t;
+  return `${t.slice(0, max).trim()}…`;
+}
+
+function formatStatus(status: ProjectStatus): string {
+  return status.replaceAll("_", " ");
+}
 
 export function ProjectExpandOverlay({
   project,
@@ -280,6 +290,11 @@ export function ProjectExpandOverlay({
   const thumbFrames =
     mediaFrames.length > 1 ? mediaFrames.slice(1) : [mediaFrames[0]];
 
+  const stageStyle = {
+    "--project-accent": project.theme.textColor,
+    "--project-scene": project.theme.sceneBackground,
+  } as CSSProperties;
+
   return createPortal(
     <div className="expand-overlay">
       <div
@@ -295,11 +310,7 @@ export function ProjectExpandOverlay({
         aria-modal="true"
         aria-labelledby="expand-project-title"
         className="expand-overlay__stage"
-        style={
-          {
-            "--project-accent": project.accentColor,
-          } as CSSProperties
-        }
+        style={stageStyle}
       >
         <div className="expand-overlay__atmos">
           <div className="expand-overlay__hero-img-wrap">
@@ -325,18 +336,6 @@ export function ProjectExpandOverlay({
           <button type="button" onClick={runExit} className="expand-overlay__close type-nav">
             Close — Esc
           </button>
-          <div className="expand-overlay__chrome-links type-nav">
-            {project.githubUrl ? (
-              <a
-                href={project.githubUrl}
-                className="ds-interactive ds-link-underline expand-overlay__link-muted"
-                target="_blank"
-                rel="noreferrer"
-              >
-                GitHub
-              </a>
-            ) : null}
-          </div>
         </div>
 
         <div className="expand-overlay__scroll">
@@ -387,7 +386,7 @@ export function ProjectExpandOverlay({
               </h2>
 
               <p ref={leadRef} className="expand-overlay__lead type-lead">
-                {project.tagline}
+                {excerptDescription(project.description)}
               </p>
             </div>
 
@@ -396,15 +395,12 @@ export function ProjectExpandOverlay({
                 <span>{project.type}</span>
                 <span className="expand-overlay__meta-sep">·</span>
                 <span className="u-tabular-nums">{project.year}</span>
+                <span className="expand-overlay__meta-sep">·</span>
+                <span>{formatStatus(project.status)}</span>
               </div>
 
-              <ul className="expand-overlay__stack-list">
-                {project.stack.map((tech) => (
-                  <li key={tech} className="expand-overlay__stack-tag type-tag">
-                    {tech}
-                  </li>
-                ))}
-              </ul>
+              <p className="expand-overlay__context type-body">{project.context}</p>
+              <p className="expand-overlay__role type-caption">{project.role}</p>
 
               {project.liveUrl ? (
                 <a

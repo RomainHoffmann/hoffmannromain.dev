@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { useGSAP } from "@/lib/gsap";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import { SITE } from "@/constants/site";
-import type { Project } from "@/data/projects";
+import type { Project } from "@/types/project";
 import { registerProjectGridMotion } from "@/lib/motion/timelines";
 
 type ProjectGridSectionProps = {

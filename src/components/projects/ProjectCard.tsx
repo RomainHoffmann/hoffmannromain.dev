@@ -10,7 +10,7 @@ import {
 } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { useProjectExpand } from "@/components/projects/ProjectExpandContext";
-import type { Project } from "@/data/projects";
+import type { Project } from "@/types/project";
 import { rafPointerHandler } from "@/lib/pointerFrame";
 
 type ProjectCardProps = {
@@ -92,9 +92,15 @@ function ProjectCardInner({
     }
   };
 
+  const themeStyle = {
+    "--project-accent": project.theme.textColor,
+    "--project-scene": project.theme.sceneBackground,
+  } as CSSProperties;
+
   return (
     <div
-      className="project-card__hitbox"
+      className={`project-card__hitbox ${className}`}
+      style={themeStyle}
       onPointerEnter={warmExpandChunk}
       onClick={open}
       onKeyDown={onKeyDown}
@@ -102,14 +108,7 @@ function ProjectCardInner({
       tabIndex={0}
       aria-label={`Open ${project.title}`}
     >
-      <article
-        ref={root}
-        data-project-card
-        style={
-          { "--project-accent": project.accentColor } as CSSProperties
-        }
-        className={`project-card__article ds-card-depth ${className}`}
-      >
+      <article ref={root} data-project-card className="project-card__article ds-card-depth">
         <div className="project-card__media-stack">
           <div className="project-card__media-clip">
             <div ref={shiftRef} className="project-card__media-shift">
