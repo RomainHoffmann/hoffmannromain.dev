@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Instrument_Serif } from "next/font/google";
-import { Atmosphere } from "@/components/layout/Atmosphere";
 import { ProjectExpandProvider } from "@/components/projects/ProjectExpandContext";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 import { SITE } from "@/constants/site";
@@ -65,7 +64,6 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="app-body">
-        <Atmosphere />
         <div className="app-shell">
           <SmoothScrollProvider>
             <ProjectExpandProvider>{children}</ProjectExpandProvider>

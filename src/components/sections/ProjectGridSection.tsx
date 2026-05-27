@@ -11,12 +11,6 @@ type ProjectGridSectionProps = {
   projects: Project[];
 };
 
-const editorialCellClasses = [
-  "project-grid__cell project-grid__cell--layout-a",
-  "project-grid__cell project-grid__cell--layout-b",
-  "project-grid__cell project-grid__cell--layout-c",
-] as const;
-
 export function ProjectGridSection({ projects }: ProjectGridSectionProps) {
   const root = useRef<HTMLElement>(null);
 
@@ -46,10 +40,7 @@ export function ProjectGridSection({ projects }: ProjectGridSectionProps) {
             <ProjectCard
               key={project.slug}
               project={project}
-              className={
-                editorialCellClasses[index] ??
-                "project-grid__cell project-grid__cell--layout-default"
-              }
+              className="project-grid__cell project-grid__cell--layout-default"
               priority={index === 0}
             />
           ))}

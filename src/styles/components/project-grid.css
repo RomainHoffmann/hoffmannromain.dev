@@ -26,7 +26,7 @@
 
 .project-grid__layout {
   flex: 1;
-  display: grid;
+  display: flex;
   grid-template-columns: 1fr;
   row-gap: var(--space-2xl);
 }
@@ -38,23 +38,8 @@
     row-gap: var(--space-2xl);
   }
 
-  .project-grid__cell--layout-a {
-    grid-column: span 7;
-    min-height: min(85vh, 38rem);
-  }
-
-  .project-grid__cell--layout-b {
-    grid-column: span 5;
-    min-height: min(92vh, 42rem);
-  }
-
-  .project-grid__cell--layout-c {
-    grid-column: 2 / span 10;
-    min-height: min(72vh, 34rem);
-  }
-
   .project-grid__cell--layout-default {
-    grid-column: span 12;
-    min-height: min(70vh, 32rem);
+    min-height: min(10vh, 32rem);
+    display: none;
   }
 }
