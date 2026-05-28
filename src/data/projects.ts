@@ -19,13 +19,17 @@ const mangeznotez: Project = {
   galleryImages: [],
   theme: {
     textColor: "#ff5321",
-    sceneBackground: "#fff",
+    sceneBackground: "#f8f8f8",
   },
 };
 
 export const projects: Project[] = [
   mangeznotez,
-  { ...mangeznotez, title: "mangeznotez 2" },
+  {
+    ...mangeznotez,
+    title: "mangeznotez 2",
+    theme: { textColor: "#663131", sceneBackground: "#EDCECE" },
+  },
   mangeznotez,
 ];
 

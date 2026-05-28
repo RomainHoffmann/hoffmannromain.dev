@@ -11,7 +11,8 @@
   -webkit-user-select: none;
 }
 
-body[data-project-expand-ready]:not([data-project-expand-exiting]) .expand-overlay {
+body[data-project-expand-ready]:not([data-project-expand-exiting])
+  .expand-overlay {
   background-color: var(--expand-bg, var(--bg-deep));
 }
 
@@ -61,7 +62,7 @@ body[data-project-expand-ready]:not([data-project-expand-exiting]) .expand-overl
 
 body[data-project-expand-ready]:not([data-project-expand-exiting])
   .expand-overlay__image {
-  opacity: 0.2;
+  opacity: 0.1;
 }
 
 .expand-overlay__title {
