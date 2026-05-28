@@ -12,13 +12,11 @@ const THUMB_INTRINSIC_H = THUMB_DISPLAY_H * 2;
 type ProjectExpandGalleryProps = {
   images: readonly string[];
   projectTitle: string;
-  visible: boolean;
 };
 
 export function ProjectExpandGallery({
   images,
   projectTitle,
-  visible,
 }: ProjectExpandGalleryProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -35,11 +33,7 @@ export function ProjectExpandGallery({
   const activeSrc = images[selectedIndex] ?? images[0];
 
   return (
-    <div
-      className="expand-gallery"
-      data-visible={visible ? "true" : undefined}
-      aria-hidden={!visible}
-    >
+    <div className="expand-gallery">
       <div className="expand-gallery__preview">
         <Image
           key={activeSrc}

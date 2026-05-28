@@ -263,19 +263,22 @@ export function ProjectExpandOverlay({
               style={shellInitialStyle(tile.rect, activeIndex)}
             >
               <ExpandShellImage objectPosition={tile.objectPosition} />
-              <p
-                className="expand-overlay__title"
+              <div
+                className="expand-overlay__shell-ui"
                 data-visible={galleryVisible ? "true" : undefined}
                 aria-hidden={!galleryVisible}
-                style={{ color: tile.project.theme.textColor }}
               >
-                {tile.project.title}
-              </p>
-              <ProjectExpandGallery
-                images={tile.project.galleryImages}
-                projectTitle={tile.project.title}
-                visible={galleryVisible}
-              />
+                <p
+                  className="expand-overlay__title"
+                  style={{ color: tile.project.theme.textColor }}
+                >
+                  {tile.project.title}
+                </p>
+                <ProjectExpandGallery
+                  images={tile.project.galleryImages}
+                  projectTitle={tile.project.title}
+                />
+              </div>
             </div>
           ))}
         </div>

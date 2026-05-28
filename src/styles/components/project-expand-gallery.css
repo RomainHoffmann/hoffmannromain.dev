@@ -1,35 +1,25 @@
-/* Galerie projet — visionneur centré, preview + thumbs verticales */
+/* Galerie — flex dans le shell-ui (pas de position absolute pour le layout) */
 
 .expand-gallery {
   --gallery-width: min(85vw, 1400px);
   --gallery-thumb-w: clamp(5.5rem, 11vw, 9.5rem);
   --gallery-gap: 1.25rem;
 
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 2;
   display: flex;
+  align-self: center;
   align-items: center;
   gap: var(--gallery-gap);
   width: var(--gallery-width);
-  opacity: 0;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  transition: opacity 280ms ease;
-}
-
-.expand-gallery[data-visible="true"] {
-  opacity: 1;
-  pointer-events: auto;
+  max-width: 100%;
+  min-height: 0;
 }
 
 .expand-gallery__preview {
-  position: relative;
   flex: 1 1 auto;
   min-width: 0;
   aspect-ratio: 16 / 9;
   overflow: hidden;
+  position: relative;
 }
 
 .expand-gallery__preview-image {
@@ -53,7 +43,7 @@
 }
 
 .expand-gallery__thumb {
-  position: relative;
+  display: block;
   flex-shrink: 0;
   width: 100%;
   aspect-ratio: 16 / 9;
