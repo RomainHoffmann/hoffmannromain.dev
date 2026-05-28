@@ -1,0 +1,47 @@
+/* Tuile + image grandissent ensemble (width/height animés, cover à l'intérieur). */
+
+.expand-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  background-color: var(--bg-deep);
+  cursor: pointer;
+}
+
+.expand-overlay__shell {
+  position: fixed;
+  overflow: hidden;
+  z-index: 1;
+  cursor: default;
+  will-change: left, top, width, height;
+}
+
+.expand-overlay__image {
+  object-fit: cover;
+  object-position: var(--expand-object-position, 50% 50%);
+  max-width: none;
+  pointer-events: none;
+  user-select: none;
+}
+
+.expand-overlay__close {
+  position: fixed;
+  z-index: calc(var(--z-modal) + 1);
+  top: calc(env(safe-area-inset-top) + 1rem);
+  right: var(--space-gutter);
+  border: none;
+  background: none;
+  padding: 0;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg);
+  cursor: pointer;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.7);
+}
+
+.expand-overlay__close:hover,
+.expand-overlay__close:focus-visible {
+  opacity: 0.75;
+}
