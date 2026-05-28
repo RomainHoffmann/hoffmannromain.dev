@@ -1,6 +1,9 @@
+import { getProjectGalleryImages } from "@/lib/project-gallery";
 import type { Project } from "@/types/project";
 
 export type { Project, ProjectTheme } from "@/types/project";
+
+const mangeznotezGallery = getProjectGalleryImages("mangeznotez");
 
 const mangeznotez: Project = {
   id: "mangeznotez",
@@ -16,7 +19,7 @@ const mangeznotez: Project = {
   liveUrl: "https://example.com",
   coverImage:
     "https://images.freeimages.com/images/large-previews/d9d/festive-family-meal-0410-5702854.jpg?w=1500",
-  galleryImages: [],
+  galleryImages: mangeznotezGallery,
   theme: {
     textColor: "#ff5321",
     sceneBackground: "#f8f8f8",
@@ -27,8 +30,10 @@ export const projects: Project[] = [
   mangeznotez,
   {
     ...mangeznotez,
+    id: "mangeznotez-2",
     title: "mangeznotez 2",
     theme: { textColor: "#663131", sceneBackground: "#EDCECE" },
+    galleryImages: mangeznotezGallery,
   },
   mangeznotez,
 ];

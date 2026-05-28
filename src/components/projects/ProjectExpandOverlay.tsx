@@ -10,6 +10,7 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import { ExpandShellImage } from "@/components/projects/ExpandShellImage";
+import { ProjectExpandGallery } from "@/components/projects/ProjectExpandGallery";
 import type { TileSnapshot } from "@/components/projects/ProjectExpandContext";
 import {
   clearExpandBodyState,
@@ -51,6 +52,7 @@ export function ProjectExpandOverlay({
   const rootRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(activeIndex);
+  const [galleryVisible, setGalleryVisible] = useState(false);
   const dismissedRef = useRef(false);
   const exitingRef = useRef(false);
   const hasEnteredRef = useRef(false);
@@ -95,23 +97,32 @@ export function ProjectExpandOverlay({
 
       markExpandGridHidden(true);
 
+      const tl = gsap.timeline({
+        onComplete: () => {
+          hasEnteredRef.current = true;
+          setGalleryVisible(true);
+        },
+      });
+
       shells.forEach((shell, index) => {
         const tile = tiles[index];
         if (!tile) return;
 
         const end = expandedSlideLayout(index);
 
-        gsap.to(shell, {
-          left: end.left,
-          top: end.top,
-          width: end.width,
-          height: end.height,
-          duration,
-          ease: overlayMotion.ease,
-        });
+        tl.to(
+          shell,
+          {
+            left: end.left,
+            top: end.top,
+            width: end.width,
+            height: end.height,
+            duration,
+            ease: overlayMotion.ease,
+          },
+          0,
+        );
       });
-
-      hasEnteredRef.current = true;
     }, root);
 
     return () => {
@@ -148,6 +159,7 @@ export function ProjectExpandOverlay({
   const runExit = useCallback(() => {
     if (exitingRef.current || dismissedRef.current) return;
     exitingRef.current = true;
+    setGalleryVisible(false);
     markExpandExiting(true);
 
     const startGsapExit = () => {
@@ -251,6 +263,11 @@ export function ProjectExpandOverlay({
               style={shellInitialStyle(tile.rect, activeIndex)}
             >
               <ExpandShellImage objectPosition={tile.objectPosition} />
+              <ProjectExpandGallery
+                images={tile.project.galleryImages}
+                projectTitle={tile.project.title}
+                visible={galleryVisible}
+              />
             </div>
           ))}
         </div>
