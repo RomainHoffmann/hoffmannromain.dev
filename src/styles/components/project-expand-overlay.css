@@ -5,13 +5,13 @@
   background-color: transparent;
   color: var(--expand-fg, var(--fg));
   transition:
-    background-color 320ms ease,
+    background-color var(--expand-theme-transition, 320ms) ease,
     color 260ms ease;
   user-select: none;
   -webkit-user-select: none;
 }
 
-body[data-project-expand-ready] .expand-overlay {
+body[data-project-expand-ready]:not([data-project-expand-exiting]) .expand-overlay {
   background-color: var(--expand-bg, var(--bg-deep));
 }
 
@@ -53,10 +53,15 @@ body[data-project-expand-ready] .expand-overlay {
   height: 100%;
   object-fit: cover;
   object-position: var(--expand-object-position, 50% 50%);
-  opacity: 0.72;
-  transition: opacity 320ms ease;
+  opacity: 1;
+  transition: opacity var(--expand-theme-transition, 320ms) ease;
   max-width: none;
   pointer-events: none;
+}
+
+body[data-project-expand-ready]:not([data-project-expand-exiting])
+  .expand-overlay__image {
+  opacity: 0.2;
 }
 
 .expand-overlay__title {
@@ -74,6 +79,7 @@ body[data-project-expand-ready] .expand-overlay {
   color: var(--expand-fg, var(--fg));
   text-shadow: 0 1px 10px rgba(0, 0, 0, 0.7);
   pointer-events: none;
+  transition: color 260ms ease;
 }
 
 .expand-overlay__nav {
@@ -92,6 +98,7 @@ body[data-project-expand-ready] .expand-overlay {
   cursor: pointer;
   backdrop-filter: blur(6px);
   -webkit-tap-highlight-color: transparent;
+  transition: color 260ms ease;
 }
 
 .expand-overlay__nav:disabled {
@@ -128,6 +135,7 @@ body[data-project-expand-ready] .expand-overlay {
   cursor: pointer;
   text-shadow: 0 1px 10px rgba(0, 0, 0, 0.7);
   -webkit-tap-highlight-color: transparent;
+  transition: color 260ms ease;
 }
 
 .expand-overlay__close:hover,

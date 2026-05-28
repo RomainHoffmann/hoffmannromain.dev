@@ -8,7 +8,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { markExpandGridHidden } from "@/lib/expand-frame";
+import { clearExpandBodyState } from "@/lib/expand-frame";
 import { ProjectExpandOverlay } from "@/components/projects/ProjectExpandOverlay";
 import type { RectSnapshot } from "@/lib/expand-frame";
 import type { Project } from "@/types/project";
@@ -41,7 +41,7 @@ export function ProjectExpandProvider({ children }: { children: ReactNode }) {
 
   const expand = useCallback((activeIndex: number, tiles: TileSnapshot[]) => {
     if (!tiles.length) return;
-    markExpandGridHidden(false);
+    clearExpandBodyState();
     setPayload({
       id: crypto.randomUUID(),
       activeIndex,
@@ -55,7 +55,7 @@ export function ProjectExpandProvider({ children }: { children: ReactNode }) {
     setPayload(null);
     document.body.removeAttribute("data-project-expand");
     document.body.style.removeProperty("overflow");
-    markExpandGridHidden(false);
+    clearExpandBodyState();
   }, []);
 
   const value = useMemo(

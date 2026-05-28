@@ -65,6 +65,19 @@ export function markExpandGridHidden(hidden: boolean) {
   }
 }
 
+export function markExpandExiting(exiting: boolean) {
+  if (exiting) {
+    document.body.setAttribute("data-project-expand-exiting", "");
+  } else {
+    document.body.removeAttribute("data-project-expand-exiting");
+  }
+}
+
+export function clearExpandBodyState() {
+  document.body.removeAttribute("data-project-expand-ready");
+  document.body.removeAttribute("data-project-expand-exiting");
+}
+
 export function mountShellImagesFromGrid(
   track: HTMLElement,
   tiles: ReadonlyArray<{ objectPosition: string }>,

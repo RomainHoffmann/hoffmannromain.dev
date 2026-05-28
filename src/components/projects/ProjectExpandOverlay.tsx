@@ -12,7 +12,9 @@ import { createPortal } from "react-dom";
 import { ExpandShellImage } from "@/components/projects/ExpandShellImage";
 import type { TileSnapshot } from "@/components/projects/ProjectExpandContext";
 import {
+  clearExpandBodyState,
   expandedSlideLayout,
+  markExpandExiting,
   markExpandGridHidden,
   mountShellImagesFromGrid,
   shellStartInTrack,
@@ -114,7 +116,7 @@ export function ProjectExpandOverlay({
 
     return () => {
       ctx.revert();
-      markExpandGridHidden(false);
+      clearExpandBodyState();
     };
   }, [activeIndex, tiles]);
 
@@ -146,41 +148,48 @@ export function ProjectExpandOverlay({
   const runExit = useCallback(() => {
     if (exitingRef.current || dismissedRef.current) return;
     exitingRef.current = true;
+    markExpandExiting(true);
 
-    const root = rootRef.current;
-    const track = trackRef.current;
-    if (!root || !track) {
-      dismissAfterExit();
-      return;
-    }
+    const startGsapExit = () => {
+      const root = rootRef.current;
+      const track = trackRef.current;
+      if (!root || !track) {
+        dismissAfterExit();
+        return;
+      }
 
-    const shells = track.querySelectorAll<HTMLElement>("[data-expand-shell]");
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    const duration = reduceMotion ? 0.01 : overlayMotion.expandOut;
+      const shells = track.querySelectorAll<HTMLElement>("[data-expand-shell]");
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      const duration = reduceMotion ? 0.01 : overlayMotion.expandOut;
 
-    gsap.set(track, { x: trackTranslateX(currentIndex) });
+      gsap.set(track, { x: trackTranslateX(currentIndex) });
 
-    const tl = gsap.timeline({ onComplete: dismissAfterExit });
+      const tl = gsap.timeline({ onComplete: dismissAfterExit });
 
-    shells.forEach((shell, index) => {
-      const tile = tiles[index];
-      if (!tile) return;
-      const end = shellStartInTrack(tile.rect, currentIndex);
+      shells.forEach((shell, index) => {
+        const tile = tiles[index];
+        if (!tile) return;
+        const end = shellStartInTrack(tile.rect, currentIndex);
 
-      tl.to(
-        shell,
-        {
-          left: end.left,
-          top: end.top,
-          width: end.width,
-          height: end.height,
-          duration,
-          ease: overlayMotion.ease,
-        },
-        0,
-      );
+        tl.to(
+          shell,
+          {
+            left: end.left,
+            top: end.top,
+            width: end.width,
+            height: end.height,
+            duration,
+            ease: overlayMotion.ease,
+          },
+          0,
+        );
+      });
+    };
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(startGsapExit);
     });
   }, [currentIndex, dismissAfterExit, tiles]);
 
@@ -211,8 +220,11 @@ export function ProjectExpandOverlay({
     ? ({
         "--expand-bg": currentProject.theme.sceneBackground,
         "--expand-fg": currentProject.theme.textColor,
+        "--expand-theme-transition": `${overlayMotion.themeTransitionMs}ms`,
       } as CSSProperties)
-    : undefined;
+    : ({
+        "--expand-theme-transition": `${overlayMotion.themeTransitionMs}ms`,
+      } as CSSProperties);
 
   return createPortal(
     <div ref={rootRef} className="expand-overlay" style={overlayThemeStyle}>
