@@ -44,6 +44,11 @@ a {
   outline-offset: 3px;
 }
 
-body[data-project-expand="open"] .project-card__image {
+body[data-project-expand="open"] {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+body[data-project-expand="open"] .home {
   visibility: hidden;
 }

@@ -9,6 +9,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import type { RectSnapshot } from "@/lib/expand-frame";
 import type { Project } from "@/types/project";
 
 const ProjectExpandOverlay = dynamic(
@@ -19,20 +20,23 @@ const ProjectExpandOverlay = dynamic(
   { ssr: false },
 );
 
-export type ExpandPayload = {
-  id: string;
+export type TileSnapshot = {
   project: Project;
-  rect: DOMRect;
+  rect: RectSnapshot;
   objectPosition: string;
 };
 
+export type ExpandPayload = {
+  id: string;
+  activeIndex: number;
+  tiles: TileSnapshot[];
+};
+
 type ProjectExpandContextValue = {
-  expand: (
-    project: Project,
-    originEl: HTMLElement | null,
-    objectPosition: string,
-  ) => void;
+  expand: (activeIndex: number, tiles: TileSnapshot[]) => void;
   close: () => void;
+  isOpen: boolean;
+  activeIndex: number | null;
 };
 
 const ProjectExpandContext = createContext<ProjectExpandContextValue | null>(
@@ -42,25 +46,16 @@ const ProjectExpandContext = createContext<ProjectExpandContextValue | null>(
 export function ProjectExpandProvider({ children }: { children: ReactNode }) {
   const [payload, setPayload] = useState<ExpandPayload | null>(null);
 
-  const expand = useCallback(
-    (
-      project: Project,
-      originEl: HTMLElement | null,
-      objectPosition: string,
-    ) => {
-      const rect = originEl?.getBoundingClientRect();
-      if (!rect?.width) return;
-      setPayload({
-        id: crypto.randomUUID(),
-        project,
-        rect,
-        objectPosition,
-      });
-      document.body.setAttribute("data-project-expand", "open");
-      document.body.style.overflow = "hidden";
-    },
-    [],
-  );
+  const expand = useCallback((activeIndex: number, tiles: TileSnapshot[]) => {
+    if (!tiles.length) return;
+    setPayload({
+      id: crypto.randomUUID(),
+      activeIndex,
+      tiles,
+    });
+    document.body.setAttribute("data-project-expand", "open");
+    document.body.style.overflow = "hidden";
+  }, []);
 
   const close = useCallback(() => {
     setPayload(null);
@@ -69,8 +64,13 @@ export function ProjectExpandProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const value = useMemo(
-    () => ({ expand, close }),
-    [expand, close],
+    () => ({
+      expand,
+      close,
+      isOpen: payload !== null,
+      activeIndex: payload?.activeIndex ?? null,
+    }),
+    [expand, close, payload],
   );
 
   return (
@@ -79,9 +79,8 @@ export function ProjectExpandProvider({ children }: { children: ReactNode }) {
       {payload ? (
         <ProjectExpandOverlay
           key={payload.id}
-          project={payload.project}
-          originRect={payload.rect}
-          objectPosition={payload.objectPosition}
+          activeIndex={payload.activeIndex}
+          tiles={payload.tiles}
           onDismiss={close}
         />
       ) : null}

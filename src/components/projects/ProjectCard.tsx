@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { memo, useCallback, useRef } from "react";
-import { useProjectExpand } from "@/components/projects/ProjectExpandContext";
+import { memo, useCallback, useRef, type MouseEvent } from "react";
 import type { Project } from "@/types/project";
 
 const TILE_W = 100;
@@ -11,10 +10,14 @@ const TILE_H = 800;
 type ProjectCardProps = {
   project: Project;
   priority?: boolean;
+  onOpen: () => void;
 };
 
-function ProjectCardInner({ project, priority = false }: ProjectCardProps) {
-  const { expand } = useProjectExpand();
+function ProjectCardInner({
+  project,
+  priority = false,
+  onOpen,
+}: ProjectCardProps) {
   const mediaRef = useRef<HTMLDivElement>(null);
   const prefetchOnce = useRef(false);
 
@@ -24,16 +27,8 @@ function ProjectCardInner({ project, priority = false }: ProjectCardProps) {
     void import("@/components/projects/ProjectExpandOverlay");
   }, []);
 
-  const open = () => {
-    const media = mediaRef.current;
-    if (!media) return;
-
-    const img = media.querySelector("img");
-    const objectPosition = img
-      ? getComputedStyle(img).objectPosition
-      : "50% 50%";
-
-    expand(project, media, objectPosition);
+  const preventSelectFlash = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
   };
 
   return (
@@ -41,10 +36,11 @@ function ProjectCardInner({ project, priority = false }: ProjectCardProps) {
       type="button"
       className="project-card"
       onPointerEnter={warmExpandChunk}
-      onClick={open}
+      onMouseDown={preventSelectFlash}
+      onClick={onOpen}
       aria-label={`Open ${project.title}`}
     >
-      <div ref={mediaRef} className="project-card__media">
+      <div ref={mediaRef} data-project-tile className="project-card__media">
         <Image
           src={project.coverImage}
           alt=""

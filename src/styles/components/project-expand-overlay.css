@@ -1,19 +1,35 @@
-/* Tuile + image grandissent ensemble (width/height animés, cover à l'intérieur). */
-
 .expand-overlay {
   position: fixed;
   inset: 0;
   z-index: var(--z-modal);
   background-color: var(--bg-deep);
-  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.expand-overlay__viewport {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+.expand-overlay__track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100dvh;
+  will-change: transform;
 }
 
 .expand-overlay__shell {
-  position: fixed;
+  position: absolute;
+  top: 0;
   overflow: hidden;
-  z-index: 1;
-  cursor: default;
   will-change: left, top, width, height;
+}
+
+.expand-overlay__shell[data-active="true"] {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
 }
 
 .expand-overlay__image {
@@ -21,7 +37,42 @@
   object-position: var(--expand-object-position, 50% 50%);
   max-width: none;
   pointer-events: none;
-  user-select: none;
+}
+
+.expand-overlay__nav {
+  position: fixed;
+  top: 50%;
+  z-index: calc(var(--z-modal) + 1);
+  transform: translateY(-50%);
+  border: none;
+  background: rgba(3, 3, 3, 0.55);
+  padding: 0.75rem 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg);
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.expand-overlay__nav:disabled {
+  opacity: 0.28;
+  cursor: default;
+}
+
+.expand-overlay__nav--prev {
+  left: 0;
+}
+
+.expand-overlay__nav--next {
+  right: 0;
+}
+
+.expand-overlay__nav:not(:disabled):hover,
+.expand-overlay__nav:not(:disabled):focus-visible {
+  background: rgba(3, 3, 3, 0.78);
 }
 
 .expand-overlay__close {
@@ -39,6 +90,7 @@
   color: var(--fg);
   cursor: pointer;
   text-shadow: 0 1px 10px rgba(0, 0, 0, 0.7);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .expand-overlay__close:hover,
