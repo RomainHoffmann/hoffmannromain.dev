@@ -118,19 +118,22 @@ export function ProjectExpandOverlay({
     };
   }, [activeIndex, tiles]);
 
-  const slideTo = useCallback((index: number) => {
-    const track = trackRef.current;
-    if (!track || !hasEnteredRef.current) return;
+  const slideTo = useCallback(
+    (index: number) => {
+      const track = trackRef.current;
+      if (!track || !hasEnteredRef.current) return;
 
-    const clamped = Math.max(0, Math.min(index, tiles.length - 1));
-    setCurrentIndex(clamped);
+      const clamped = Math.max(0, Math.min(index, tiles.length - 1));
+      setCurrentIndex(clamped);
 
-    gsap.to(track, {
-      x: trackTranslateX(clamped),
-      duration: overlayMotion.slide,
-      ease: overlayMotion.ease,
-    });
-  }, [tiles.length]);
+      gsap.to(track, {
+        x: trackTranslateX(clamped),
+        duration: overlayMotion.slide,
+        ease: overlayMotion.ease,
+      });
+    },
+    [tiles.length],
+  );
 
   const goPrev = useCallback(() => {
     slideTo(currentIndex - 1);
