@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import {
   useCallback,
   useEffect,
@@ -10,9 +9,12 @@ import {
   type CSSProperties,
 } from "react";
 import { createPortal } from "react-dom";
+import { ExpandShellImage } from "@/components/projects/ExpandShellImage";
 import type { TileSnapshot } from "@/components/projects/ProjectExpandContext";
 import {
   expandedSlideLayout,
+  markExpandGridHidden,
+  scheduleExpandGridHidden,
   shellStartInTrack,
   trackTranslateX,
   viewportSize,
@@ -25,6 +27,19 @@ type ProjectExpandOverlayProps = {
   tiles: TileSnapshot[];
   onDismiss: () => void;
 };
+
+function shellInitialStyle(
+  rect: TileSnapshot["rect"],
+  activeIndex: number,
+): CSSProperties {
+  const start = shellStartInTrack(rect, activeIndex);
+  return {
+    left: start.left,
+    top: start.top,
+    width: start.width,
+    height: start.height,
+  };
+}
 
 export function ProjectExpandOverlay({
   activeIndex,
@@ -65,7 +80,6 @@ export function ProjectExpandOverlay({
         if (!tile) return;
 
         const start = shellStartInTrack(tile.rect, activeIndex);
-        const end = expandedSlideLayout(index);
 
         gsap.set(shell, {
           left: start.left,
@@ -73,6 +87,15 @@ export function ProjectExpandOverlay({
           width: start.width,
           height: start.height,
         });
+      });
+
+      scheduleExpandGridHidden();
+
+      shells.forEach((shell, index) => {
+        const tile = tiles[index];
+        if (!tile) return;
+
+        const end = expandedSlideLayout(index);
 
         gsap.to(shell, {
           left: end.left,
@@ -87,7 +110,10 @@ export function ProjectExpandOverlay({
       hasEnteredRef.current = true;
     }, root);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      markExpandGridHidden(false);
+    };
   }, [activeIndex, tiles]);
 
   const slideTo = useCallback((index: number) => {
@@ -115,6 +141,7 @@ export function ProjectExpandOverlay({
   const runExit = useCallback(() => {
     if (exitingRef.current || dismissedRef.current) return;
     exitingRef.current = true;
+    markExpandGridHidden(false);
 
     const root = rootRef.current;
     const track = trackRef.current;
@@ -187,33 +214,26 @@ export function ProjectExpandOverlay({
         <div
           ref={trackRef}
           className="expand-overlay__track"
-          style={{ width: tiles.length * vw }}
+          style={{
+            width: tiles.length * vw,
+            transform: `translate3d(${trackTranslateX(activeIndex)}px, 0, 0)`,
+          }}
         >
-          {tiles.map((tile, index) => {
-            const imageStyle = {
-              "--expand-object-position": tile.objectPosition,
-            } as CSSProperties;
-
-            return (
-              <div
-                key={`${tile.project.slug}-${index}`}
-                data-expand-shell
-                data-active={index === currentIndex ? "true" : undefined}
-                className="expand-overlay__shell"
-              >
-                <Image
-                  src={tile.project.coverImage}
-                  alt={tile.project.title}
-                  fill
-                  priority={index === activeIndex}
-                  quality={90}
-                  sizes="100vw"
-                  className="expand-overlay__image u-img-cover"
-                  style={imageStyle}
-                />
-              </div>
-            );
-          })}
+          {tiles.map((tile, index) => (
+            <div
+              key={`${tile.project.slug}-${index}`}
+              data-expand-shell
+              data-active={index === currentIndex ? "true" : undefined}
+              className="expand-overlay__shell"
+              style={shellInitialStyle(tile.rect, activeIndex)}
+            >
+              <ExpandShellImage
+                clone={tile.imageClone}
+                fallbackSrc={tile.project.coverImage}
+                objectPosition={tile.objectPosition}
+              />
+            </div>
+          ))}
         </div>
       </div>
 

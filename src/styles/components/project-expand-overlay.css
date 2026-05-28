@@ -2,9 +2,13 @@
   position: fixed;
   inset: 0;
   z-index: var(--z-modal);
-  background-color: var(--bg-deep);
+  background-color: transparent;
   user-select: none;
   -webkit-user-select: none;
+}
+
+body[data-project-expand-ready] .expand-overlay {
+  background-color: var(--bg-deep);
 }
 
 .expand-overlay__viewport {
@@ -28,11 +32,21 @@
   will-change: left, top, width, height;
 }
 
+.expand-overlay__media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
 .expand-overlay__shell[data-active="true"] {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
 }
 
 .expand-overlay__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: var(--expand-object-position, 50% 50%);
   max-width: none;

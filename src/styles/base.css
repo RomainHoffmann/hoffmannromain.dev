@@ -49,6 +49,6 @@ body[data-project-expand="open"] {
   -webkit-user-select: none;
 }
 
-body[data-project-expand="open"] .home {
+body[data-project-expand-ready] .home {
   visibility: hidden;
 }

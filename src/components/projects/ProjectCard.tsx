@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { memo, useCallback, useRef, type MouseEvent } from "react";
+import { memo, type MouseEvent } from "react";
 import type { Project } from "@/types/project";
 
-const TILE_W = 100;
-const TILE_H = 800;
+/** Intrinsic 3× display (50×400) — cover sur la hauteur ≈ 400px réels. */
+const TILE_W = 150;
+const TILE_H = 1200;
 
 type ProjectCardProps = {
   project: Project;
@@ -18,15 +19,6 @@ function ProjectCardInner({
   priority = false,
   onOpen,
 }: ProjectCardProps) {
-  const mediaRef = useRef<HTMLDivElement>(null);
-  const prefetchOnce = useRef(false);
-
-  const warmExpandChunk = useCallback(() => {
-    if (prefetchOnce.current) return;
-    prefetchOnce.current = true;
-    void import("@/components/projects/ProjectExpandOverlay");
-  }, []);
-
   const preventSelectFlash = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
   };
@@ -35,12 +27,11 @@ function ProjectCardInner({
     <button
       type="button"
       className="project-card"
-      onPointerEnter={warmExpandChunk}
       onMouseDown={preventSelectFlash}
       onClick={onOpen}
       aria-label={`Open ${project.title}`}
     >
-      <div ref={mediaRef} data-project-tile className="project-card__media">
+      <div data-project-tile className="project-card__media">
         <Image
           src={project.coverImage}
           alt=""
@@ -50,7 +41,7 @@ function ProjectCardInner({
           priority={priority}
           quality={90}
           decoding="async"
-          sizes="50px"
+          sizes="400px"
           className="project-card__image u-img-cover"
         />
       </div>

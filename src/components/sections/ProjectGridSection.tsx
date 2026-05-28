@@ -4,6 +4,7 @@ import { useRef, type MouseEvent } from "react";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import { useProjectExpand } from "@/components/projects/ProjectExpandContext";
 import type { TileSnapshot } from "@/components/projects/ProjectExpandContext";
+import { cloneTileCoverImage } from "@/lib/expand-frame";
 import type { Project } from "@/types/project";
 
 type ProjectGridSectionProps = {
@@ -24,6 +25,10 @@ function collectTiles(
       throw new Error(`Missing project for tile index ${index}`);
     }
 
+    const objectPosition = img
+      ? getComputedStyle(img).objectPosition
+      : "50% 50%";
+
     return {
       project,
       rect: {
@@ -32,9 +37,8 @@ function collectTiles(
         width: rect.width,
         height: rect.height,
       },
-      objectPosition: img
-        ? getComputedStyle(img).objectPosition
-        : "50% 50%",
+      objectPosition,
+      imageClone: cloneTileCoverImage(media, objectPosition),
     };
   });
 }

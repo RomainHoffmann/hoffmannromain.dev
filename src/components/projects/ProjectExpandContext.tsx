@@ -1,6 +1,5 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import {
   createContext,
   useCallback,
@@ -9,21 +8,17 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { markExpandGridHidden } from "@/lib/expand-frame";
+import { ProjectExpandOverlay } from "@/components/projects/ProjectExpandOverlay";
 import type { RectSnapshot } from "@/lib/expand-frame";
 import type { Project } from "@/types/project";
-
-const ProjectExpandOverlay = dynamic(
-  () =>
-    import("@/components/projects/ProjectExpandOverlay").then(
-      (m) => m.ProjectExpandOverlay,
-    ),
-  { ssr: false },
-);
 
 export type TileSnapshot = {
   project: Project;
   rect: RectSnapshot;
   objectPosition: string;
+  /** Copie du <img> déjà décodé dans la tuile — affichage instantané à l’ouverture. */
+  imageClone: HTMLImageElement | null;
 };
 
 export type ExpandPayload = {
@@ -61,6 +56,7 @@ export function ProjectExpandProvider({ children }: { children: ReactNode }) {
     setPayload(null);
     document.body.removeAttribute("data-project-expand");
     document.body.style.removeProperty("overflow");
+    markExpandGridHidden(false);
   }, []);
 
   const value = useMemo(

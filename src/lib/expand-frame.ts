@@ -56,3 +56,36 @@ export function shellStartInTrack(
     height: Math.max(rect.height, 1),
   };
 }
+
+export function markExpandGridHidden(hidden: boolean) {
+  if (hidden) {
+    document.body.setAttribute("data-project-expand-ready", "");
+  } else {
+    document.body.removeAttribute("data-project-expand-ready");
+  }
+}
+
+/** Masque la grille après que l’overlay ait été peint (évite une frame vide). */
+export function scheduleExpandGridHidden() {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      markExpandGridHidden(true);
+    });
+  });
+}
+
+export function cloneTileCoverImage(
+  media: HTMLElement,
+  objectPosition: string,
+): HTMLImageElement | null {
+  const img = media.querySelector("img");
+  if (!img) return null;
+
+  const clone = img.cloneNode(true) as HTMLImageElement;
+  clone.className = "expand-overlay__image u-img-cover";
+  clone.style.objectPosition = objectPosition;
+  clone.alt = "";
+  clone.setAttribute("role", "presentation");
+  clone.draggable = false;
+  return clone;
+}
