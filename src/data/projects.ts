@@ -23,7 +23,7 @@ const mangeznotez: Project = {
   },
 };
 
-export const projects: Project[] = [mangeznotez];
+export const projects: Project[] = [mangeznotez, mangeznotez, mangeznotez];
 
 export function getProjectBySlug(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);
