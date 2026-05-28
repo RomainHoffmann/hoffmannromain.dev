@@ -13,13 +13,6 @@
   --accent: #ff5321;
   --ring-focus: rgba(255, 83, 33, 0.45);
 
-  --text-expand: clamp(1.75rem, 5vw, 3rem);
-  --text-lead: clamp(1rem, 2vw, 1.125rem);
-  --text-body: 1rem;
-  --text-caption: 0.8125rem;
-  --text-nav: 0.75rem;
-  --text-meta: 0.75rem;
-
   --space-gutter: 1.25rem;
   --space-gutter-lg: 2rem;
   --space-md: 1rem;
@@ -29,13 +22,8 @@
   --space-3xl: 3.5rem;
   --space-4xl: 4.5rem;
   --space-5xl: 6rem;
-
-  --z-modal: 100;
-
-  --duration-ui: 200ms;
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-
 }
+
 
 html.app-html {
   --font-sans: var(--font-geist-sans), system-ui, sans-serif;

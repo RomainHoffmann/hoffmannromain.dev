@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
-import { ProjectExpandProvider } from "@/components/projects/ProjectExpandContext";
 import { SITE } from "@/constants/site";
 import "./globals.css";
 
@@ -48,9 +47,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang={SITE.locale} className={`app-html ${geistSans.variable}`}>
-      <body>
-        <ProjectExpandProvider>{children}</ProjectExpandProvider>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

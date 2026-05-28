@@ -10,7 +10,7 @@ export function ProjectGridSection({ projects }: ProjectGridSectionProps) {
     <section className="home" aria-label="Projects">
       <ul className="home__list">
         {projects.map((project, index) => (
-          <li key={project.slug} className="home__item">
+          <li key={`${project.slug}-${index}`} className="home__item">
             <ProjectCard project={project} priority={index === 0} />
           </li>
         ))}

@@ -1,14 +1,18 @@
 .home {
+  display: flex;
   min-height: 100dvh;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-gutter);
 }
 
 .home__list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  height: 100dvh;
 }
