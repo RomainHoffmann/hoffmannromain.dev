@@ -11,6 +11,7 @@ import {
 import { createPortal } from "react-dom";
 import { ExpandShellImage } from "@/components/projects/ExpandShellImage";
 import { ProjectExpandGallery } from "@/components/projects/ProjectExpandGallery";
+import { ProjectExpandMeta } from "@/components/projects/ProjectExpandMeta";
 import type { TileSnapshot } from "@/components/projects/ProjectExpandContext";
 import {
   clearExpandBodyState,
@@ -268,16 +269,18 @@ export function ProjectExpandOverlay({
                 data-visible={galleryVisible ? "true" : undefined}
                 aria-hidden={!galleryVisible}
               >
-                <p
-                  className="expand-overlay__title"
-                  style={{ color: tile.project.theme.textColor }}
-                >
-                  {tile.project.title}
-                </p>
-                <ProjectExpandGallery
-                  images={tile.project.galleryImages}
-                  projectTitle={tile.project.title}
-                />
+                <div className="expand-card">
+                  <header className="expand-card__header">
+                    <h2
+                      className="expand-card__title"
+                      style={{ color: tile.project.theme.textColor }}
+                    >
+                      {tile.project.title}
+                    </h2>
+                    <ProjectExpandMeta project={tile.project} />
+                  </header>
+                  <ProjectExpandGallery project={tile.project} />
+                </div>
               </div>
             </div>
           ))}

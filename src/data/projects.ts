@@ -9,13 +9,11 @@ const mangeznotez: Project = {
   id: "mangeznotez",
   slug: "mangeznotez",
   title: "mangeznotez",
-  description:
-    "Produit autour des expériences culinaires partagées. Interface sobre, focus sur la mise en scène des contenus et le rythme de lecture.",
   year: "2024",
   status: "shipped",
   type: "Website",
   role: "Full stack developer",
-  context: "Startup — produit autour des expériences culinaires partagées.",
+  context: "Agency",
   liveUrl: "https://example.com",
   coverImage:
     "https://images.freeimages.com/images/large-previews/d9d/festive-family-meal-0410-5702854.jpg?w=1500",

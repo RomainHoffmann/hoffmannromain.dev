@@ -1,16 +1,21 @@
-/* Galerie — flex dans le shell-ui (pas de position absolute pour le layout) */
+/* Visionneur + lien live sous la galerie */
+
+.expand-gallery-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  width: 100%;
+  min-height: 0;
+}
 
 .expand-gallery {
-  --gallery-width: min(85vw, 1400px);
   --gallery-thumb-w: clamp(5.5rem, 11vw, 9.5rem);
   --gallery-gap: 1.25rem;
 
   display: flex;
-  align-self: center;
   align-items: center;
   gap: var(--gallery-gap);
-  width: var(--gallery-width);
-  max-width: 100%;
+  width: 100%;
   min-height: 0;
 }
 
@@ -76,9 +81,41 @@
   max-width: none;
 }
 
+.expand-gallery__live {
+  align-self: flex-start;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--expand-fg, var(--fg));
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.expand-gallery__live:hover,
+.expand-gallery__live:focus-visible {
+  opacity: 0.75;
+}
+
 @media (max-width: 720px) {
+  .expand-card {
+    --expand-card-width: min(94vw, 100%);
+  }
+
+  .expand-card__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .expand-meta {
+    justify-content: flex-start;
+  }
+
+  .expand-meta__item dd {
+    text-align: left;
+  }
+
   .expand-gallery {
-    --gallery-width: min(94vw, 100%);
     flex-direction: column;
     gap: 1rem;
   }

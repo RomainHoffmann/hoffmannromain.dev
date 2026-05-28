@@ -2,22 +2,19 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
+import type { Project } from "@/types/project";
 
-/** Largeur thumb affichée (~9.5rem max) — intrinsic 2× pour écrans retina */
 const THUMB_DISPLAY_W = 152;
 const THUMB_DISPLAY_H = Math.round((THUMB_DISPLAY_W * 9) / 16);
 const THUMB_INTRINSIC_W = THUMB_DISPLAY_W * 2;
 const THUMB_INTRINSIC_H = THUMB_DISPLAY_H * 2;
 
 type ProjectExpandGalleryProps = {
-  images: readonly string[];
-  projectTitle: string;
+  project: Project;
 };
 
-export function ProjectExpandGallery({
-  images,
-  projectTitle,
-}: ProjectExpandGalleryProps) {
+export function ProjectExpandGallery({ project }: ProjectExpandGalleryProps) {
+  const { galleryImages: images, title: projectTitle } = project;
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   useEffect(() => {
@@ -33,7 +30,8 @@ export function ProjectExpandGallery({
   const activeSrc = images[selectedIndex] ?? images[0];
 
   return (
-    <div className="expand-gallery">
+    <div className="expand-gallery-block">
+      <div className="expand-gallery">
       <div className="expand-gallery__preview">
         <Image
           key={activeSrc}
@@ -78,6 +76,18 @@ export function ProjectExpandGallery({
           );
         })}
       </ul>
+      </div>
+
+      {project.liveUrl ? (
+        <a
+          href={project.liveUrl}
+          className="expand-gallery__live"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          View live
+        </a>
+      ) : null}
     </div>
   );
 }
