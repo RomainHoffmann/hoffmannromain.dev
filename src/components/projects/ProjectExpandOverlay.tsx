@@ -227,11 +227,11 @@ export function ProjectExpandOverlay({
   const { width: vw } = viewportSize();
   const canPrev = currentIndex > 0;
   const canNext = currentIndex < tiles.length - 1;
-  const currentProject = tiles[currentIndex]?.project;
-  const overlayThemeStyle = currentProject
+  const themeProject = tiles[currentIndex]?.project;
+  const overlayThemeStyle = themeProject
     ? ({
-        "--expand-bg": currentProject.theme.sceneBackground,
-        "--expand-fg": currentProject.theme.textColor,
+        "--expand-bg": themeProject.theme.sceneBackground,
+        "--expand-fg": themeProject.theme.textColor,
         "--expand-theme-transition": `${overlayMotion.themeTransitionMs}ms`,
       } as CSSProperties)
     : ({
@@ -263,6 +263,14 @@ export function ProjectExpandOverlay({
               style={shellInitialStyle(tile.rect, activeIndex)}
             >
               <ExpandShellImage objectPosition={tile.objectPosition} />
+              <p
+                className="expand-overlay__title"
+                data-visible={galleryVisible ? "true" : undefined}
+                aria-hidden={!galleryVisible}
+                style={{ color: tile.project.theme.textColor }}
+              >
+                {tile.project.title}
+              </p>
               <ProjectExpandGallery
                 images={tile.project.galleryImages}
                 projectTitle={tile.project.title}
@@ -272,10 +280,6 @@ export function ProjectExpandOverlay({
           ))}
         </div>
       </div>
-
-      {currentProject ? (
-        <p className="expand-overlay__title">{currentProject.title}</p>
-      ) : null}
 
       <button
         type="button"

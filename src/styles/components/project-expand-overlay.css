@@ -66,21 +66,31 @@ body[data-project-expand-ready]:not([data-project-expand-exiting])
 }
 
 .expand-overlay__title {
-  position: fixed;
-  z-index: calc(var(--z-modal) + 1);
+  position: absolute;
+  z-index: 3;
   top: calc(env(safe-area-inset-top) + 1rem);
   left: 50%;
-  transform: translateX(-50%);
+  width: max-content;
+  max-width: min(90vw, 56rem);
   margin: 0;
   padding: 0;
   font-family: var(--font-sans);
-  font-size: 3rem;
+  font-size: clamp(1.5rem, 4vw, 3rem);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--expand-fg, var(--fg));
+  text-align: center;
   text-shadow: 0 1px 10px rgba(0, 0, 0, 0.7);
+  transform: translateX(-50%);
+  opacity: 0;
   pointer-events: none;
-  transition: color 260ms ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: opacity 280ms ease;
+}
+
+.expand-overlay__title[data-visible="true"] {
+  opacity: 1;
 }
 
 .expand-overlay__nav {
