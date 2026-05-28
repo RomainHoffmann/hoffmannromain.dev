@@ -12,7 +12,3 @@
   gap: 20px;
   height: 100dvh;
 }
-
-.home__item + .home__item {
-  border-top: 1px solid var(--border);
-}
