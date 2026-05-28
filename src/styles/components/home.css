@@ -1,0 +1,13 @@
+.home {
+  min-height: 100dvh;
+}
+
+.home__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.home__item + .home__item {
+  border-top: 1px solid var(--border);
+}

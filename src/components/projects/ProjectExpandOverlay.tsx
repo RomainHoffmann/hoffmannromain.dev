@@ -10,8 +10,7 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import { gsap } from "@/lib/gsap";
-import { useLenisRef } from "@/components/providers/SmoothScrollProvider";
-import { overlayMotion } from "@/lib/motion/config";
+import { overlayMotion } from "@/lib/overlay-motion";
 import type { Project, ProjectStatus } from "@/types/project";
 
 type ProjectExpandOverlayProps = {
@@ -35,7 +34,6 @@ export function ProjectExpandOverlay({
   originRect,
   onDismiss,
 }: ProjectExpandOverlayProps) {
-  const lenisRef = useLenisRef();
   const stageRef = useRef<HTMLDivElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -50,14 +48,6 @@ export function ProjectExpandOverlay({
     dismissedRef.current = true;
     onDismiss();
   }, [onDismiss]);
-
-  useEffect(() => {
-    const lenis = lenisRef?.current;
-    lenis?.stop?.();
-    return () => {
-      lenis?.start?.();
-    };
-  }, [lenisRef]);
 
   useLayoutEffect(() => {
     const stage = stageRef.current;
@@ -312,24 +302,17 @@ export function ProjectExpandOverlay({
         className="expand-overlay__stage"
         style={stageStyle}
       >
-        <div className="expand-overlay__atmos">
-          <div className="expand-overlay__hero-img-wrap">
-            <Image
-              src={project.coverImage}
-              alt=""
-              fill
-              priority
-              fetchPriority="high"
-              decoding="async"
-              className="u-img-cover"
-              sizes="100vw"
-            />
-          </div>
-          <div className="expand-overlay__grad-v" aria-hidden />
-          <div className="expand-overlay__grad-h" aria-hidden />
-          <div className="expand-overlay__grad-radial" aria-hidden />
-          <div className="ds-edge-dim" aria-hidden />
-          <div className="ds-noise ds-noise--animated" aria-hidden />
+        <div className="expand-overlay__hero" aria-hidden>
+          <Image
+            src={project.coverImage}
+            alt=""
+            fill
+            priority
+            fetchPriority="high"
+            decoding="async"
+            className="u-img-cover"
+            sizes="100vw"
+          />
         </div>
 
         <div className="expand-overlay__chrome">

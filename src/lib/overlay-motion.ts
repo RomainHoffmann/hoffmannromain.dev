@@ -1,0 +1,23 @@
+/** Project expand overlay — FLIP + content timings (seconds). */
+export const overlayMotion = {
+  flipIn: 0.84,
+  backdropIn: 0.44,
+  titleIn: 0.36,
+  leadIn: 0.34,
+  detailsIn: 0.32,
+  galleryItemIn: 0.28,
+  galleryStaggerIn: 0.058,
+  easeFlip: "power4.inOut" as const,
+  easeContent: "power3.out" as const,
+  contentEnterAt: 0.36,
+  galleryWaveDelay: 0.22,
+  exitGalleryDur: 0.2,
+  exitGalleryStagger: 0.036,
+  exitContentDur: 0.24,
+  exitContentAt: 0.03,
+  exitBackdropDur: 0.32,
+  exitBackdropAt: 0.07,
+  exitFlipDur: 0.54,
+  exitFlipAt: 0.05,
+  easeExit: "power3.in" as const,
+} as const;

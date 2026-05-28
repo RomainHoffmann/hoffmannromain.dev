@@ -1,131 +1,42 @@
-/* Design tokens — surfaces, type scale, spacing, motion, z-index */
-
 :root {
   color-scheme: dark;
 
   --bg: #050505;
-  --bg-elevated: #080808;
+  --bg-elevated: #0a0a0a;
   --bg-deep: #030303;
   --fg: #ebe8e4;
-  --fg-subtle: #d4d0c8;
-  --muted: #6e6e6e;
-  --muted-strong: #9c9893;
+  --muted: #8a8680;
+  --muted-strong: #b8b4ae;
   --surface: #0a0a0a;
-  --border: rgba(255, 255, 255, 0.065);
-  --border-strong: rgba(255, 255, 255, 0.12);
-
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.14);
   --accent: #ff5321;
-  --accent-hover: #ff6a3d;
-  --accent-muted: rgba(255, 83, 33, 0.42);
-  --accent-soft: color-mix(in srgb, var(--accent) 78%, var(--fg) 22%);
-  --accent-subtle: rgba(255, 83, 33, 0.09);
-  --accent-glow: rgba(255, 83, 33, 0.055);
-  --accent-line: rgba(255, 83, 33, 0.88);
-  --ring-focus: rgba(255, 83, 33, 0.42);
+  --ring-focus: rgba(255, 83, 33, 0.45);
 
-  --text-hero: clamp(2.85rem, 9.2vw, 7.35rem);
-  --text-section: clamp(2rem, 4.6vw, 3.45rem);
-  --text-project: clamp(1.6875rem, 3.65vw, 2.5rem);
-  --text-expand: clamp(2.125rem, 6.9vw, 4.35rem);
-  --text-lead: clamp(1.02rem, 2.15vw, 1.14rem);
-  --text-body: 1.0625rem;
-  --text-body-lg: 1.125rem;
+  --text-expand: clamp(1.75rem, 5vw, 3rem);
+  --text-lead: clamp(1rem, 2vw, 1.125rem);
+  --text-body: 1rem;
   --text-caption: 0.8125rem;
   --text-nav: 0.75rem;
   --text-meta: 0.75rem;
-  --text-label: 0.75rem;
 
-  --leading-hero: 0.93;
-  --leading-section: 1.14;
-  --leading-project: 1.07;
-  --leading-expand: 0.98;
-  --leading-body: 1.68;
-  --leading-caption: 1.55;
-
-  --tracking-display: -0.042em;
-  --tracking-tight: -0.028em;
-  --tracking-body: 0.006em;
-  --tracking-nav: 0.2em;
-  --tracking-meta: 0.22em;
-  --tracking-label: 0.32em;
-  --tracking-label-wide: 0.38em;
-
-  --text-display: var(--text-hero);
-  --text-h2: var(--text-section);
-  --leading-display: var(--leading-hero);
-  --leading-snug: var(--leading-section);
-
-  --space-3xs: 0.25rem;
-  --space-2xs: 0.5rem;
-  --space-xs: 0.75rem;
-  --space-sm: 1rem;
-  --space-md: 1.5rem;
-  --space-lg: 2rem;
-  --space-xl: 2.5rem;
-  --space-2xl: 3.5rem;
-  --space-3xl: 5rem;
-  --space-4xl: 6rem;
-  --space-5xl: 8rem;
   --space-gutter: 1.25rem;
-  --space-gutter-lg: 2.5rem;
-  --space-section-y: 6rem;
-  --space-section-y-lg: 8rem;
-  --space-header-pad-y: 0.65rem;
-  --space-header-pad-x: 1.25rem;
-  --space-header-pad-x-lg: 1.75rem;
+  --space-gutter-lg: 2rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 2.5rem;
+  --space-3xl: 3.5rem;
+  --space-4xl: 4.5rem;
+  --space-5xl: 6rem;
 
-  --z-below: -1;
-  --z-content: 1;
-  --z-raised: 2;
-  --z-header: 50;
-  --z-overlay: 100;
-  --z-modal: 200;
+  --z-modal: 100;
 
-  --duration-instant: 0ms;
-  --duration-fast: 160ms;
-  --duration-ui: 340ms;
-  --duration-normal: 340ms;
-  --duration-moderate: 440ms;
-  --duration-layer: 540ms;
-  --duration-emphasis: 620ms;
-  --duration-slow: 620ms;
-  --duration-slower: 800ms;
-  --duration-chrome: 420ms;
-  --duration-shell: 380ms;
+  --duration-ui: 200ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 
-  --ease-default: cubic-bezier(0.33, 1, 0.68, 1);
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out-soft: cubic-bezier(0.45, 0, 0.15, 1);
-  --ease-linear-soft: cubic-bezier(0.25, 0.1, 0.25, 1);
-
-  --opacity-muted: 0.55;
-  --opacity-dim: 0.72;
-  --opacity-strong: 0.88;
-  --opacity-subtle: 0.35;
-
-  --transition-color: color var(--duration-ui) var(--ease-out-expo);
-  --transition-opacity: opacity var(--duration-layer) var(--ease-out-expo);
-  --transition-transform: transform var(--duration-emphasis) var(--ease-out-expo);
-  --transition-border: border-color var(--duration-ui) var(--ease-out-expo);
-  --transition-bg: background-color var(--duration-ui) var(--ease-out-expo);
-  --transition-shadow: box-shadow var(--duration-moderate) var(--ease-out-expo);
 }
 
-@media (max-width: 767px) {
-  :root {
-    --space-gutter: 1rem;
-    --space-section-y: 4.25rem;
-    --space-section-y-lg: 5.25rem;
-    --space-2xl: 2.75rem;
-    --space-3xl: 3.75rem;
-    --space-4xl: 4.25rem;
-    --space-5xl: 5.5rem;
-  }
-}
-
-/* Next.js font variables are set on <html> — map to semantic stacks */
 html.app-html {
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-instrument), ui-serif, Georgia, "Times New Roman",
-    serif;
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
 }

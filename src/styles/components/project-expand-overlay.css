@@ -25,54 +25,22 @@
   will-change: transform;
 }
 
-.expand-overlay__atmos {
+.expand-overlay__hero {
   pointer-events: none;
   position: absolute;
   inset: 0;
   z-index: 0;
+  opacity: 0.32;
 }
 
-.expand-overlay__atmos .ds-edge-dim,
-.expand-overlay__atmos .ds-noise {
-  position: absolute;
-  inset: 0;
-}
-
-.expand-overlay__hero-img-wrap {
-  position: absolute;
-  inset: 0;
-  opacity: 0.42;
-}
-
-.expand-overlay__grad-v {
+.expand-overlay__hero::after {
+  content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to bottom,
-    color-mix(in srgb, var(--bg-deep) 95%, transparent) 0%,
-    rgba(0, 0, 0, 0.55) 50%,
-    var(--bg-deep) 100%
-  );
-}
-
-.expand-overlay__grad-h {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0.75) 0%,
-    rgba(0, 0, 0, 0.25) 50%,
-    rgba(0, 0, 0, 0.65) 100%
-  );
-}
-
-.expand-overlay__grad-radial {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    ellipse 78% 68% at 50% 54%,
-    transparent 26%,
-    rgba(0, 0, 0, 0.55) 100%
+    rgba(3, 3, 3, 0.2) 0%,
+    var(--bg-deep) 88%
   );
 }
 
@@ -379,5 +347,63 @@
 @media (min-width: 1024px) {
   .expand-overlay__description {
     max-width: 42rem;
+  }
+}
+
+.type-expand-title {
+  font-size: var(--text-expand);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.type-lead {
+  font-size: var(--text-lead);
+  line-height: 1.6;
+}
+
+.type-body {
+  font-size: var(--text-body);
+  line-height: 1.65;
+}
+
+.type-caption {
+  font-size: var(--text-caption);
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.type-meta {
+  font-size: var(--text-meta);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.type-nav {
+  font-size: var(--text-nav);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.expand-thumb-strip {
+  touch-action: pan-x;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--space-gutter);
+}
+
+.expand-thumb-strip > * {
+  scroll-snap-align: start;
+}
+
+@media (min-width: 1024px) {
+  .expand-thumb-strip {
+    touch-action: auto;
+    scroll-snap-type: none;
+    scroll-padding-inline: 0;
+  }
+
+  .expand-thumb-strip > * {
+    scroll-snap-align: none;
   }
 }
