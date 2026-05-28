@@ -4,7 +4,6 @@ import Image from "next/image";
 import { memo, type MouseEvent } from "react";
 import type { Project } from "@/types/project";
 
-/** Intrinsic 3× display (50×400) — cover sur la hauteur ≈ 400px réels. */
 const TILE_W = 150;
 const TILE_H = 1200;
 
@@ -39,9 +38,9 @@ function ProjectCardInner({
           width={TILE_W}
           height={TILE_H}
           priority={priority}
-          quality={90}
+          quality={100}
           decoding="async"
-          sizes="400px"
+          sizes="100vw"
           className="project-card__image u-img-cover"
         />
       </div>
