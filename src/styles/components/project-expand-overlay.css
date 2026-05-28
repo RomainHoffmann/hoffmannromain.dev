@@ -3,12 +3,16 @@
   inset: 0;
   z-index: var(--z-modal);
   background-color: transparent;
+  color: var(--expand-fg, var(--fg));
+  transition:
+    background-color 320ms ease,
+    color 260ms ease;
   user-select: none;
   -webkit-user-select: none;
 }
 
 body[data-project-expand-ready] .expand-overlay {
-  background-color: var(--bg-deep);
+  background-color: var(--expand-bg, var(--bg-deep));
 }
 
 .expand-overlay__viewport {
@@ -49,7 +53,26 @@ body[data-project-expand-ready] .expand-overlay {
   height: 100%;
   object-fit: cover;
   object-position: var(--expand-object-position, 50% 50%);
+  opacity: 0.72;
+  transition: opacity 320ms ease;
   max-width: none;
+  pointer-events: none;
+}
+
+.expand-overlay__title {
+  position: fixed;
+  z-index: calc(var(--z-modal) + 1);
+  top: calc(env(safe-area-inset-top) + 1rem);
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  font-size: 3rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--expand-fg, var(--fg));
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.7);
   pointer-events: none;
 }
 
@@ -65,7 +88,7 @@ body[data-project-expand-ready] .expand-overlay {
   font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--fg);
+  color: var(--expand-fg, var(--fg));
   cursor: pointer;
   backdrop-filter: blur(6px);
   -webkit-tap-highlight-color: transparent;
@@ -101,7 +124,7 @@ body[data-project-expand-ready] .expand-overlay {
   font-size: 0.75rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--fg);
+  color: var(--expand-fg, var(--fg));
   cursor: pointer;
   text-shadow: 0 1px 10px rgba(0, 0, 0, 0.7);
   -webkit-tap-highlight-color: transparent;

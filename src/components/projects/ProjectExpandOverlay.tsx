@@ -146,7 +146,6 @@ export function ProjectExpandOverlay({
   const runExit = useCallback(() => {
     if (exitingRef.current || dismissedRef.current) return;
     exitingRef.current = true;
-    markExpandGridHidden(false);
 
     const root = rootRef.current;
     const track = trackRef.current;
@@ -207,9 +206,16 @@ export function ProjectExpandOverlay({
   const { width: vw } = viewportSize();
   const canPrev = currentIndex > 0;
   const canNext = currentIndex < tiles.length - 1;
+  const currentProject = tiles[currentIndex]?.project;
+  const overlayThemeStyle = currentProject
+    ? ({
+        "--expand-bg": currentProject.theme.sceneBackground,
+        "--expand-fg": currentProject.theme.textColor,
+      } as CSSProperties)
+    : undefined;
 
   return createPortal(
-    <div ref={rootRef} className="expand-overlay">
+    <div ref={rootRef} className="expand-overlay" style={overlayThemeStyle}>
       <div
         className="expand-overlay__viewport"
         role="dialog"
@@ -237,6 +243,10 @@ export function ProjectExpandOverlay({
           ))}
         </div>
       </div>
+
+      {currentProject ? (
+        <p className="expand-overlay__title">{currentProject.title}</p>
+      ) : null}
 
       <button
         type="button"

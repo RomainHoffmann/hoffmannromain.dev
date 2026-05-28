@@ -19,11 +19,15 @@ const mangeznotez: Project = {
   galleryImages: [],
   theme: {
     textColor: "#ff5321",
-    sceneBackground: "#111111",
+    sceneBackground: "#fff",
   },
 };
 
-export const projects: Project[] = [mangeznotez, mangeznotez, mangeznotez];
+export const projects: Project[] = [
+  mangeznotez,
+  { ...mangeznotez, title: "mangeznotez 2" },
+  mangeznotez,
+];
 
 export function getProjectBySlug(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);
