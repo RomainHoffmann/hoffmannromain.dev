@@ -17,8 +17,6 @@ export type TileSnapshot = {
   project: Project;
   rect: RectSnapshot;
   objectPosition: string;
-  /** Copie du <img> déjà décodé dans la tuile — affichage instantané à l’ouverture. */
-  imageClone: HTMLImageElement | null;
 };
 
 export type ExpandPayload = {
@@ -43,6 +41,7 @@ export function ProjectExpandProvider({ children }: { children: ReactNode }) {
 
   const expand = useCallback((activeIndex: number, tiles: TileSnapshot[]) => {
     if (!tiles.length) return;
+    markExpandGridHidden(false);
     setPayload({
       id: crypto.randomUUID(),
       activeIndex,

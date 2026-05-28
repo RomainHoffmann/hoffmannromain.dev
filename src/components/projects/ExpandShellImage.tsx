@@ -1,52 +1,16 @@
 "use client";
 
-import { useCallback, type CSSProperties } from "react";
+import type { CSSProperties } from "react";
 
 type ExpandShellImageProps = {
-  clone: HTMLImageElement | null;
-  fallbackSrc: string;
   objectPosition: string;
 };
 
-export function ExpandShellImage({
-  clone,
-  fallbackSrc,
-  objectPosition,
-}: ExpandShellImageProps) {
+/** Hôte vide : l’image est clonée depuis la grille dans le layout effect parent. */
+export function ExpandShellImage({ objectPosition }: ExpandShellImageProps) {
   const mediaStyle = {
     "--expand-object-position": objectPosition,
   } as CSSProperties;
 
-  const mountClone = useCallback(
-    (host: HTMLDivElement | null) => {
-      if (!host || !clone) return;
-      if (clone.parentElement !== host) {
-        host.replaceChildren(clone);
-      }
-    },
-    [clone],
-  );
-
-  if (clone) {
-    return (
-      <div
-        ref={mountClone}
-        className="expand-overlay__media"
-        style={mediaStyle}
-      />
-    );
-  }
-
-  return (
-    <div className="expand-overlay__media" style={mediaStyle}>
-      <img
-        src={fallbackSrc}
-        alt=""
-        role="presentation"
-        draggable={false}
-        className="expand-overlay__image u-img-cover"
-        style={{ objectPosition }}
-      />
-    </div>
-  );
+  return <div data-shell-media className="expand-overlay__media" style={mediaStyle} />;
 }

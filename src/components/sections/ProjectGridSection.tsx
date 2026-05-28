@@ -4,7 +4,6 @@ import { useRef, type MouseEvent } from "react";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import { useProjectExpand } from "@/components/projects/ProjectExpandContext";
 import type { TileSnapshot } from "@/components/projects/ProjectExpandContext";
-import { cloneTileCoverImage } from "@/lib/expand-frame";
 import type { Project } from "@/types/project";
 
 type ProjectGridSectionProps = {
@@ -38,7 +37,6 @@ function collectTiles(
         height: rect.height,
       },
       objectPosition,
-      imageClone: cloneTileCoverImage(media, objectPosition),
     };
   });
 }

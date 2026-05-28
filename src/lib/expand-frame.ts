@@ -65,12 +65,25 @@ export function markExpandGridHidden(hidden: boolean) {
   }
 }
 
-/** Masque la grille après que l’overlay ait été peint (évite une frame vide). */
-export function scheduleExpandGridHidden() {
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      markExpandGridHidden(true);
-    });
+export function mountShellImagesFromGrid(
+  track: HTMLElement,
+  tiles: ReadonlyArray<{ objectPosition: string }>,
+): void {
+  const shells = track.querySelectorAll<HTMLElement>("[data-expand-shell]");
+  const gridMedias = document.querySelectorAll<HTMLElement>(
+    "[data-project-tile]",
+  );
+
+  shells.forEach((shell, index) => {
+    const host = shell.querySelector<HTMLElement>("[data-shell-media]");
+    const gridMedia = gridMedias[index];
+    const objectPosition = tiles[index]?.objectPosition ?? "50% 50%";
+    if (!host || !gridMedia) return;
+
+    const clone = cloneTileCoverImage(gridMedia, objectPosition);
+    if (clone) {
+      host.replaceChildren(clone);
+    }
   });
 }
 

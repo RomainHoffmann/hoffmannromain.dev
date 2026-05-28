@@ -14,7 +14,7 @@ import type { TileSnapshot } from "@/components/projects/ProjectExpandContext";
 import {
   expandedSlideLayout,
   markExpandGridHidden,
-  scheduleExpandGridHidden,
+  mountShellImagesFromGrid,
   shellStartInTrack,
   trackTranslateX,
   viewportSize,
@@ -67,6 +67,8 @@ export function ProjectExpandOverlay({
     const shells = track.querySelectorAll<HTMLElement>("[data-expand-shell]");
     if (!shells.length) return;
 
+    mountShellImagesFromGrid(track, tiles);
+
     const ctx = gsap.context(() => {
       const reduceMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
@@ -89,7 +91,7 @@ export function ProjectExpandOverlay({
         });
       });
 
-      scheduleExpandGridHidden();
+      markExpandGridHidden(true);
 
       shells.forEach((shell, index) => {
         const tile = tiles[index];
@@ -227,11 +229,7 @@ export function ProjectExpandOverlay({
               className="expand-overlay__shell"
               style={shellInitialStyle(tile.rect, activeIndex)}
             >
-              <ExpandShellImage
-                clone={tile.imageClone}
-                fallbackSrc={tile.project.coverImage}
-                objectPosition={tile.objectPosition}
-              />
+              <ExpandShellImage objectPosition={tile.objectPosition} />
             </div>
           ))}
         </div>
