@@ -1,14 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { Geist } from "next/font/google";
 import { ProjectExpandProvider } from "@/components/projects/ProjectExpandContext";
 import { SITE } from "@/constants/site";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -25,7 +18,7 @@ export const metadata: Metadata = {
     url: SITE.url,
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: SITE.title,
     description: SITE.description,
   },
@@ -47,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang={SITE.locale} className={`app-html ${geistSans.variable}`}>
+    <html lang={SITE.locale} className="app-html">
       <body>
         <ProjectExpandProvider>{children}</ProjectExpandProvider>
       </body>
