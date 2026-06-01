@@ -11,6 +11,7 @@ import {
 import { createPortal } from "react-dom";
 import { ExpandShellImage } from "@/components/projects/ExpandShellImage";
 import { ProjectExpandGallery } from "@/components/projects/ProjectExpandGallery";
+import { ExpandOverlayControls } from "@/components/projects/ExpandOverlayControls";
 import { ProjectExpandMeta } from "@/components/projects/ProjectExpandMeta";
 import type { TileSnapshot } from "@/components/projects/ProjectExpandContext";
 import {
@@ -287,34 +288,14 @@ export function ProjectExpandOverlay({
         </div>
       </div>
 
-      <button
-        type="button"
-        className="expand-overlay__nav expand-overlay__nav--prev"
-        onClick={goPrev}
-        disabled={!canPrev}
-        aria-label="Previous project"
-      >
-        Prev
-      </button>
-
-      <button
-        type="button"
-        className="expand-overlay__nav expand-overlay__nav--next"
-        onClick={goNext}
-        disabled={!canNext}
-        aria-label="Next project"
-      >
-        Next
-      </button>
-
-      <button
-        type="button"
-        onClick={runExit}
-        className="expand-overlay__close"
-        aria-label="Close"
-      >
-        Close — Esc
-      </button>
+      <ExpandOverlayControls
+        visible={galleryVisible}
+        canPrev={canPrev}
+        canNext={canNext}
+        onPrev={goPrev}
+        onNext={goNext}
+        onClose={runExit}
+      />
     </div>,
     document.body,
   );
