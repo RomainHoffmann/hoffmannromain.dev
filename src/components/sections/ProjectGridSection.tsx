@@ -1,4 +1,5 @@
 import { ProjectCard } from "@/components/projects/ProjectCard";
+import { ProjectExpandedOverlay } from "@/components/sections/ProjectExpandedOverlay";
 import type { Project } from "@/types/project";
 
 type ProjectGridSectionProps = {
@@ -15,6 +16,7 @@ export function ProjectGridSection({ projects }: ProjectGridSectionProps) {
           </li>
         ))}
       </ul>
+      <ProjectExpandedOverlay />
     </section>
   );
 }

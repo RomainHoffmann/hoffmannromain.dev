@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useProjectSelection } from "@/components/projects/ProjectSelectionProvider";
 import type { Project } from "@/types/project";
 
 type ProjectCardProps = {
@@ -6,8 +9,17 @@ type ProjectCardProps = {
 };
 
 export function ProjectCard({ project }: ProjectCardProps) {
+  const { select, isSelected } = useProjectSelection();
+  const selected = isSelected(project);
+
   return (
-    <article className="project-card" aria-label={project.title}>
+    <button
+      type="button"
+      className="project-card"
+      onClick={() => select(project)}
+      aria-label={project.title}
+      aria-pressed={selected}
+    >
       <div className="project-card__media">
         <Image
           src={project.coverImage}
@@ -20,6 +32,6 @@ export function ProjectCard({ project }: ProjectCardProps) {
           className="project-card__image u-img-cover"
         />
       </div>
-    </article>
+    </button>
   );
 }
