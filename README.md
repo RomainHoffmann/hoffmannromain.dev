@@ -7,7 +7,7 @@ Personal portfolio of Romain Hoffmann — Full-stack developer.
 - React + TypeScript
 - Vite
 - React Router
-- Tailwind CSS
+- CSS (vanilla)
 - GSAP
 - Lucide React
 

@@ -22,21 +22,21 @@ export function Footer({ showSocial = false }: FooterProps) {
 
   return (
     <>
-      <footer className="pointer-events-none fixed inset-x-0 bottom-0 z-30 hidden border-t border-line/90 bg-bg/80 backdrop-blur-sm lg:block">
-        <div className="page-shell content-pad-right flex h-14 items-center justify-between text-[0.8rem] text-muted">
-          <div className="pointer-events-auto flex items-center gap-3">
-            <span className="inline-flex items-center gap-1.5">
-              <MapPin className="size-3.5" aria-hidden />
+      <footer className="site-footer">
+        <div className="page-shell content-pad-right site-footer__inner">
+          <div className="site-footer__meta">
+            <span className="site-footer__item">
+              <MapPin className="icon icon--sm" aria-hidden />
               {site.location}
             </span>
-            <span className="h-3 w-px bg-line" aria-hidden />
-            <span className="inline-flex items-center gap-1.5">
-              <span className="size-1.5 rounded-full bg-available" aria-hidden />
+            <span className="site-footer__divider" aria-hidden />
+            <span className="site-footer__item">
+              <span className="site-footer__dot" aria-hidden />
               {site.availability}
             </span>
           </div>
 
-          <div className="pointer-events-auto flex items-center gap-3">
+          <div className="site-footer__actions">
             {showSocial ? (
               <>
                 <a
@@ -44,18 +44,18 @@ export function Footer({ showSocial = false }: FooterProps) {
                   target="_blank"
                   rel="noreferrer"
                   aria-label="GitHub"
-                  className="text-muted transition-colors hover:text-ink"
+                  className="site-footer__social"
                 >
-                  <GitHubIcon className="size-4" />
+                  <GitHubIcon className="icon" />
                 </a>
                 <a
                   href={site.social.linkedin}
                   target="_blank"
                   rel="noreferrer"
                   aria-label="LinkedIn"
-                  className="text-muted transition-colors hover:text-ink"
+                  className="site-footer__social"
                 >
-                  <LinkedInIcon className="size-4" />
+                  <LinkedInIcon className="icon" />
                 </a>
               </>
             ) : (
@@ -63,23 +63,23 @@ export function Footer({ showSocial = false }: FooterProps) {
                 type="button"
                 onClick={goTop}
                 aria-label="Back to top"
-                className="inline-grid size-8 place-items-center rounded-full border border-line text-muted transition-colors hover:border-subtle hover:text-ink"
+                className="site-footer__top"
               >
-                <ArrowUp className="size-3.5" />
+                <ArrowUp className="icon icon--sm" />
               </button>
             )}
           </div>
         </div>
       </footer>
 
-      <div className="pointer-events-none fixed inset-x-0 bottom-[4.25rem] z-30 border-t border-line/70 bg-bg/85 px-4 py-2 text-[0.7rem] text-muted backdrop-blur-sm lg:hidden">
-        <div className="mx-auto flex max-w-lg items-center justify-between gap-2">
-          <span className="inline-flex items-center gap-1.5 truncate">
-            <MapPin className="size-3 shrink-0" aria-hidden />
+      <div className="mobile-status">
+        <div className="mobile-status__inner">
+          <span className="mobile-status__item">
+            <MapPin className="icon icon--sm" aria-hidden />
             {site.location}
           </span>
-          <span className="inline-flex items-center gap-1.5 truncate">
-            <span className="size-1.5 rounded-full bg-available" aria-hidden />
+          <span className="mobile-status__item">
+            <span className="site-footer__dot" aria-hidden />
             {site.availability}
           </span>
         </div>

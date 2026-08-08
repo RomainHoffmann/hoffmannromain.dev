@@ -63,50 +63,39 @@ export function Contact() {
     <section
       id="contact"
       ref={sectionRef}
-      className="relative flex min-h-dvh items-center py-24 lg:py-20"
+      className="contact"
       aria-labelledby="contact-title"
     >
-      <div className="page-shell content-pad-right grid w-full items-center gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(280px,0.9fr)] lg:gap-10">
+      <div className="page-shell content-pad-right contact__grid">
         <div>
           <h2 id="contact-title" className="section-title" data-reveal>
-            <span className="block">{site.contact.titleLines[0]}</span>
-            <span className="block">
-              {site.contact.titleLines[1]}
-              <span className="accent-dot" aria-hidden />
+            <span className="stack-title">
+              <span>{site.contact.titleLines[0]}</span>
+              <span>
+                {site.contact.titleLines[1]}
+                <span className="accent-dot" aria-hidden />
+              </span>
             </span>
           </h2>
-          <p
-            className="mt-5 max-w-md text-[1rem] leading-relaxed text-ink/80"
-            data-reveal
-          >
+          <p className="contact__subtitle" data-reveal>
             {site.contact.subtitle}
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-3" data-reveal>
-            <a
-              href={`mailto:${site.email}`}
-              className="inline-flex items-center gap-2 rounded-xl bg-accent px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-            >
-              <Mail className="size-4" aria-hidden />
+          <div className="contact__actions" data-reveal>
+            <a href={`mailto:${site.email}`} className="btn btn--primary">
+              <Mail className="icon" aria-hidden />
               Send email
             </a>
-            <a
-              href={site.resumePath}
-              download
-              className="inline-flex items-center gap-2 rounded-xl border border-line bg-surface px-5 py-3 text-sm font-semibold text-ink transition-colors hover:border-subtle"
-            >
+            <a href={site.resumePath} download className="btn btn--secondary">
               View resume
-              <Download className="size-4" aria-hidden />
+              <Download className="icon" aria-hidden />
             </a>
           </div>
         </div>
 
-        <div
-          className="overflow-hidden rounded-[1.35rem] border border-line bg-surface shadow-[var(--shadow-card)]"
-          data-reveal
-        >
+        <div className="contact__card" data-reveal>
           <ul>
-            {contactRows.map((row, index) => {
+            {contactRows.map((row) => {
               const Icon = row.icon;
               return (
                 <li key={row.label}>
@@ -116,22 +105,16 @@ export function Contact() {
                     rel={
                       row.href.startsWith("http") ? "noreferrer" : undefined
                     }
-                    className={`group flex items-center gap-4 px-5 py-5 transition-colors hover:bg-neutral-50 sm:px-6 ${
-                      index > 0 ? "border-t border-line" : ""
-                    }`}
+                    className="contact__row"
                   >
-                    <span className="inline-grid size-10 place-items-center rounded-full bg-accent/10 text-accent">
-                      <Icon className="size-4" aria-hidden />
+                    <span className="contact__row-icon">
+                      <Icon className="icon" aria-hidden />
                     </span>
-                    <span className="min-w-0 flex-1">
-                      <span className="block text-xs font-medium text-subtle">
-                        {row.label}
-                      </span>
-                      <span className="mt-0.5 block truncate text-sm font-medium text-ink">
-                        {row.value}
-                      </span>
+                    <span className="contact__row-text">
+                      <span className="contact__row-label">{row.label}</span>
+                      <span className="contact__row-value">{row.value}</span>
                     </span>
-                    <ArrowRight className="size-4 text-accent transition-transform duration-300 group-hover:translate-x-0.5" />
+                    <ArrowRight className="icon contact__row-arrow" />
                   </a>
                 </li>
               );

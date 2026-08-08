@@ -18,14 +18,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
     <Link
       to={`/projects/${project.slug}`}
       viewTransition
-      className="group grid overflow-hidden rounded-[var(--radius-card)] border border-line bg-surface shadow-[var(--shadow-card)] transition-[border-color,box-shadow,transform] duration-300 hover:border-black/10 hover:shadow-[0_18px_50px_-24px_rgba(15,23,42,0.18)] focus-visible:border-accent md:grid-cols-[1.05fr_0.95fr]"
+      className="project-card"
       aria-label={`Open case study: ${project.title}`}
     >
-      <div className="flex flex-col justify-between gap-8 p-6 sm:p-8 lg:p-10">
+      <div className="project-card__body">
         <div>
-          <p className="text-sm font-semibold text-accent">{number}</p>
+          <p className="project-card__number">{number}</p>
           <h3
-            className="mt-3 text-[clamp(1.6rem,3vw,2.15rem)] font-extrabold uppercase tracking-[-0.03em] text-ink"
+            className="project-card__title"
             style={
               {
                 viewTransitionName: `project-title-${project.slug}`,
@@ -34,31 +34,26 @@ export function ProjectCard({ project }: ProjectCardProps) {
           >
             {project.title}
           </h3>
-          <p className="mt-3 max-w-sm text-[0.95rem] leading-relaxed text-muted">
-            {project.shortDescription}
-          </p>
-          <ul className="mt-5 flex flex-wrap gap-2">
+          <p className="project-card__desc">{project.shortDescription}</p>
+          <ul className="project-card__stack">
             {project.stack.map((tech) => (
-              <li
-                key={tech}
-                className="rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-600"
-              >
+              <li key={tech} className="project-card__tag">
                 {tech}
               </li>
             ))}
           </ul>
         </div>
 
-        <span className="inline-flex items-center gap-1.5 text-sm font-medium text-accent">
+        <span className="project-card__cta">
           Open case study
-          <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
+          <ArrowRight className="icon" />
         </span>
       </div>
 
-      <div className="relative min-h-[220px] bg-neutral-50 md:min-h-[280px]">
+      <div className="project-card__media">
         <ProjectVisual
           project={project}
-          className="absolute inset-0 p-6 transition-transform duration-500 group-hover:scale-[1.02] sm:p-8"
+          className="project-card__visual"
           transitionName={`project-image-${project.slug}`}
         />
       </div>

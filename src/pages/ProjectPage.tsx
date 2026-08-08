@@ -49,27 +49,23 @@ export function ProjectPage() {
   return (
     <main
       ref={pageRef}
-      className="min-h-dvh pb-32 pt-24 lg:pb-20 lg:pt-28"
+      className="project-page"
       aria-labelledby="project-title"
     >
-      <div className="page-shell content-pad-right grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(280px,0.95fr)] lg:gap-8">
-        <div className="max-w-xl">
-          <Link
-            to="/#projects"
-            className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-ink"
-            data-reveal
-          >
-            <ArrowLeft className="size-4" aria-hidden />
+      <div className="page-shell content-pad-right project-page__grid">
+        <div className="project-page__copy">
+          <Link to="/#projects" className="project-page__back" data-reveal>
+            <ArrowLeft className="icon" aria-hidden />
             Back to projects
           </Link>
 
-          <p className="mt-8 text-sm font-semibold text-accent" data-reveal>
+          <p className="project-page__number" data-reveal>
             {formatProjectNumber(project.id)}
           </p>
 
           <h1
             id="project-title"
-            className="mt-3 section-title"
+            className="section-title project-page__title"
             data-reveal
             style={
               {
@@ -81,42 +77,33 @@ export function ProjectPage() {
             <span className="accent-dot" aria-hidden />
           </h1>
 
-          <p
-            className="mt-5 text-[clamp(1.05rem,2vw,1.25rem)] font-medium leading-snug text-ink"
-            data-reveal
-          >
+          <p className="project-page__tagline" data-reveal>
             {project.shortDescription}
           </p>
 
-          <ul className="mt-6 flex flex-wrap gap-2" data-reveal>
+          <ul className="project-page__stack" data-reveal>
             {project.stack.map((tech) => (
-              <li
-                key={tech}
-                className="rounded-full border border-line bg-surface px-3 py-1 text-xs font-medium text-neutral-600"
-              >
+              <li key={tech} className="project-page__tag">
                 {tech}
               </li>
             ))}
           </ul>
 
-          <p
-            className="mt-6 max-w-md text-[0.95rem] leading-relaxed text-muted"
-            data-reveal
-          >
+          <p className="project-page__desc" data-reveal>
             {project.description}
           </p>
 
           {(project.links?.website || project.links?.github) && (
-            <div className="mt-8 flex flex-wrap gap-3" data-reveal>
+            <div className="project-page__links" data-reveal>
               {project.links.website && (
                 <a
                   href={project.links.website}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                  className="btn btn--primary"
                 >
                   Visit website
-                  <ArrowUpRight className="size-4" aria-hidden />
+                  <ArrowUpRight className="icon" aria-hidden />
                 </a>
               )}
               {project.links.github && (
@@ -124,9 +111,9 @@ export function ProjectPage() {
                   href={project.links.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-xl border border-line bg-surface px-4 py-2.5 text-sm font-semibold text-ink transition-colors hover:border-subtle"
+                  className="btn btn--secondary"
                 >
-                  <GitHubIcon className="size-4" />
+                  <GitHubIcon className="icon" />
                   GitHub
                 </a>
               )}
@@ -134,15 +121,11 @@ export function ProjectPage() {
           )}
         </div>
 
-        <div
-          className="relative mx-auto w-full max-w-[420px] lg:max-w-none"
-          data-reveal
-        >
-          <div className="aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-neutral-100 sm:aspect-[5/6]">
+        <div className="project-page__visual-wrap" data-reveal>
+          <div className="project-page__visual">
             <ProjectVisual
               project={project}
               priority
-              className="h-full w-full p-6 sm:p-10"
               transitionName={`project-image-${project.slug}`}
             />
           </div>

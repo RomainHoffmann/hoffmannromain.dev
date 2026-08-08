@@ -19,7 +19,7 @@ export function Home() {
   }, [location.hash]);
 
   return (
-    <main className="pb-28 lg:pb-16">
+    <main className="home">
       <About />
       <SelectedWork />
       <Contact />

@@ -59,28 +59,27 @@ export function SelectedWork() {
     <section
       id="projects"
       ref={sectionRef}
-      className="relative scroll-mt-8 py-20 lg:min-h-dvh lg:py-24"
+      className="projects"
       aria-labelledby="projects-title"
     >
       <div className="page-shell content-pad-right">
-        <div className="grid gap-10 lg:grid-cols-[minmax(220px,0.85fr)_minmax(0,1.6fr)] lg:gap-12 xl:gap-16">
-          <header className="lg:sticky lg:top-28 lg:self-start">
+        <div className="projects__layout">
+          <header className="projects__intro">
             <h2 id="projects-title" className="section-title" data-reveal>
-              <span className="block">{site.projectsIntro.titleLines[0]}</span>
-              <span className="block">
-                {site.projectsIntro.titleLines[1]}
-                <span className="accent-dot" aria-hidden />
+              <span className="stack-title">
+                <span>{site.projectsIntro.titleLines[0]}</span>
+                <span>
+                  {site.projectsIntro.titleLines[1]}
+                  <span className="accent-dot" aria-hidden />
+                </span>
               </span>
             </h2>
-            <p
-              className="mt-5 max-w-xs text-[0.95rem] leading-relaxed text-muted"
-              data-reveal
-            >
+            <p className="projects__subtitle" data-reveal>
               {site.projectsIntro.subtitle}
             </p>
           </header>
 
-          <ul className="flex flex-col gap-5 md:gap-6">
+          <ul className="projects__list">
             {projects.map((project) => (
               <li key={project.id} data-project-card>
                 <ProjectCard project={project} />

@@ -7,11 +7,8 @@ type MobileNavProps = {
 
 export function MobileNav({ active, onNavigate }: MobileNavProps) {
   return (
-    <nav
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-line/80 bg-bg/90 backdrop-blur-md lg:hidden"
-      aria-label="Primary"
-    >
-      <ul className="mx-auto grid max-w-lg grid-cols-3 px-2 py-2.5">
+    <nav className="mobile-nav" aria-label="Primary">
+      <ul className="mobile-nav__list">
         {sections.map((section) => {
           const isActive = active === section.id;
 
@@ -24,31 +21,12 @@ export function MobileNav({ active, onNavigate }: MobileNavProps) {
                   event.preventDefault();
                   onNavigate(section.id);
                 }}
-                className={`flex flex-col items-center rounded-xl px-2 py-2 transition-colors ${
-                  isActive ? "text-ink" : "text-subtle"
-                }`}
+                className={`mobile-nav__link${isActive ? " is-active" : ""}`}
                 aria-current={isActive ? "true" : undefined}
               >
-                <span
-                  className={`text-[0.8rem] leading-none ${
-                    isActive ? "font-bold" : "font-medium"
-                  }`}
-                >
-                  {section.number}
-                </span>
-                <span
-                  className={`mt-1 text-[0.62rem] tracking-[0.12em] ${
-                    isActive ? "font-semibold" : "font-medium"
-                  }`}
-                >
-                  {section.label}
-                </span>
-                <span
-                  className={`mt-1.5 h-0.5 w-5 rounded-full bg-accent transition-opacity ${
-                    isActive ? "opacity-100" : "opacity-0"
-                  }`}
-                  aria-hidden
-                />
+                <span className="mobile-nav__number">{section.number}</span>
+                <span className="mobile-nav__label">{section.label}</span>
+                <span className="mobile-nav__indicator" aria-hidden />
               </a>
             </li>
           );

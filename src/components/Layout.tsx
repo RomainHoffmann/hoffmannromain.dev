@@ -23,7 +23,7 @@ export function Layout() {
   };
 
   return (
-    <div className="min-h-dvh bg-bg text-ink">
+    <div className="app-shell">
       <Logo to={isHome ? "/#about" : "/"} />
       <SideNav active={active} onNavigate={handleNavigate} />
       <MobileNav active={active} onNavigate={handleNavigate} />
