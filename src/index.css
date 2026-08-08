@@ -141,8 +141,6 @@ button {
 }
 
 .page-shell {
-  width: min(100%, 1280px);
-  margin-inline: auto;
   padding-inline: var(--space-gutter);
 }
 

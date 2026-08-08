@@ -27,7 +27,6 @@ export function Layout() {
       <Logo to={isHome ? "/#about" : "/"} />
       <SideNav active={active} onNavigate={handleNavigate} />
       <MobileNav active={active} onNavigate={handleNavigate} />
-      <Footer showSocial={isHome && active === "projects"} />
       <Outlet />
     </div>
   );
