@@ -2,7 +2,7 @@ export const site = {
   name: "Romain Hoffmann",
   initials: "RH",
   role: "Full-stack developer",
-  tagline: "I build web and mobile products with clean code",
+  tagline: "Building web and mobile products from idea to production",
   location: "Based in France",
   availability: "Available for work",
   email: "hoffmann.romain84@gmail.com",
