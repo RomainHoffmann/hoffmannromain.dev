@@ -1,9 +1,8 @@
 .contact {
   position: relative;
-  display: flex;
-  align-items: center;
   min-height: 100dvh;
-  padding: 6rem 0;
+  padding-top: 90px;
+  box-sizing: border-box;
 }
 
 .contact__grid {
