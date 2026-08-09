@@ -4,7 +4,7 @@ export const site = {
   role: "Full-stack developer",
   tagline: "I build web and mobile products with clean code",
   location: "Based in France",
-  availability: "Available for freelance",
+  availability: "Available for work",
   email: "hoffmann.romain84@gmail.com",
   resumePath: "/resume.pdf",
   social: {
