@@ -29,7 +29,6 @@ export const projects: Project[] = [
     imageHeight: 1800,
     links: {
       website: "https://voltra-app.com",
-      github: "https://github.com/romainhoffmann",
     },
   },
   {
@@ -46,7 +45,6 @@ export const projects: Project[] = [
     visualStart: true,
     links: {
       website: "https://mangeznotez.com",
-      github: "https://github.com/romainhoffmann",
     },
   },
 ];
