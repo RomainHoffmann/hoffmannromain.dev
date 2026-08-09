@@ -106,7 +106,7 @@
   max-height: min(var(--project-page-visual-h), 42dvh);
   flex-shrink: 0;
   overflow: hidden;
-  border-radius: 1.5rem;
+  border-radius: 0.2rem;
 }
 
 .project-page__visual .project-visual {

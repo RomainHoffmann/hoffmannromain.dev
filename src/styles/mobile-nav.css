@@ -22,7 +22,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 0.75rem;
   padding: 0.5rem;
   color: var(--color-subtle);
   transition: color 0.2s ease;
