@@ -6,7 +6,7 @@
 
 .projects__layout {
   display: grid;
-  gap: 2.5rem;
+  gap: clamp(2rem, 4vw, 4.5rem);
 }
 
 .projects__intro {
@@ -16,13 +16,14 @@
 .projects__list {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
 }
 
-@media (min-width: 768px) {
-  .projects__list {
-    gap: 2rem;
-  }
+.projects__list > li {
+  border-top: 1px solid var(--color-line);
+}
+
+.projects__list > li:last-child {
+  border-bottom: 1px solid var(--color-line);
 }
 
 @media (min-width: 1024px) {
@@ -32,17 +33,13 @@
   }
 
   .projects__layout {
-    grid-template-columns: minmax(220px, 0.75fr) minmax(0, 1.6fr);
-    gap: 4.5rem;
+    grid-template-columns: minmax(200px, 0.7fr) minmax(0, 1.7fr);
+    gap: clamp(3rem, 5vw, 5rem);
   }
 
   .projects__intro {
     position: sticky;
     top: var(--header-height);
     align-self: start;
-  }
-
-  .projects__list {
-    gap: 2.25rem;
   }
 }

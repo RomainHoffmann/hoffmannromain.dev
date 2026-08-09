@@ -19,7 +19,7 @@ export const projects: Project[] = [
     title: "Voltra",
     shortDescription: "Workout tracking, without thinking about progression.",
     description:
-      "Voltra is a mobile workout tracking application that helps athletes log sessions, follow progression and stay consistent without friction.",
+      "Voltra is a workout tracker built around automatic progression. It tells you when to increase reps or weight, so you can focus on training instead of managing your progression.",
     stack: ["React Native", "Expo", "Supabase"],
     image: "/images/projects/voltra.webp",
     links: {

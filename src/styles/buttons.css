@@ -3,14 +3,14 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.7rem 1.15rem;
-  border-radius: 0.2rem;
-  font-size: 0.875rem;
+  border-radius: var(--radius-control);
+  font-size: var(--text-meta);
   font-weight: 500;
   transition:
-    opacity 0.2s ease,
-    border-color 0.2s ease,
-    background-color 0.2s ease,
-    color 0.2s ease;
+    opacity var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
 }
 
 .btn--primary {
@@ -32,5 +32,5 @@
 .btn--secondary:hover,
 .btn--outline:hover {
   border-color: var(--color-subtle);
-  background: color-mix(in srgb, var(--color-neutral-100) 80%, transparent);
+  background: color-mix(in srgb, var(--color-neutral-100) 70%, transparent);
 }
