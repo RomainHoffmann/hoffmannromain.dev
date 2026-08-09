@@ -20,4 +20,15 @@
   --z-nav: 40;
   --space-gutter: clamp(2rem, 4vw, 5rem);
   --nav-rail: 7.5rem;
+  --mobile-nav-height: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+  --mobile-status-height: 2.25rem;
+  --mobile-chrome: calc(var(--mobile-nav-height) + var(--mobile-status-height));
+  --desktop-footer-height: 3.5rem;
+  --chrome-offset: var(--mobile-chrome);
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --chrome-offset: var(--desktop-footer-height);
+  }
 }

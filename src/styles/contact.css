@@ -1,6 +1,6 @@
 .contact {
   position: relative;
-  min-height: 100dvh;
+  min-height: calc(100dvh - var(--chrome-offset));
   padding-top: 90px;
   box-sizing: border-box;
 }

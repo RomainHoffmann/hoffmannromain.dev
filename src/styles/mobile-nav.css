@@ -3,6 +3,8 @@
   inset-inline: 0;
   bottom: 0;
   z-index: var(--z-nav);
+  min-height: var(--mobile-nav-height);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
   border-top: 1px solid color-mix(in srgb, var(--color-line) 80%, transparent);
   background: color-mix(in srgb, var(--color-bg) 90%, transparent);
   backdrop-filter: blur(12px);

@@ -27,7 +27,7 @@
 
 @media (min-width: 1024px) {
   .projects {
-    min-height: 100dvh;
+    min-height: calc(100dvh - var(--chrome-offset));
     padding: 6rem 0;
   }
 

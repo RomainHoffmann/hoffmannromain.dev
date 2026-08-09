@@ -1,6 +1,6 @@
 .about {
   display: flex;
-  min-height: 100dvh;
+  min-height: calc(100dvh - var(--chrome-offset));
 }
 
 .about__grid {

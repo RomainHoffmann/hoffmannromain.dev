@@ -70,11 +70,5 @@
 }
 
 .home {
-  padding-bottom: 7rem;
-}
-
-@media (min-width: 1024px) {
-  .home {
-    padding-bottom: 4rem;
-  }
+  padding-bottom: 0;
 }
