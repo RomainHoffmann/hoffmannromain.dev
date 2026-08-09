@@ -1,7 +1,11 @@
 import { useEffect, useRef, type CSSProperties } from "react";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { Link, Navigate, useParams } from "react-router-dom";
-import { GitHubIcon } from "@/components/icons";
+import {
+  AppStoreIcon,
+  GitHubIcon,
+  PlayStoreIcon,
+} from "@/components/icons";
 import { ProjectVisual } from "@/components/ProjectVisual";
 import { TechTags } from "@/components/TechTags";
 import { getProjectBySlug } from "@/data/projects";
@@ -91,7 +95,10 @@ export function ProjectPage() {
             {project.description}
           </p>
 
-          {(project.links?.website || project.links?.github) && (
+          {(project.links?.website ||
+            project.links?.github ||
+            project.links?.appStore ||
+            project.links?.playStore) && (
             <div className="project-page__links" data-reveal>
               {project.links.website && (
                 <a
@@ -105,6 +112,28 @@ export function ProjectPage() {
                     className="icon project-page__link-icon"
                     aria-hidden
                   />
+                </a>
+              )}
+              {project.links.appStore && (
+                <a
+                  href={project.links.appStore}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn btn--outline"
+                >
+                  <AppStoreIcon className="icon" />
+                  App Store
+                </a>
+              )}
+              {project.links.playStore && (
+                <a
+                  href={project.links.playStore}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn btn--outline"
+                >
+                  <PlayStoreIcon className="icon" />
+                  Google Play
                 </a>
               )}
               {project.links.github && (
