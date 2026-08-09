@@ -32,9 +32,9 @@ export const projects: Project[] = [
     slug: "voltra",
     title: "Voltra",
     role: "Solo Developer",
-    shortDescription: "Workout tracking, without thinking about progression.",
+    shortDescription: "Workout tracking with progression built in.",
     description:
-      "Voltra is a workout tracker built around automatic progression. It tells you when to increase reps or weight, so you can focus on training instead of managing your progression.",
+      "Voltra is a mobile workout tracker built around automatic progression. It tracks your performance and tells you when to increase reps or weight, so you can focus on training instead of managing your progression.",
     stack: ["React Native", "Expo", "Supabase"],
     image: "/images/projects/voltra.webp",
     imageWidth: 900,
@@ -43,14 +43,15 @@ export const projects: Project[] = [
       website: "https://voltra-app.com",
     },
   },
+
   {
     id: 2,
     slug: "mangeznotez",
     title: "Mangeznotez",
     role: "Full-stack Developer",
-    shortDescription: "Book your next meal.",
+    shortDescription: "Discover restaurants and book your next table.",
     description:
-      "Mangeznotez is a booking platform that connects diners with partner restaurants — discover a place, reserve a table, and show up.",
+      "Mangeznotez is a restaurant discovery and booking platform. I contributed to the product as a full-stack developer, working on the SvelteKit and NestJS application, feature development, refactoring, and third-party integrations.",
     stack: ["SvelteKit", "NestJS", "PostgreSQL"],
     image: "/images/projects/mangeznotez.webp",
     imageWidth: 1600,
@@ -60,14 +61,16 @@ export const projects: Project[] = [
       website: "https://mangeznotez.com",
     },
   },
+
   {
     id: 3,
     slug: "restopro",
-    title: "Restopro",
+    title: "Resto Pro",
     role: "Full-stack Developer",
-    shortDescription: "Restaurant management system.",
+    shortDescription:
+      "Restaurant management tools, built for daily operations.",
     description:
-      "Restopro is a restaurant management system that helps you manage your restaurant.",
+      "Resto Pro is a web and mobile platform for restaurant owners to manage their day-to-day operations, including reservations and customer activity. I contributed to both the web platform and mobile application as a full-stack developer.",
     stack: ["SvelteKit", "NestJS", "Flutter"],
     image: "/images/projects/restopro.webp",
     imageWidth: 1600,
