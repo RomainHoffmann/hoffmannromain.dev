@@ -5,6 +5,7 @@ import { MobileNav } from "@/components/MobileNav";
 import { SideNav } from "@/components/SideNav";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import type { SectionId } from "@/data/site";
+import { scrollToSection } from "@/lib/scroll";
 
 export function Layout() {
   const location = useLocation();
@@ -15,7 +16,8 @@ export function Layout() {
 
   const handleNavigate = (id: SectionId) => {
     if (isHome) {
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+      scrollToSection(id);
+      history.replaceState(null, "", `/#${id}`);
       return;
     }
 
