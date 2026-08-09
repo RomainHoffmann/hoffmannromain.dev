@@ -1,5 +1,13 @@
-.logo {
+.logo-header {
   position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: var(--space-gutter);
+  z-index: var(--z-nav);
+}
+
+.logo {
   top: 1.25rem;
   left: var(--space-gutter);
   z-index: var(--z-nav);

@@ -7,9 +7,11 @@ type LogoProps = {
 
 export function Logo({ to = "/#about" }: LogoProps) {
   return (
-    <Link to={to} className="logo" aria-label={`${site.name} — Home`}>
-      <span className="logo__text">{site.initials}</span>
-      <span className="logo__mark" aria-hidden />
-    </Link>
+    <header className="logo-header">
+      <Link to={to} className="logo" aria-label={`${site.name} — Home`}>
+        <span className="logo__text">{site.initials}</span>
+        <span className="logo__mark" aria-hidden />
+      </Link>
+    </header>
   );
 }
