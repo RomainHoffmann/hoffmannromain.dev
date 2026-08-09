@@ -18,7 +18,7 @@
   --radius-card: 1.25rem;
   --z-footer: 30;
   --z-nav: 40;
-  --space-gutter: clamp(2rem, 4vw, 5rem);
+  --space-gutter: 1.5rem;
   --nav-rail: 7.5rem;
   --header-height: 90px;
   --mobile-nav-height: calc(4.5rem + env(safe-area-inset-bottom, 0px));
@@ -28,8 +28,25 @@
   --chrome-offset: var(--mobile-chrome);
 }
 
+@media (min-width: 640px) {
+  :root {
+    --space-gutter: 2rem;
+  }
+}
+
 @media (min-width: 1024px) {
   :root {
+    --space-gutter: 2.5rem;
     --chrome-offset: var(--desktop-footer-height);
+    --nav-rail: 9rem;
+    --about-nav-rail: 8rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --space-gutter: 3.5rem;
+    --nav-rail: 10rem;
+    --about-nav-rail: 9rem;
   }
 }

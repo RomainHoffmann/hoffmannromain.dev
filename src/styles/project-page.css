@@ -40,7 +40,7 @@
 
 .project-page__tagline {
   margin-top: 1.25rem;
-  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  font-size: 1.1rem;
   font-weight: 500;
   line-height: 1.35;
   color: var(--color-ink);
@@ -113,9 +113,13 @@
     padding: var(--header-height) 0 calc(1.25rem + var(--chrome-offset));
   }
 
+  .project-page__tagline {
+    font-size: 1.25rem;
+  }
+
   .project-page__grid {
     grid-template-columns: minmax(0, 1fr) minmax(280px, 0.95fr);
-    gap: 2rem;
+    gap: 4.5rem;
   }
 
   .project-page__visual-wrap {

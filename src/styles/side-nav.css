@@ -3,7 +3,7 @@
   pointer-events: none;
   position: fixed;
   top: 50%;
-  right: clamp(1rem, 2.5vw, 2.25rem);
+  right: 1.25rem;
   z-index: var(--z-nav);
   transform: translateY(-50%);
 }
@@ -81,5 +81,29 @@
 @media (min-width: 1024px) {
   .side-nav {
     display: block;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .side-nav {
+    right: 1rem;
+  }
+
+  .side-nav__list {
+    gap: 2.25rem;
+  }
+
+  .side-nav__number {
+    font-size: 1.35rem;
+  }
+
+  .side-nav__label {
+    font-size: 0.62rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .side-nav {
+    right: 2rem;
   }
 }

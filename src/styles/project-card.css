@@ -35,7 +35,7 @@
 
 .project-card__title {
   margin-top: 0.75rem;
-  font-size: clamp(1.6rem, 3vw, 2.15rem);
+  font-size: 1.6rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: -0.03em;
@@ -118,10 +118,18 @@
   .project-card__media {
     min-height: 280px;
   }
+
+  .project-card__title {
+    font-size: 1.9rem;
+  }
 }
 
 @media (min-width: 1024px) {
   .project-card__body {
     padding: 2.5rem;
+  }
+
+  .project-card__title {
+    font-size: 2.15rem;
   }
 }
