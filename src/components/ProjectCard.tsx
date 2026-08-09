@@ -1,10 +1,7 @@
 import type { CSSProperties } from "react";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import {
-  formatProjectNumber,
-  type Project,
-} from "@/data/projects";
+import { formatProjectNumber, type Project } from "@/data/projects";
 import { ProjectVisual } from "@/components/ProjectVisual";
 
 type ProjectCardProps = {
@@ -19,7 +16,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
       to={`/projects/${project.slug}`}
       viewTransition
       className="project-card"
-      aria-label={`Open case study: ${project.title}`}
+      aria-label={`Open project: ${project.title}`}
     >
       <div className="project-card__body">
         <div>
@@ -45,7 +42,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </div>
 
         <span className="project-card__cta">
-          Open case study
+          Open project
           <ArrowRight className="icon" />
         </span>
       </div>
