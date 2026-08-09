@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { formatProjectNumber, type Project } from "@/data/projects";
 import { ProjectVisual } from "@/components/ProjectVisual";
+import { TechTags } from "@/components/TechTags";
 
 type ProjectCardProps = {
   project: Project;
@@ -10,12 +11,15 @@ type ProjectCardProps = {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   const number = formatProjectNumber(project.id);
+  const reverse = Boolean(project.visualStart);
 
   return (
     <Link
       to={`/projects/${project.slug}`}
       viewTransition
-      className="project-card"
+      className={["project-card", reverse ? "project-card--reverse" : ""]
+        .filter(Boolean)
+        .join(" ")}
       aria-label={`Open project: ${project.title}`}
     >
       <div className="project-card__body">
@@ -32,18 +36,12 @@ export function ProjectCard({ project }: ProjectCardProps) {
             {project.title}
           </h3>
           <p className="project-card__desc">{project.shortDescription}</p>
-          <ul className="project-card__stack">
-            {project.stack.map((tech) => (
-              <li key={tech} className="project-card__tag">
-                {tech}
-              </li>
-            ))}
-          </ul>
+          <TechTags items={project.stack} className="project-card__stack" />
         </div>
 
         <span className="project-card__cta">
           Open project
-          <ArrowRight className="icon" />
+          <ArrowRight className="icon" aria-hidden />
         </span>
       </div>
 

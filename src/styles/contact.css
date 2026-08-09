@@ -73,13 +73,9 @@
   align-items: flex-end;
   justify-content: space-between;
   gap: 1.25rem;
-  padding: 1.25rem 0.15rem;
-  margin-inline: -0.15rem;
+  padding: 1.25rem 0;
   border-bottom: 1px solid var(--color-line);
-  border-radius: var(--radius-control);
-  transition:
-    background-color var(--duration-fast) var(--ease-out),
-    color var(--duration-fast) var(--ease-out);
+  transition: color var(--duration-fast) var(--ease-out);
 }
 
 .contact__links li:first-child .contact__link {
@@ -98,6 +94,7 @@
   font-weight: 500;
   letter-spacing: 0.02em;
   color: var(--color-subtle);
+  transition: color var(--duration-fast) var(--ease-out);
 }
 
 .contact__link-value {
@@ -117,8 +114,8 @@
   transition: transform var(--duration-fast) var(--ease-out);
 }
 
-.contact__link:hover {
-  background: color-mix(in srgb, var(--color-neutral-100) 55%, transparent);
+.contact__link:hover .contact__link-label {
+  color: var(--color-muted);
 }
 
 .contact__link:hover .contact__link-value {
@@ -126,7 +123,12 @@
 }
 
 .contact__link:hover .contact__link-arrow {
-  transform: translate(3px, -3px);
+  transform: translate(4px, -4px);
+}
+
+.contact__link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
 }
 
 @media (min-width: 1024px) {

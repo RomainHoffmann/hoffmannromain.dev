@@ -3,8 +3,10 @@ import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { GitHubIcon } from "@/components/icons";
 import { ProjectVisual } from "@/components/ProjectVisual";
+import { TechTags } from "@/components/TechTags";
 import { getProjectBySlug } from "@/data/projects";
 import { fadeUp } from "@/lib/animations";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 export function ProjectPage() {
@@ -13,17 +15,20 @@ export function ProjectPage() {
   const pageRef = useRef<HTMLElement>(null);
   const reducedMotion = useReducedMotion();
 
+  usePageMeta({
+    title: project
+      ? `${project.title} — Romain Hoffmann`
+      : "Romain Hoffmann — Full-stack Developer",
+    description: project?.description ?? "",
+    path: project ? `/projects/${project.slug}` : "/",
+    image: project
+      ? `https://hoffmannromain.dev${project.image}`
+      : undefined,
+  });
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
   }, [slug]);
-
-  useEffect(() => {
-    if (!project) return;
-    document.title = `${project.title} — Romain Hoffmann`;
-    return () => {
-      document.title = "Romain Hoffmann — Full-stack Developer";
-    };
-  }, [project]);
 
   useEffect(() => {
     if (reducedMotion || !pageRef.current || !project) return;
@@ -76,13 +81,11 @@ export function ProjectPage() {
             {project.shortDescription}
           </p>
 
-          <ul className="project-page__stack" data-reveal>
-            {project.stack.map((tech) => (
-              <li key={tech} className="project-page__tag">
-                {tech}
-              </li>
-            ))}
-          </ul>
+          <TechTags
+            items={project.stack}
+            className="project-page__stack"
+            data-reveal
+          />
 
           <p className="project-page__desc" data-reveal>
             {project.description}
@@ -98,7 +101,10 @@ export function ProjectPage() {
                   className="btn btn--primary"
                 >
                   Visit website
-                  <ArrowUpRight className="icon project-page__link-icon" aria-hidden />
+                  <ArrowUpRight
+                    className="icon project-page__link-icon"
+                    aria-hidden
+                  />
                 </a>
               )}
               {project.links.github && (
@@ -108,7 +114,7 @@ export function ProjectPage() {
                   rel="noreferrer"
                   className="btn btn--outline"
                 >
-                  <GitHubIcon className="icon" />
+                  <GitHubIcon className="icon" aria-hidden />
                   GitHub
                 </a>
               )}

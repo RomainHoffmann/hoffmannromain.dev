@@ -6,6 +6,9 @@ export type Project = {
   description: string;
   stack: string[];
   image: string;
+  imageWidth: number;
+  imageHeight: number;
+  visualStart?: boolean;
   links?: {
     website?: string;
     github?: string;
@@ -22,6 +25,8 @@ export const projects: Project[] = [
       "Voltra is a workout tracker built around automatic progression. It tells you when to increase reps or weight, so you can focus on training instead of managing your progression.",
     stack: ["React Native", "Expo", "Supabase"],
     image: "/images/projects/voltra.webp",
+    imageWidth: 900,
+    imageHeight: 1800,
     links: {
       website: "https://voltra-app.com",
       github: "https://github.com/romainhoffmann",
@@ -33,28 +38,17 @@ export const projects: Project[] = [
     title: "Mangeznotez",
     shortDescription: "Book your next meal.",
     description:
-      "Mangeznotez is a platform that allows you to book your next meal in a partner restaurant.",
-    stack: ["Sveltekit", "NestJS", "PostgreSQL"],
+      "Mangeznotez is a booking platform that connects diners with partner restaurants — discover a place, reserve a table, and show up.",
+    stack: ["SvelteKit", "NestJS", "PostgreSQL"],
     image: "/images/projects/mangeznotez.webp",
+    imageWidth: 1600,
+    imageHeight: 1100,
+    visualStart: true,
     links: {
       website: "https://mangeznotez.com",
       github: "https://github.com/romainhoffmann",
     },
   },
-  // {
-  //   id: 3,
-  //   slug: "restopro",
-  //   title: "Restopro",
-  //   shortDescription: "Restaurant management system.",
-  //   description:
-  //     "Restopro is a restaurant management system that helps you manage your restaurant.",
-  //   stack: ["Sveltekit", "NestJS", "Flutter"],
-  //   image: "/images/projects/restopro.webp",
-  //   links: {
-  //     website: "https://hoffmannromain.dev",
-  //     github: "https://github.com/romainhoffmann",
-  //   },
-  // },
 ];
 
 export function getProjectBySlug(slug: string): Project | undefined {

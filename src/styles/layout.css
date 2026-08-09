@@ -62,10 +62,26 @@
   display: block;
 }
 
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.tech-tags__item {
+  border-radius: var(--radius-tag);
+  background: color-mix(in srgb, var(--color-neutral-100) 85%, transparent);
+  padding: 0.18rem 0.5rem;
+  font-size: var(--text-tag);
+  font-weight: 500;
+  color: var(--color-muted);
+}
+
 .app-shell {
   min-height: 100dvh;
   background: var(--color-bg);
   color: var(--color-ink);
+  overflow-x: clip;
 }
 
 #about,

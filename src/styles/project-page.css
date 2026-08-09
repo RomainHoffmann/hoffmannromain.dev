@@ -49,19 +49,7 @@
 }
 
 .project-page__stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
   margin-top: 1.35rem;
-}
-
-.project-page__tag {
-  border-radius: var(--radius-tag);
-  background: color-mix(in srgb, var(--color-neutral-100) 85%, transparent);
-  padding: 0.18rem 0.5rem;
-  font-size: var(--text-tag);
-  font-weight: 500;
-  color: var(--color-muted);
 }
 
 .project-page__desc {

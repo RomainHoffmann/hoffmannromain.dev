@@ -52,10 +52,10 @@
     --chrome-offset: var(--desktop-footer-height);
     --nav-rail: 9rem;
     --about-nav-rail: 6.5rem;
-    --project-card-visual-w: 22rem;
-    --project-card-visual-h: 28rem;
-    --project-page-visual-w: 32rem;
-    --project-page-visual-h: 42rem;
+    --project-card-visual-w: 23rem;
+    --project-card-visual-h: 29rem;
+    --project-page-visual-w: 33rem;
+    --project-page-visual-h: 43rem;
   }
 }
 
@@ -63,9 +63,18 @@
   :root {
     --nav-rail: 10rem;
     --about-nav-rail: 7.5rem;
-    --project-card-visual-w: 24rem;
-    --project-card-visual-h: 32rem;
-    --project-page-visual-w: 36rem;
-    --project-page-visual-h: 46rem;
+    --project-card-visual-w: 25rem;
+    --project-card-visual-h: 33rem;
+    --project-page-visual-w: 37rem;
+    --project-page-visual-h: 47rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  :root {
+    --project-card-visual-w: 26.5rem;
+    --project-card-visual-h: 34.5rem;
+    --project-page-visual-w: 39rem;
+    --project-page-visual-h: 50rem;
   }
 }

@@ -56,9 +56,10 @@
 }
 
 .about__portrait-wrap {
-  flex: 1 1 auto;
-  min-height: 14rem;
+  flex: 0 1 auto;
   width: 100%;
+  max-height: min(48dvh, 26rem);
+  min-height: 12rem;
   display: flex;
 }
 
@@ -81,7 +82,8 @@
 
 @media (min-width: 640px) {
   .about__portrait-wrap {
-    min-height: 20rem;
+    min-height: 18rem;
+    max-height: min(52dvh, 30rem);
     max-width: 32rem;
     margin-inline: auto;
   }
@@ -90,7 +92,8 @@
 @media (min-width: 768px) {
   .about__portrait-wrap {
     max-width: 36rem;
-    min-height: 26rem;
+    min-height: 22rem;
+    max-height: min(56dvh, 34rem);
   }
 }
 
@@ -124,10 +127,10 @@
   .about__portrait-wrap {
     flex: none;
     min-height: 0;
+    max-height: calc(100dvh - var(--chrome-offset) - var(--header-height));
     max-width: none;
     width: 100%;
     height: 100%;
-    max-height: calc(100dvh - var(--chrome-offset) - var(--header-height));
     margin-inline: 0;
     align-self: stretch;
     justify-self: stretch;

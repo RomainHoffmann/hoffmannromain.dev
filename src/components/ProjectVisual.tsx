@@ -25,9 +25,12 @@ export function ProjectVisual({
     >
       <img
         src={project.image}
-        alt={`${project.title} preview`}
+        alt={`${project.title} product preview`}
+        width={project.imageWidth}
+        height={project.imageHeight}
         loading={priority ? "eager" : "lazy"}
         decoding="async"
+        fetchPriority={priority ? "high" : "auto"}
         className="project-visual__img"
       />
     </div>
