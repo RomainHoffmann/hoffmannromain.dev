@@ -86,14 +86,17 @@
 .project-card__media {
   position: relative;
   min-height: 220px;
-  background: var(--color-neutral-50);
 }
 
 .project-card__visual {
   position: absolute;
   inset: 0;
-  padding: 1.5rem;
   transition: transform 0.5s ease;
+  height: 100%;
+}
+
+.project-card__visual .project-visual__img {
+  object-fit: cover;
 }
 
 .project-card:hover .project-card__visual {
@@ -102,10 +105,6 @@
 
 @media (min-width: 640px) {
   .project-card__body {
-    padding: 2rem;
-  }
-
-  .project-card__visual {
     padding: 2rem;
   }
 }
