@@ -1,7 +1,8 @@
 .contact {
   position: relative;
-  min-height: calc(100dvh - var(--chrome-offset));
+  min-height: 100dvh;
   padding-top: 90px;
+  padding-bottom: var(--chrome-offset);
   box-sizing: border-box;
 }
 
@@ -102,7 +103,7 @@
 
 @media (min-width: 1024px) {
   .contact {
-    padding: 5rem 0;
+    padding: 5rem 0 var(--chrome-offset);
   }
 
   .contact__grid {
