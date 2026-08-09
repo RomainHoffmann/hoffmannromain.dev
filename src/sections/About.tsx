@@ -48,25 +48,7 @@ export function About() {
 
         <div className="about__portrait-wrap" data-reveal>
           <div className="about__portrait">
-            <img
-              src={site.profileImage}
-              alt={`Portrait of ${site.name}`}
-              onError={(event) => {
-                const img = event.currentTarget;
-                img.style.display = "none";
-                const fallback = img.nextElementSibling;
-                if (fallback instanceof HTMLElement) {
-                  fallback.hidden = false;
-                }
-              }}
-            />
-            <div hidden className="about__fallback" aria-hidden>
-              <div className="about__fallback-avatar" />
-              <p className="about__fallback-label">PROFILE</p>
-              <p className="about__fallback-hint">
-                Add <code>/public/images/profile.webp</code>
-              </p>
-            </div>
+            <img src={site.profileImage} alt={`Portrait of ${site.name}`} />
           </div>
         </div>
       </div>
