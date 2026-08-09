@@ -68,7 +68,7 @@ export function SelectedWork() {
             <h2 id="projects-title" className="section-title" data-reveal>
               <span className="stack-title">
                 <span>{site.projectsIntro.titleLines[0]}</span>
-                <span>
+                <span className="title-line--dot">
                   {site.projectsIntro.titleLines[1]}
                   <span className="accent-dot" aria-hidden />
                 </span>

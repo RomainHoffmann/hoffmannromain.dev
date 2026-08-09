@@ -73,8 +73,10 @@ export function ProjectPage() {
               } as CSSProperties
             }
           >
-            {project.title.toUpperCase()}.
-            <span className="accent-dot" aria-hidden />
+            <span className="title-line--dot">
+              {project.title.toUpperCase()}.
+              <span className="accent-dot" aria-hidden />
+            </span>
           </h1>
 
           <p className="project-page__tagline" data-reveal>

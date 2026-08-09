@@ -37,6 +37,11 @@
   margin-left: 0.12em;
   border-radius: 999px;
   background: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.title-line--dot {
+  white-space: nowrap;
 }
 
 .page-shell {

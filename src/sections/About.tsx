@@ -31,7 +31,7 @@ export function About() {
         <div className="about__copy">
           <h1 id="about-title" className="about__title" data-reveal>
             <span className="about__firstname">{site.about.titleLines[0]}</span>
-            <span>
+            <span className="title-line--dot">
               {site.about.titleLines[1]}
               <span className="accent-dot" aria-hidden />
             </span>

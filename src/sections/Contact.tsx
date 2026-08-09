@@ -71,7 +71,7 @@ export function Contact() {
           <h2 id="contact-title" className="section-title" data-reveal>
             <span className="stack-title">
               <span>{site.contact.titleLines[0]}</span>
-              <span>
+              <span className="title-line--dot">
                 {site.contact.titleLines[1]}
                 <span className="accent-dot" aria-hidden />
               </span>
