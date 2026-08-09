@@ -24,7 +24,10 @@ export function ProjectCard({ project }: ProjectCardProps) {
     >
       <div className="project-card__body">
         <div>
-          <p className="project-card__number">{number}</p>
+          <div className="project-card__meta">
+            <p className="project-card__number">{number}</p>
+            <p className="project-card__role">{project.role}</p>
+          </div>
           <h3
             className="project-card__title"
             style={

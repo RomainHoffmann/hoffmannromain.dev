@@ -1,7 +1,16 @@
+export const projectRoles = [
+  "Solo Developer",
+  "Full-stack Developer",
+  "Front-end Developer",
+] as const;
+
+export type ProjectRole = (typeof projectRoles)[number];
+
 export type Project = {
   id: number;
   slug: string;
   title: string;
+  role: ProjectRole;
   shortDescription: string;
   description: string;
   stack: string[];
@@ -22,6 +31,7 @@ export const projects: Project[] = [
     id: 1,
     slug: "voltra",
     title: "Voltra",
+    role: "Solo Developer",
     shortDescription: "Workout tracking, without thinking about progression.",
     description:
       "Voltra is a workout tracker built around automatic progression. It tells you when to increase reps or weight, so you can focus on training instead of managing your progression.",
@@ -37,6 +47,7 @@ export const projects: Project[] = [
     id: 2,
     slug: "mangeznotez",
     title: "Mangeznotez",
+    role: "Full-stack Developer",
     shortDescription: "Book your next meal.",
     description:
       "Mangeznotez is a booking platform that connects diners with partner restaurants — discover a place, reserve a table, and show up.",
@@ -53,6 +64,7 @@ export const projects: Project[] = [
     id: 3,
     slug: "restopro",
     title: "Restopro",
+    role: "Full-stack Developer",
     shortDescription: "Restaurant management system.",
     description:
       "Restopro is a restaurant management system that helps you manage your restaurant.",

@@ -22,11 +22,24 @@
   min-width: 0;
 }
 
+.project-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.65rem 1rem;
+}
+
 .project-card__number {
   font-size: var(--text-meta);
   font-weight: 600;
   letter-spacing: 0.04em;
   color: var(--color-accent);
+}
+
+.project-card__role {
+  font-size: var(--text-meta);
+  font-weight: 500;
+  color: var(--color-subtle);
 }
 
 .project-card__title {

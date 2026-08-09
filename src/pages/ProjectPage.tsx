@@ -81,6 +81,10 @@ export function ProjectPage() {
             </span>
           </h1>
 
+          <p className="project-page__role" data-reveal>
+            {project.role}
+          </p>
+
           <p className="project-page__tagline" data-reveal>
             {project.shortDescription}
           </p>

@@ -39,8 +39,15 @@
   margin-top: 1.75rem;
 }
 
+.project-page__role {
+  margin-top: 0.85rem;
+  font-size: var(--text-meta);
+  font-weight: 500;
+  color: var(--color-subtle);
+}
+
 .project-page__tagline {
-  margin-top: 1.15rem;
+  margin-top: 0.85rem;
   max-width: 28rem;
   font-size: clamp(1.05rem, 1.4vw, 1.2rem);
   font-weight: 500;
