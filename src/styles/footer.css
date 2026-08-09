@@ -1,42 +1,30 @@
 .site-footer {
-  display: none;
-  pointer-events: none;
   position: fixed;
   inset-inline: 0;
-  bottom: 0;
+  bottom: var(--mobile-nav-height);
   z-index: var(--z-footer);
-  border-top: 1px solid color-mix(in srgb, var(--color-line) 90%, transparent);
-  background: color-mix(in srgb, var(--color-bg) 80%, transparent);
+  height: var(--mobile-status-height);
+  border-top: 1px solid color-mix(in srgb, var(--color-line) 80%, transparent);
+  background: color-mix(in srgb, var(--color-bg) 85%, transparent);
   backdrop-filter: blur(8px);
+  pointer-events: none;
 }
 
 .site-footer__inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: var(--desktop-footer-height);
-  font-size: 0.8rem;
+  gap: 1rem;
+  height: 100%;
+  font-size: 0.7rem;
   color: var(--color-muted);
-}
-
-.site-footer__meta,
-.site-footer__actions {
-  pointer-events: auto;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
 }
 
 .site-footer__item {
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
-}
-
-.site-footer__divider {
-  width: 1px;
-  height: 0.75rem;
-  background: var(--color-line);
+  min-width: 0;
 }
 
 .site-footer__dot {
@@ -44,77 +32,16 @@
   height: 0.375rem;
   border-radius: 999px;
   background: var(--color-available);
-}
-
-.site-footer__social {
-  color: var(--color-muted);
-  transition: color 0.2s ease;
-}
-
-.site-footer__social:hover {
-  color: var(--color-ink);
-}
-
-.site-footer__top {
-  display: grid;
-  place-items: center;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 999px;
-  border: 1px solid var(--color-line);
-  color: var(--color-muted);
-  transition:
-    color 0.2s ease,
-    border-color 0.2s ease;
-}
-
-.site-footer__top:hover {
-  border-color: var(--color-subtle);
-  color: var(--color-ink);
-}
-
-.mobile-status {
-  pointer-events: none;
-  position: fixed;
-  inset-inline: 0;
-  bottom: var(--mobile-nav-height);
-  z-index: var(--z-footer);
-  height: var(--mobile-status-height);
-  border-top: 1px solid color-mix(in srgb, var(--color-line) 70%, transparent);
-  background: color-mix(in srgb, var(--color-bg) 85%, transparent);
-  backdrop-filter: blur(8px);
-  padding: 0 1rem;
-  font-size: 0.7rem;
-  color: var(--color-muted);
-  display: flex;
-  align-items: center;
-}
-
-.mobile-status__inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
-  max-width: 32rem;
-  margin-inline: auto;
-}
-
-.mobile-status__item {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 @media (min-width: 1024px) {
   .site-footer {
-    display: block;
+    bottom: 0;
+    height: var(--desktop-footer-height);
   }
 
-  .mobile-status {
-    display: none;
+  .site-footer__inner {
+    font-size: 0.8rem;
   }
 }
