@@ -39,7 +39,7 @@
     --space-gutter: 2.5rem;
     --chrome-offset: var(--desktop-footer-height);
     --nav-rail: 9rem;
-    --about-nav-rail: 8rem;
+    --about-nav-rail: 6.5rem;
   }
 }
 
@@ -47,6 +47,6 @@
   :root {
     --space-gutter: 3.5rem;
     --nav-rail: 10rem;
-    --about-nav-rail: 9rem;
+    --about-nav-rail: 7.5rem;
   }
 }

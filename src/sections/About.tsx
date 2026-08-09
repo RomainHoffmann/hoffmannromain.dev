@@ -27,7 +27,7 @@ export function About() {
       className="about"
       aria-labelledby="about-title"
     >
-      <div className="page-shell content-pad-right about__grid">
+      <div className="page-shell about__grid">
         <div className="about__copy">
           <h1 id="about-title" className="about__title" data-reveal>
             <span className="about__firstname">{site.about.titleLines[0]}</span>
