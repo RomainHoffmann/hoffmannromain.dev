@@ -26,11 +26,19 @@
   --mobile-chrome: calc(var(--mobile-nav-height) + var(--mobile-status-height));
   --desktop-footer-height: 3.5rem;
   --chrome-offset: var(--mobile-chrome);
+  --project-card-visual-w: 12rem;
+  --project-card-visual-h: 14rem;
+  --project-page-visual-w: min(100%, 20rem);
+  --project-page-visual-h: 24rem;
 }
 
 @media (min-width: 640px) {
   :root {
     --space-gutter: 2rem;
+    --project-card-visual-w: 14rem;
+    --project-card-visual-h: 16rem;
+    --project-page-visual-w: 22rem;
+    --project-page-visual-h: 28rem;
   }
 }
 
@@ -40,6 +48,10 @@
     --chrome-offset: var(--desktop-footer-height);
     --nav-rail: 9rem;
     --about-nav-rail: 6.5rem;
+    --project-card-visual-w: 16rem;
+    --project-card-visual-h: 20rem;
+    --project-page-visual-w: 28rem;
+    --project-page-visual-h: 34rem;
   }
 }
 
@@ -48,5 +60,9 @@
     --space-gutter: 3.5rem;
     --nav-rail: 10rem;
     --about-nav-rail: 7.5rem;
+    --project-card-visual-w: 18rem;
+    --project-card-visual-h: 22rem;
+    --project-page-visual-w: 30rem;
+    --project-page-visual-h: 36rem;
   }
 }
