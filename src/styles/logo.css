@@ -28,7 +28,7 @@
 }
 
 .logo__mark {
-  width: 1.35rem;
+  width: 100%;
   height: 3px;
   border-radius: 999px;
   background: var(--color-accent);
