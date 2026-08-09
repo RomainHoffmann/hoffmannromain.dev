@@ -16,8 +16,6 @@ export const site = {
   },
   projectsIntro: {
     titleLines: ["SELECTED", "WORK"],
-    subtitle:
-      "Three projects focused on product thinking, clean code and useful experiences",
   },
   contact: {
     titleLines: ["LET'S BUILD", "SOMETHING."],

@@ -74,9 +74,6 @@ export function SelectedWork() {
                 </span>
               </span>
             </h2>
-            <p className="projects__subtitle" data-reveal>
-              {site.projectsIntro.subtitle}
-            </p>
           </header>
 
           <ul className="projects__list">

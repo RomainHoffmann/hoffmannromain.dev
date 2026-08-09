@@ -13,14 +13,6 @@
   max-width: 20rem;
 }
 
-.projects__subtitle {
-  margin-top: 1.25rem;
-  max-width: 20rem;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: var(--color-muted);
-}
-
 .projects__list {
   display: flex;
   flex-direction: column;
