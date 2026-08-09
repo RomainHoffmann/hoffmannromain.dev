@@ -5,11 +5,11 @@ export const site = {
   tagline: "I build web and mobile products with clean code",
   location: "Based in France",
   availability: "Available for freelance",
-  email: "hello@romainhoffmann.dev",
+  email: "hoffmann.romain84@gmail.com",
   resumePath: "/resume.pdf",
   social: {
     github: "https://github.com/romainhoffmann",
-    linkedin: "https://linkedin.com/in/romainhoffmann",
+    linkedin: "https://www.linkedin.com/in/hoffmann-romain",
   },
   about: {
     titleLines: ["ROMAIN", "HOFFMANN"],
@@ -18,7 +18,7 @@ export const site = {
     titleLines: ["SELECTED", "WORK"],
   },
   contact: {
-    titleLines: ["LET'S BUILD", "SOMETHING."],
+    titleLines: ["LET'S BUILD", "SOMETHING"],
     subtitle:
       "Available for freelance opportunities, product collaborations and full-stack roles",
   },
