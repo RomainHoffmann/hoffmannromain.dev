@@ -29,13 +29,11 @@ export function About() {
     >
       <div className="page-shell content-pad-right about__grid">
         <div className="about__copy">
-          <h1 id="about-title" className="display-title" data-reveal>
-            <span className="stack-title">
-              <span>{site.about.titleLines[0]}</span>
-              <span>
-                {site.about.titleLines[1]}
-                <span className="accent-dot" aria-hidden />
-              </span>
+          <h1 id="about-title" className="about__title" data-reveal>
+            <span className="about__firstname">{site.about.titleLines[0]}</span>
+            <span>
+              {site.about.titleLines[1]}
+              <span className="accent-dot" aria-hidden />
             </span>
           </h1>
           <p className="about__role" data-reveal>
@@ -47,9 +45,16 @@ export function About() {
         </div>
 
         <div className="about__portrait-wrap" data-reveal>
-          <div className="about__portrait">
-            <img src={site.profileImage} alt={`Portrait of ${site.name}`} />
-          </div>
+          <figure className="about__portrait">
+            <img
+              src={site.profileImage}
+              alt={`Portrait of ${site.name}`}
+              width={900}
+              height={1125}
+              decoding="async"
+              fetchPriority="high"
+            />
+          </figure>
         </div>
       </div>
     </section>
