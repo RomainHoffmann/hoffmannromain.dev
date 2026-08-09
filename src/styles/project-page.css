@@ -1,0 +1,132 @@
+.project-page {
+  min-height: 100dvh;
+  padding: 6rem 0 8rem;
+}
+
+.project-page__grid {
+  display: grid;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.project-page__copy {
+  max-width: 36rem;
+}
+
+.project-page__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  transition: color 0.2s ease;
+}
+
+.project-page__back:hover {
+  color: var(--color-ink);
+}
+
+.project-page__number {
+  margin-top: 2rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+.project-page__title {
+  margin-top: 0.75rem;
+}
+
+.project-page__tagline {
+  margin-top: 1.25rem;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--color-ink);
+}
+
+.project-page__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.project-page__tag {
+  border-radius: 999px;
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-neutral-600);
+}
+
+.project-page__desc {
+  margin-top: 1.5rem;
+  max-width: 28rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+
+.project-page__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.project-page__visual-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  margin-inline: auto;
+}
+
+.project-page__visual {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: var(--color-neutral-100);
+}
+
+.project-page__visual .project-visual {
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .project-page__visual {
+    aspect-ratio: 5 / 6;
+  }
+
+  .project-page__visual .project-visual {
+    padding: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .project-page {
+    padding: 7rem 0 5rem;
+  }
+
+  .project-page__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.95fr);
+    gap: 2rem;
+  }
+
+  .project-page__visual-wrap {
+    max-width: none;
+    margin-inline: 0;
+  }
+}
+
+@supports (view-transition-name: none) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.35s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}

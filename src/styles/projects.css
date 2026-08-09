@@ -1,0 +1,52 @@
+.projects {
+  position: relative;
+  scroll-margin-top: 2rem;
+  padding: 5rem 0;
+}
+
+.projects__layout {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.projects__intro {
+  max-width: 20rem;
+}
+
+.projects__subtitle {
+  margin-top: 1.25rem;
+  max-width: 20rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+
+.projects__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .projects__list {
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .projects {
+    min-height: 100dvh;
+    padding: 6rem 0;
+  }
+
+  .projects__layout {
+    grid-template-columns: minmax(220px, 0.85fr) minmax(0, 1.6fr);
+    gap: 3rem;
+  }
+
+  .projects__intro {
+    position: sticky;
+    top: 7rem;
+    align-self: start;
+  }
+}

@@ -1,0 +1,114 @@
+.about {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 100dvh;
+}
+
+.about__grid {
+  display: grid;
+  width: 100%;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.about__copy {
+  max-width: 36rem;
+  padding-bottom: 1rem;
+}
+
+.about__role {
+  margin-top: 1.5rem;
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+.about__tagline {
+  margin-top: 1rem;
+  max-width: 28rem;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+
+.about__portrait-wrap {
+  position: relative;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.about__portrait {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+
+.about__portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  filter: grayscale(1);
+}
+
+.about__fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  height: 100%;
+  padding: 0 1.5rem 2rem;
+  text-align: center;
+  background: linear-gradient(
+    to bottom,
+    var(--color-neutral-100),
+    var(--color-neutral-200)
+  );
+}
+
+.about__fallback-avatar {
+  width: 7rem;
+  height: 7rem;
+  margin-top: 4rem;
+  margin-bottom: auto;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-neutral-300) 80%, transparent);
+}
+
+.about__fallback-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--color-subtle);
+}
+
+.about__fallback-hint {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--color-muted);
+}
+
+.about__fallback-hint code {
+  color: var(--color-ink);
+}
+
+@media (min-width: 1024px) {
+  .about {
+    padding: 2.5rem 0 4rem;
+  }
+
+  .about__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.9fr);
+    gap: 2rem;
+  }
+
+  .about__copy {
+    padding-bottom: 2.5rem;
+  }
+
+  .about__portrait-wrap {
+    margin-inline: 0;
+    justify-self: end;
+  }
+}

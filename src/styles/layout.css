@@ -1,0 +1,75 @@
+.icon {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+.icon--sm {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.icon--md {
+  width: 1rem;
+  height: 1rem;
+}
+
+.display-title {
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  text-transform: uppercase;
+  font-size: clamp(2.75rem, 7vw, 5.5rem);
+}
+
+.section-title {
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+  text-transform: uppercase;
+  font-size: clamp(2.4rem, 5.5vw, 4.25rem);
+}
+
+.accent-dot {
+  display: inline-block;
+  width: 0.42em;
+  height: 0.42em;
+  margin-left: 0.12em;
+  border-radius: 999px;
+  background: var(--color-accent);
+  vertical-align: 0.08em;
+}
+
+.page-shell {
+  padding-inline: var(--space-gutter);
+}
+
+.content-pad-right {
+  padding-right: var(--space-gutter);
+}
+
+@media (min-width: 1024px) {
+  .content-pad-right {
+    padding-right: var(--nav-rail);
+  }
+}
+
+.stack-title > span {
+  display: block;
+}
+
+.app-shell {
+  min-height: 100dvh;
+  background: var(--color-bg);
+  color: var(--color-ink);
+}
+
+.home {
+  padding-bottom: 7rem;
+}
+
+@media (min-width: 1024px) {
+  .home {
+    padding-bottom: 4rem;
+  }
+}

@@ -10,10 +10,10 @@ export function About() {
   useEffect(() => {
     if (reducedMotion || !sectionRef.current) return;
 
-    const ctx = fadeUp(
-      sectionRef.current.querySelectorAll("[data-reveal]"),
-      { stagger: 0.1, y: 18 },
-    );
+    const ctx = fadeUp(sectionRef.current.querySelectorAll("[data-reveal]"), {
+      stagger: 0.1,
+      y: 18,
+    });
 
     return () => {
       ctx.kill();

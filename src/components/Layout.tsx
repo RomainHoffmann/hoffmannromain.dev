@@ -28,6 +28,7 @@ export function Layout() {
       <SideNav active={active} onNavigate={handleNavigate} />
       <MobileNav active={active} onNavigate={handleNavigate} />
       <Outlet />
+      <Footer />
     </div>
   );
 }
