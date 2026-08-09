@@ -18,13 +18,13 @@ const contactRows = [
   },
   {
     label: "LinkedIn",
-    value: site.social.linkedin.replace("https://", ""),
+    value: site.social.linkedin.replace(/^https?:\/\//, ""),
     href: site.social.linkedin,
     icon: LinkedInIcon,
   },
   {
     label: "GitHub",
-    value: site.social.github.replace("https://", ""),
+    value: site.social.github.replace(/^https?:\/\//, ""),
     href: site.social.github,
     icon: GitHubIcon,
   },
@@ -66,60 +66,67 @@ export function Contact() {
       className="contact"
       aria-labelledby="contact-title"
     >
-      <div className="page-shell content-pad-right contact__grid">
-        <div>
-          <h2 id="contact-title" className="section-title" data-reveal>
-            <span className="stack-title">
+      <div className="page-shell content-pad-right contact__shell">
+        <div className="contact__layout">
+          <div className="contact__intro">
+            <h2 id="contact-title" className="contact__title" data-reveal>
               <span>{site.contact.titleLines[0]}</span>
               <span className="title-line--dot">
                 {site.contact.titleLines[1]}
                 <span className="accent-dot" aria-hidden />
               </span>
-            </span>
-          </h2>
-          <p className="contact__subtitle" data-reveal>
-            {site.contact.subtitle}
-          </p>
+            </h2>
 
-          <div className="contact__actions" data-reveal>
-            <a href={`mailto:${site.email}`} className="btn btn--primary">
-              <Mail className="icon" aria-hidden />
-              Send email
-            </a>
-            <a href={site.resumePath} download className="btn btn--secondary">
-              View resume
-              <Download className="icon" aria-hidden />
-            </a>
+            <p className="contact__subtitle" data-reveal>
+              {site.contact.subtitle}
+            </p>
+
+            <div className="contact__actions" data-reveal>
+              <a href={`mailto:${site.email}`} className="btn btn--contact">
+                <Mail className="icon icon--md" aria-hidden />
+                Send email
+              </a>
+              <a
+                href={site.resumePath}
+                download
+                className="btn btn--contact btn--contact-secondary"
+              >
+                View resume
+                <Download className="icon icon--md" aria-hidden />
+              </a>
+            </div>
           </div>
-        </div>
 
-        <div className="contact__card" data-reveal>
-          <ul>
-            {contactRows.map((row) => {
-              const Icon = row.icon;
-              return (
-                <li key={row.label}>
-                  <a
-                    href={row.href}
-                    target={row.href.startsWith("http") ? "_blank" : undefined}
-                    rel={
-                      row.href.startsWith("http") ? "noreferrer" : undefined
-                    }
-                    className="contact__row"
-                  >
-                    <span className="contact__row-icon">
-                      <Icon className="icon" aria-hidden />
-                    </span>
-                    <span className="contact__row-text">
-                      <span className="contact__row-label">{row.label}</span>
-                      <span className="contact__row-value">{row.value}</span>
-                    </span>
-                    <ArrowRight className="icon contact__row-arrow" />
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
+          <div className="contact__card" data-reveal>
+            <ul>
+              {contactRows.map((row) => {
+                const Icon = row.icon;
+                return (
+                  <li key={row.label}>
+                    <a
+                      href={row.href}
+                      target={
+                        row.href.startsWith("http") ? "_blank" : undefined
+                      }
+                      rel={
+                        row.href.startsWith("http") ? "noreferrer" : undefined
+                      }
+                      className="contact__row"
+                    >
+                      <span className="contact__row-icon">
+                        <Icon className="icon icon--md" aria-hidden />
+                      </span>
+                      <span className="contact__row-text">
+                        <span className="contact__row-label">{row.label}</span>
+                        <span className="contact__row-value">{row.value}</span>
+                      </span>
+                      <ArrowRight className="icon icon--md contact__row-arrow" />
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
       </div>
     </section>
