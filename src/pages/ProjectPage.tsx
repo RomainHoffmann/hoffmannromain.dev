@@ -3,7 +3,7 @@ import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { GitHubIcon } from "@/components/icons";
 import { ProjectVisual } from "@/components/ProjectVisual";
-import { formatProjectNumber, getProjectBySlug } from "@/data/projects";
+import { getProjectBySlug } from "@/data/projects";
 import { fadeUp } from "@/lib/animations";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
@@ -56,10 +56,6 @@ export function ProjectPage() {
             Back to projects
           </Link>
 
-          <p className="project-page__number" data-reveal>
-            {formatProjectNumber(project.id)}
-          </p>
-
           <h1
             id="project-title"
             className="section-title project-page__title"
@@ -102,7 +98,7 @@ export function ProjectPage() {
                   className="btn btn--primary"
                 >
                   Visit website
-                  <ArrowUpRight className="icon" aria-hidden />
+                  <ArrowUpRight className="icon project-page__link-icon" aria-hidden />
                 </a>
               )}
               {project.links.github && (
@@ -110,7 +106,7 @@ export function ProjectPage() {
                   href={project.links.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="btn btn--secondary"
+                  className="btn btn--outline"
                 >
                   <GitHubIcon className="icon" />
                   GitHub

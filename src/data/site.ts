@@ -19,8 +19,7 @@ export const site = {
   },
   contact: {
     titleLines: ["LET'S BUILD", "SOMETHING"],
-    subtitle:
-      "Available for freelance opportunities, product collaborations and full-stack roles",
+    subtitle: "Available for full-stack roles and product collaborations.",
   },
   profileImage: "/images/profile.webp",
 } as const;

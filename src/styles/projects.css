@@ -1,7 +1,7 @@
 .projects {
   position: relative;
   scroll-margin-top: 0;
-  padding: var(--header-height) 0;
+  padding: var(--header-height) 0 calc(3rem + var(--chrome-offset));
 }
 
 .projects__layout {
@@ -16,12 +16,12 @@
 .projects__list {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.5rem;
 }
 
 @media (min-width: 768px) {
   .projects__list {
-    gap: 1.5rem;
+    gap: 2rem;
   }
 }
 
@@ -32,7 +32,7 @@
   }
 
   .projects__layout {
-    grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.5fr);
+    grid-template-columns: minmax(220px, 0.75fr) minmax(0, 1.6fr);
     gap: 4.5rem;
   }
 
@@ -40,5 +40,9 @@
     position: sticky;
     top: var(--header-height);
     align-self: start;
+  }
+
+  .projects__list {
+    gap: 2.25rem;
   }
 }

@@ -52,7 +52,7 @@
 
 .side-nav__number,
 .side-nav__label {
-  font-weight: 600;
+  font-weight: 500;
   transition: color 0.3s ease;
 }
 
@@ -75,6 +75,7 @@
 
 .side-nav__link.is-active .side-nav__number,
 .side-nav__link.is-active .side-nav__label {
+  font-weight: 600;
   color: var(--color-ink);
 }
 
