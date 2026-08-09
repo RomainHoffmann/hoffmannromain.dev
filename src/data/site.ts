@@ -1,8 +1,8 @@
 export const site = {
   name: "Romain Hoffmann",
   initials: "RH",
-  role: "Full-stack developer.",
-  tagline: "I build web and mobile products with clean code.",
+  role: "Full-stack developer",
+  tagline: "I build web and mobile products with clean code",
   location: "Based in France",
   availability: "Available for freelance",
   email: "hello@romainhoffmann.dev",
@@ -12,17 +12,17 @@ export const site = {
     linkedin: "https://linkedin.com/in/romainhoffmann",
   },
   about: {
-    titleLines: ["ROMAIN", "HOFFMANN."],
+    titleLines: ["ROMAIN", "HOFFMANN"],
   },
   projectsIntro: {
-    titleLines: ["SELECTED", "WORK."],
+    titleLines: ["SELECTED", "WORK"],
     subtitle:
-      "Three projects focused on product thinking, clean code and useful experiences.",
+      "Three projects focused on product thinking, clean code and useful experiences",
   },
   contact: {
     titleLines: ["LET'S BUILD", "SOMETHING."],
     subtitle:
-      "Available for freelance opportunities, product collaborations and full-stack roles.",
+      "Available for freelance opportunities, product collaborations and full-stack roles",
   },
   profileImage: "/images/profile.webp",
 } as const;
