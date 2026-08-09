@@ -1,16 +1,20 @@
 .project-page {
-  min-height: calc(100dvh - var(--chrome-offset));
-  padding: var(--header-height) 0 calc(2rem + var(--chrome-offset));
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  padding: var(--header-height) 0 var(--chrome-offset);
   box-sizing: border-box;
 }
 
 .project-page__grid {
   display: grid;
-  align-items: center;
-  gap: 2.5rem;
+  align-items: start;
+  flex: 1 1 auto;
+  gap: 1.75rem;
   width: 100%;
   max-width: 100%;
   min-width: 0;
+  min-height: 0;
 }
 
 .project-page__copy {
@@ -32,7 +36,7 @@
 }
 
 .project-page__number {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--color-accent);
@@ -96,13 +100,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--project-page-visual-w);
+  width: min(100%, var(--project-page-visual-w));
   height: var(--project-page-visual-h);
   max-width: 100%;
+  max-height: min(var(--project-page-visual-h), 42dvh);
   flex-shrink: 0;
   overflow: hidden;
   border-radius: 1.5rem;
-  width: 100%;
 }
 
 .project-page__visual .project-visual {
@@ -111,14 +115,6 @@
 }
 
 @media (min-width: 1024px) {
-  .project-page {
-    padding: var(--header-height) 0 calc(1.25rem + var(--chrome-offset));
-  }
-
-  .project-page__tagline {
-    font-size: 1.25rem;
-  }
-
   .project-page__grid {
     grid-template-columns: minmax(0, 1fr) minmax(
         var(--project-page-visual-w),
@@ -128,8 +124,24 @@
     align-items: center;
   }
 
+  .project-page__number {
+    margin-top: 2rem;
+  }
+
+  .project-page__tagline {
+    font-size: 1.25rem;
+  }
+
   .project-page__visual-wrap {
+    align-self: stretch;
+    height: 100%;
     justify-content: center;
+  }
+
+  .project-page__visual {
+    width: var(--project-page-visual-w);
+    height: var(--project-page-visual-h);
+    max-height: none;
   }
 }
 
