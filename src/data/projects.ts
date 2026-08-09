@@ -23,6 +23,7 @@ export const projects: Project[] = [
     stack: ["React Native", "Expo", "Supabase"],
     image: "/images/projects/voltra.webp",
     links: {
+      website: "https://voltra-app.com",
       github: "https://github.com/romainhoffmann",
     },
   },
@@ -40,20 +41,20 @@ export const projects: Project[] = [
       github: "https://github.com/romainhoffmann",
     },
   },
-  {
-    id: 3,
-    slug: "restopro",
-    title: "Restopro",
-    shortDescription: "Restaurant management system.",
-    description:
-      "Restopro is a restaurant management system that helps you manage your restaurant.",
-    stack: ["Sveltekit", "NestJS", "Flutter"],
-    image: "/images/projects/restopro.webp",
-    links: {
-      website: "https://hoffmannromain.dev",
-      github: "https://github.com/romainhoffmann",
-    },
-  },
+  // {
+  //   id: 3,
+  //   slug: "restopro",
+  //   title: "Restopro",
+  //   shortDescription: "Restaurant management system.",
+  //   description:
+  //     "Restopro is a restaurant management system that helps you manage your restaurant.",
+  //   stack: ["Sveltekit", "NestJS", "Flutter"],
+  //   image: "/images/projects/restopro.webp",
+  //   links: {
+  //     website: "https://hoffmannromain.dev",
+  //     github: "https://github.com/romainhoffmann",
+  //   },
+  // },
 ];
 
 export function getProjectBySlug(slug: string): Project | undefined {

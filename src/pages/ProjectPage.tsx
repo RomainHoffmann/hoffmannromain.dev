@@ -3,10 +3,7 @@ import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { GitHubIcon } from "@/components/icons";
 import { ProjectVisual } from "@/components/ProjectVisual";
-import {
-  formatProjectNumber,
-  getProjectBySlug,
-} from "@/data/projects";
+import { formatProjectNumber, getProjectBySlug } from "@/data/projects";
 import { fadeUp } from "@/lib/animations";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
@@ -74,7 +71,7 @@ export function ProjectPage() {
             }
           >
             <span className="title-line--dot">
-              {project.title.toUpperCase()}.
+              {project.title.toUpperCase()}
               <span className="accent-dot" aria-hidden />
             </span>
           </h1>
