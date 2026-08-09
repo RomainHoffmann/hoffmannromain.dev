@@ -1,6 +1,6 @@
 .project-page {
   min-height: calc(100dvh - var(--chrome-offset));
-  padding: 6rem 0 calc(2rem + var(--chrome-offset));
+  padding: var(--header-height) 0 calc(2rem + var(--chrome-offset));
   box-sizing: border-box;
 }
 
@@ -110,7 +110,7 @@
 
 @media (min-width: 1024px) {
   .project-page {
-    padding: 7rem 0 calc(1.25rem + var(--chrome-offset));
+    padding: var(--header-height) 0 calc(1.25rem + var(--chrome-offset));
   }
 
   .project-page__grid {

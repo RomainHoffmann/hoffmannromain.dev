@@ -20,6 +20,7 @@
   --z-nav: 40;
   --space-gutter: clamp(2rem, 4vw, 5rem);
   --nav-rail: 7.5rem;
+  --header-height: 90px;
   --mobile-nav-height: calc(4.5rem + env(safe-area-inset-bottom, 0px));
   --mobile-status-height: 2.25rem;
   --mobile-chrome: calc(var(--mobile-nav-height) + var(--mobile-status-height));

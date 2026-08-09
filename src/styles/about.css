@@ -2,7 +2,7 @@
   display: flex;
   box-sizing: border-box;
   min-height: calc(100dvh - var(--chrome-offset));
-  padding-top: 4.75rem;
+  padding-top: var(--header-height);
   padding-bottom: 0;
 }
 
@@ -76,10 +76,9 @@
   filter: grayscale(1);
 }
 
-/* Tablet: more air, larger type, portrait still below */
 @media (min-width: 640px) {
   .about {
-    padding-top: 5.5rem;
+    padding-top: var(--header-height);
   }
 
   .about__grid {
@@ -110,7 +109,7 @@
 
 @media (min-width: 1024px) {
   .about {
-    padding-top: 0;
+    padding-top: var(--header-height);
     align-items: stretch;
   }
 
@@ -120,7 +119,7 @@
     align-items: end;
     column-gap: clamp(2rem, 4vw, 4.5rem);
     row-gap: 0;
-    padding-top: 5.5rem;
+    padding-top: 0;
   }
 
   .about__copy {
@@ -148,7 +147,7 @@
     max-width: none;
     width: 100%;
     height: 100%;
-    max-height: calc(100dvh - var(--chrome-offset) - 5.5rem);
+    max-height: calc(100dvh - var(--chrome-offset) - var(--header-height));
     margin-inline: 0;
     align-self: end;
     justify-self: end;

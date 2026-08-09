@@ -1,7 +1,7 @@
 .projects {
   position: relative;
   scroll-margin-top: 0;
-  padding: 90px 0;
+  padding: var(--header-height) 0;
 }
 
 .projects__layout {
@@ -28,7 +28,7 @@
 @media (min-width: 1024px) {
   .projects {
     min-height: calc(100dvh - var(--chrome-offset));
-    padding: 6rem 0;
+    padding: var(--header-height) 0 6rem;
   }
 
   .projects__layout {
@@ -38,7 +38,7 @@
 
   .projects__intro {
     position: sticky;
-    top: 7rem;
+    top: var(--header-height);
     align-self: start;
   }
 }
