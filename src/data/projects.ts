@@ -20,13 +20,7 @@ export const projects: Project[] = [
     shortDescription: "Workout tracking, without thinking about progression.",
     description:
       "Voltra is a mobile workout tracking application that helps athletes log sessions, follow progression and stay consistent without friction.",
-    stack: [
-      "React Native",
-      "Expo",
-      "Supabase",
-      "Zustand",
-      "TanStack Query",
-    ],
+    stack: ["React Native", "Expo", "Supabase"],
     image: "/images/projects/voltra.webp",
     links: {
       github: "https://github.com/romainhoffmann",
@@ -34,27 +28,27 @@ export const projects: Project[] = [
   },
   {
     id: 2,
-    slug: "eventhub",
-    title: "EventHub",
-    shortDescription: "Placeholder — event analytics dashboard for organizers.",
+    slug: "mangeznotez",
+    title: "Mangeznotez",
+    shortDescription: "Book your next meal.",
     description:
-      "Placeholder project description. Replace this copy with the real EventHub case study when ready.",
-    stack: ["Next.js", "TypeScript", "PostgreSQL", "Prisma"],
-    image: "/images/projects/eventhub.webp",
+      "Mangeznotez is a platform that allows you to book your next meal in a partner restaurant.",
+    stack: ["Sveltekit", "NestJS", "PostgreSQL"],
+    image: "/images/projects/mangeznotez.webp",
     links: {
-      website: "https://example.com",
+      website: "https://mangeznotez.com",
       github: "https://github.com/romainhoffmann",
     },
   },
   {
     id: 3,
-    slug: "portfolio-v2",
-    title: "Portfolio V2",
-    shortDescription: "Placeholder — personal site focused on clarity and craft.",
+    slug: "restopro",
+    title: "Restopro",
+    shortDescription: "Restaurant management system.",
     description:
-      "Placeholder project description. Replace this copy with details about the portfolio rebuild when ready.",
-    stack: ["React", "Vite", "Tailwind CSS", "GSAP"],
-    image: "/images/projects/portfolio-v2.webp",
+      "Restopro is a restaurant management system that helps you manage your restaurant.",
+    stack: ["Sveltekit", "NestJS", "Flutter"],
+    image: "/images/projects/restopro.webp",
     links: {
       website: "https://hoffmannromain.dev",
       github: "https://github.com/romainhoffmann",
