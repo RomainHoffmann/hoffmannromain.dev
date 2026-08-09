@@ -13,35 +13,32 @@ export function useActiveSection(enabled = true): SectionId {
 
     if (elements.length === 0) return;
 
-    const ratios = new Map<string, number>();
+    const update = () => {
+      const marker = window.innerHeight * 0.32;
+      let next: SectionId = elements[0].id as SectionId;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          ratios.set(entry.target.id, entry.intersectionRatio);
+      for (const el of elements) {
+        const { top, bottom } = el.getBoundingClientRect();
+        if (top <= marker && bottom > marker) {
+          next = el.id as SectionId;
+          break;
         }
-
-        let next: SectionId = "about";
-        let best = -1;
-
-        for (const section of sections) {
-          const ratio = ratios.get(section.id) ?? 0;
-          if (ratio > best) {
-            best = ratio;
-            next = section.id;
-          }
+        if (top <= marker) {
+          next = el.id as SectionId;
         }
+      }
 
-        setActive(next);
-      },
-      {
-        threshold: [0.25, 0.4, 0.55, 0.7],
-        rootMargin: "-10% 0px -35% 0px",
-      },
-    );
+      setActive((prev) => (prev === next ? prev : next));
+    };
 
-    for (const el of elements) observer.observe(el);
-    return () => observer.disconnect();
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
   }, [enabled]);
 
   return active;
