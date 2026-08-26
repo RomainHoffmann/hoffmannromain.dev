@@ -52,7 +52,7 @@ export const projects: Project[] = [
     shortDescription: "Discover restaurants and book your next table.",
     description:
       "Mangeznotez is a restaurant discovery and booking platform. I contributed to the product as a full-stack developer, working on the SvelteKit and NestJS application, feature development, refactoring, and third-party integrations.",
-    stack: ["SvelteKit", "NestJS", "PostgreSQL"],
+    stack: ["SvelteKit", "NestJS", "Elasticsearch"],
     image: "/images/projects/mangeznotez.webp",
     imageWidth: 1600,
     imageHeight: 1100,
